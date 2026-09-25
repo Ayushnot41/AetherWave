@@ -284,6 +284,74 @@ export default function DashboardPage() {
             <ArrowRight className="h-5 w-5 text-text-muted shrink-0 mt-2" />
           </div>
         </Card>
+
+        {/* ─── Agri-Intelligence & Disaster Resilience Suite ────────── */}
+        <div className="pt-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-text-muted">
+              Agri-Intelligence / कृषि ज्ञान केंद्र
+            </h3>
+            <span className="text-[11px] font-bold text-authority bg-authority/10 px-2 py-0.5 rounded">
+              Govt Rail Live
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2.5">
+            <Card
+              className="p-3 border border-border-default hover:border-authority transition-colors cursor-pointer"
+              onClick={() => router.push('/weather')}
+            >
+              <div className="text-xl mb-1">🌦️</div>
+              <div className="font-bold text-xs text-text-primary">Live Weather</div>
+              <div className="text-[10px] text-text-muted">WBGT Heat Index & 3-Day</div>
+            </Card>
+
+            <Card
+              className="p-3 border border-border-default hover:border-authority transition-colors cursor-pointer"
+              onClick={() => router.push('/crop-advisor')}
+            >
+              <div className="text-xl mb-1">🌱</div>
+              <div className="font-bold text-xs text-text-primary">Crop Advisor</div>
+              <div className="text-[10px] text-text-muted">Profitable Kharif/Rabi Picks</div>
+            </Card>
+
+            <Card
+              className="p-3 border border-border-default hover:border-authority transition-colors cursor-pointer"
+              onClick={() => router.push('/harvest-timing')}
+            >
+              <div className="text-xl mb-1">⏱️</div>
+              <div className="font-bold text-xs text-text-primary">Harvest Timer</div>
+              <div className="text-[10px] text-text-muted">Loss Risk vs Wait Gains</div>
+            </Card>
+
+            <Card
+              className="p-3 border border-border-default hover:border-authority transition-colors cursor-pointer"
+              onClick={() => router.push('/market-prices')}
+            >
+              <div className="text-xl mb-1">📊</div>
+              <div className="font-bold text-xs text-text-primary">Mandi Prices</div>
+              <div className="text-[10px] text-text-muted">Live Agmarknet Mandi MSP</div>
+            </Card>
+
+            <Card
+              className="p-3 border border-border-default hover:border-authority transition-colors cursor-pointer"
+              onClick={() => router.push('/satellite')}
+            >
+              <div className="text-xl mb-1">🛰️</div>
+              <div className="font-bold text-xs text-text-primary">Satellite NDVI</div>
+              <div className="text-[10px] text-text-muted">Sentinel-2 Field Vigour</div>
+            </Card>
+
+            <Card
+              className="p-3 border border-border-default hover:border-authority transition-colors cursor-pointer"
+              onClick={() => router.push('/notify')}
+            >
+              <div className="text-xl mb-1">📢</div>
+              <div className="font-bold text-xs text-text-primary">Alert Dispatch</div>
+              <div className="text-[10px] text-text-muted">WhatsApp & SMS Broadcast</div>
+            </Card>
+          </div>
+        </div>
       </FadeIn>
     </div>
   );

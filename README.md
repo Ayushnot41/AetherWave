@@ -1,188 +1,364 @@
-# AetherWeave
-
-<p align="center">
-  <svg width="100%" height="220" viewBox="0 0 1000 220" xmlns="http://www.w3.org/2000/svg">
+<div align="center">
+  <!-- Animated 3D SVG Banner -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 280" width="1000" height="280">
     <defs>
       <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#0B1D13" />
-        <stop offset="50%" stop-color="#152B1E" />
-        <stop offset="100%" stop-color="#0A140F" />
+        <stop offset="0%" stop-color="#153350" />
+        <stop offset="100%" stop-color="#0a1a29" />
       </linearGradient>
-      <linearGradient id="terracotta-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#C2662D" />
-        <stop offset="100%" stop-color="#D4920B" />
+      
+      <linearGradient id="auth-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#B96A28" />
+        <stop offset="50%" stop-color="#EEECE3" />
+        <stop offset="100%" stop-color="#33573C" />
       </linearGradient>
-      <linearGradient id="emerald-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#22C55E" />
-        <stop offset="100%" stop-color="#15803D" />
-      </linearGradient>
-      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="8" result="blur" />
-        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+
+      <!-- Grid Pattern -->
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1C2B36" stroke-width="1"/>
+      </pattern>
+
+      <!-- Emboss Filter -->
+      <filter id="emboss">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
+        <feSpecularLighting in="blur" surfaceScale="5" specularConstant=".75" specularExponent="20" lighting-color="#EEECE3" result="specOut">
+          <fePointLight x="-5000" y="-10000" z="20000"/>
+        </feSpecularLighting>
+        <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+        <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
       </filter>
-      <filter id="shadow3d">
-        <feDropShadow dx="3" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+
+      <!-- Text Shadow -->
+      <filter id="shadow">
+        <feDropShadow dx="3" dy="5" stdDeviation="4" flood-opacity="0.5" flood-color="#000000" />
       </filter>
     </defs>
-    <rect width="1000" height="220" rx="16" fill="url(#bg-grad)" />
+
+    <!-- Background -->
+    <rect width="1000" height="280" fill="url(#bg-grad)" />
     
-    <!-- Isometric Grid Backdrop -->
-    <g opacity="0.15" stroke="#22C55E" stroke-width="1">
-      <line x1="100" y1="20" x2="300" y2="200" />
-      <line x1="200" y1="20" x2="400" y2="200" />
-      <line x1="300" y1="20" x2="500" y2="200" />
-      <line x1="400" y1="20" x2="600" y2="200" />
-      <line x1="500" y1="20" x2="700" y2="200" />
-      <line x1="600" y1="20" x2="800" y2="200" />
-      <line x1="700" y1="20" x2="900" y2="200" />
-      <line x1="900" y1="20" x2="700" y2="200" />
-      <line x1="800" y1="20" x2="600" y2="200" />
-      <line x1="700" y1="20" x2="500" y2="200" />
-      <line x1="600" y1="20" x2="400" y2="200" />
-      <line x1="500" y1="20" x2="300" y2="200" />
-      <line x1="400" y1="20" x2="200" y2="200" />
+    <!-- Moving Grid / Terrain -->
+    <g transform="perspective(500) rotateX(60) scale(1.5) translate(-200, -100)">
+      <rect width="1500" height="800" fill="url(#grid)">
+        <animateTransform attributeName="transform" type="translate" from="0,-40" to="0,0" dur="2s" repeatCount="indefinite" />
+      </rect>
     </g>
 
-    <!-- 3D Polyhedral Nodes -->
-    <g filter="url(#shadow3d)">
-      <!-- Left Node Cube 3D -->
-      <polygon points="120,70 160,50 200,70 160,90" fill="#22C55E" opacity="0.8" />
-      <polygon points="120,70 160,90 160,140 120,120" fill="#15803D" opacity="0.9" />
-      <polygon points="160,90 200,70 200,120 160,140" fill="#14532D" />
-      
-      <!-- Right Node Cube 3D -->
-      <polygon points="820,90 860,70 900,90 860,110" fill="#D4920B" opacity="0.8" />
-      <polygon points="820,90 860,110 860,160 820,140" fill="#C2662D" opacity="0.9" />
-      <polygon points="860,110 900,90 900,140 860,160" fill="#8C3F10" />
-
-      <!-- Center Glowing Ring -->
-      <circle cx="500" cy="110" r="48" fill="none" stroke="url(#terracotta-grad)" stroke-width="3" filter="url(#glow)" stroke-dasharray="8 6"/>
-      <circle cx="500" cy="110" r="34" fill="#0E2317" stroke="#22C55E" stroke-width="2"/>
-      <circle cx="500" cy="110" r="14" fill="url(#terracotta-grad)"/>
+    <!-- Particles -->
+    <g fill="#EEECE3" opacity="0.4">
+      <circle cx="100" cy="150" r="2">
+        <animateMotion path="M 0 0 Q 50 -100 100 0 T 200 0" dur="5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;0.8;0" dur="5s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="800" cy="200" r="1.5">
+        <animateMotion path="M 0 0 Q -50 -150 -150 -50" dur="4s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;0.6;0" dur="4s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="450" cy="250" r="2.5">
+        <animateMotion path="M 0 0 L 0 -200" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;0.7;0" dur="6s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="200" cy="80" r="1.5">
+        <animateMotion path="M 0 0 Q 100 50 150 -50" dur="7s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;0.5;0" dur="7s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="700" cy="100" r="2">
+        <animateMotion path="M 0 0 L -100 100" dur="5.5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;0.9;0" dur="5.5s" repeatCount="indefinite" />
+      </circle>
     </g>
 
-    <!-- Dynamic Energy Arcs -->
-    <path d="M 200,95 Q 350,30 500,110 T 820,115" fill="none" stroke="url(#emerald-grad)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.85" filter="url(#glow)"/>
-    <path d="M 160,120 Q 320,180 500,110 T 860,100" fill="none" stroke="url(#terracotta-grad)" stroke-width="2" opacity="0.6"/>
+    <!-- Low Poly Crop/Field (Left) -->
+    <path d="M 0 280 L 150 280 L 120 200 L 50 150 L 0 180 Z" fill="#33573C" opacity="0.7">
+      <animate attributeName="opacity" values="0.6;0.8;0.6" dur="4s" repeatCount="indefinite" />
+    </path>
+    <path d="M 150 280 L 300 280 L 220 180 L 120 200 Z" fill="#1C2B36" opacity="0.6" />
+    <path d="M 50 150 L 120 200 L 180 120 L 80 100 Z" fill="#153350" opacity="0.8" />
+    
+    <!-- Blockchain Circuit (Right) -->
+    <g stroke="#B96A28" stroke-width="2" fill="none" opacity="0.8">
+      <path d="M 800 280 L 800 200 L 850 150 L 950 150 L 1000 100">
+        <animate attributeName="stroke-dasharray" values="0,1000;1000,0" dur="3s" repeatCount="indefinite" />
+      </path>
+      <path d="M 750 280 L 750 240 L 700 190 L 700 100">
+        <animate attributeName="stroke-dasharray" values="0,1000;1000,0" dur="4s" repeatCount="indefinite" />
+      </path>
+      <circle cx="850" cy="150" r="4" fill="#B96A28" />
+      <circle cx="700" cy="190" r="4" fill="#B96A28" />
+      <circle cx="700" cy="100" r="4" fill="#B96A28" />
+    </g>
 
-    <!-- Title & Typography -->
-    <text x="500" y="70" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="34" fill="#F8FAFC" letter-spacing="3">AETHERWEAVE</text>
-    <text x="500" y="172" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="500" font-size="14" fill="#E8DCC8" letter-spacing="1.5">HYPERLOCAL CLIMATE RESILIENCE &amp; ESCROW DISBURSAL PWA</text>
-    <text x="500" y="196" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="400" font-size="11" fill="#94A3B8">OFFLINE-FIRST PWA  •  WEBCRYPTO ATTESTATION  •  DETERMINISTIC ESCROW ORACLE</text>
+    <!-- Center Govt Seal Emboss -->
+    <g transform="translate(500, 140)">
+      <circle cx="0" cy="0" r="60" fill="#153350" stroke="#EEECE3" stroke-width="4" filter="url(#emboss)">
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="20s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="0" cy="0" r="48" fill="none" stroke="#B96A28" stroke-width="1.5" stroke-dasharray="4,4" />
+      <path d="M -20 -10 L 0 -30 L 20 -10 L 0 10 Z" fill="#EEECE3" filter="url(#emboss)" />
+      <path d="M -20 15 L 0 35 L 20 15 L 0 -5 Z" fill="#33573C" filter="url(#emboss)" />
+    </g>
+
+    <!-- Extruded Text -->
+    <g transform="translate(500, 150)" text-anchor="middle" font-family="'Source Serif 4', serif" font-weight="900" font-size="64" letter-spacing="8">
+      <text x="3" y="5" fill="#1C2B36" opacity="0.8">AETHERWEAVE</text>
+      <text x="2" y="4" fill="#1C2B36" opacity="0.8">AETHERWEAVE</text>
+      <text x="1" y="2" fill="#1C2B36" opacity="0.8">AETHERWEAVE</text>
+      <text x="0" y="0" fill="url(#auth-grad)" filter="url(#shadow)">AETHERWEAVE</text>
+    </g>
+    <text x="500" y="220" text-anchor="middle" fill="#EEECE3" font-family="'Mukta', sans-serif" font-size="16" letter-spacing="4" opacity="0.8">RURAL FARMER CLIMATE RESILIENCE PROTOCOL</text>
   </svg>
-</p>
+</div>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Next.js-15.2-black?style=for-the-badge&logo=next.js" alt="Next.js" />
-  <img src="https://img.shields.io/badge/TypeScript-5.8-blue?style=for-the-badge&logo=typescript" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Tailwind-v4-38bdf8?style=for-the-badge&logo=tailwindcss" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/PWA-Offline_First-1B5E3B?style=for-the-badge" alt="PWA Ready" />
-  <img src="https://img.shields.io/badge/Solana-Devnet_ZK_Mint-14F195?style=for-the-badge&logo=solana" alt="Solana" />
-  <img src="https://img.shields.io/badge/License-MIT-amber?style=for-the-badge" alt="MIT License" />
+  <img src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js" alt="Next.js 15" />
+  <img src="https://img.shields.io/badge/TypeScript-5.8-blue?style=for-the-badge&logo=typescript" alt="TypeScript 5.8" />
+  <img src="https://img.shields.io/badge/Tailwind-v4-06B6D4?style=for-the-badge&logo=tailwindcss" alt="Tailwind v4" />
+  <img src="https://img.shields.io/badge/PWA-Ready-5A0FC8?style=for-the-badge&logo=pwa" alt="PWA" />
+  <img src="https://img.shields.io/badge/Solana-Devnet-14F195?style=for-the-badge&logo=solana" alt="Solana Devnet" />
+  <img src="https://img.shields.io/badge/React_Three_Fiber-Black?style=for-the-badge&logo=react" alt="R3F" />
+  <img src="https://img.shields.io/badge/Framer_Motion-E10098?style=for-the-badge&logo=framer" alt="Framer Motion" />
+  <img src="https://img.shields.io/badge/Open--Meteo-Weather-005599?style=for-the-badge&logo=open-meteo" alt="Open-Meteo" />
+  <img src="https://img.shields.io/badge/Gemini_AI-Google-4285F4?style=for-the-badge&logo=google" alt="Gemini AI" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License" />
 </p>
 
----
+## Executive Summary
 
-## 🌍 Executive Summary
+AetherWeave is an institutional-grade Progressive Web Application designed to mitigate climate-induced agricultural risk in rural India. Leveraging cryptographic attestation, edge AI, and zero-knowledge smart contracts, the protocol guarantees deterministic insurance disbursals and predictive agricultural intelligence. The system operates entirely passwordless and offline-first, ensuring accessibility in low-bandwidth environments while maintaining rigorous state-backed security models.
 
-**AetherWeave** is a production-grade, mobile-first Progressive Web Application (PWA) designed to protect vulnerable informal sector communities (street vendors, delivery couriers, agricultural workers) facing extreme climate hazards.
+## The Problem
 
-Operating with **zero connectivity barriers**, AetherWeave combines:
-1. **Multimodal Edge Intake**: Voice notes and camera capture with WebCrypto SHA-256 hardware attestation (GPS coordinates, gyroscope tilt, timestamp locking).
-2. **Cascading Risk Intelligence**: Multi-tiered impact modeling projecting physical climate stress onto personal health and daily livelihood earnings.
-3. **Parametric Preventative Micro-Grants**: Fast-track micro-relief (\$5.00) disbursed before damages become catastrophic.
-4. **Deterministic Oracle Governance**: Gemini AI models serve strictly advisory functions. Fund transfers are controlled by deterministic threshold rules and Solana ZK-minted proof receipts.
+> [!CAUTION]
+> Climate shocks cascade: Flood → Crop failure → Income collapse → Predatory debt. Indian farmers lose ₹1.5L crore annually to preventable post-harvest losses alone.
 
----
+Legacy systems rely on delayed manual surveys, highly susceptible to corruption, human error, and bureaucratic latency. The resulting payout delays often exceed the critical planting window, triggering cyclical poverty vectors. AetherWeave nullifies this via immutable, telemetry-bound automated triaging and real-time localized advisory systems.
 
-## ⚡ Architecture & Flow
+## System Architecture
 
 ```mermaid
 flowchart TD
-    A[Onboarding / Dialect Selector] --> B[Home Dashboard & Heat Stress HUD]
-    B --> C[Multimodal Intake]
-    C -->|WebCrypto SHA-256 Telemetry Lock| D[Cascading Risk Graph]
-    D --> E[Action Recommendation & ElevenLabs Guidance]
-    E --> F[Proof-of-Action Verification Viewfinder]
-    F --> G[4-Step Verification Tracker]
-    G --> H[Payout Settlement & Solana Explorer Receipt]
-    
-    subgraph Offline Layer
-        I[Service Worker CacheStorage]
-        J[IndexedDB Submission Queue]
+    %% Define styles based on institutional design language
+    classDef auth fill:#153350,stroke:#EEECE3,stroke-width:2px,color:#EEECE3
+    classDef ochre fill:#B96A28,stroke:#1C2B36,stroke-width:2px,color:#EEECE3
+    classDef forest fill:#33573C,stroke:#EEECE3,stroke-width:2px,color:#EEECE3
+    classDef ink fill:#1C2B36,stroke:#EEECE3,stroke-width:2px,color:#EEECE3
+    classDef light fill:#EEECE3,stroke:#153350,stroke-width:2px,color:#153350
+
+    %% Nodes
+    subgraph Client ["Frontend PWA"]
+        PWA[Offline-First PWA]:::light
+        Crypto[WebCrypto Attestation]:::auth
     end
+
+    subgraph Gateway ["Infrastructure Layer"]
+        AG[API Gateway OmniRoute]:::ink
+    end
+
+    subgraph AI ["Intelligence Swarm"]
+        Gemini[Gemini Vision Triage]:::ochre
+        LG[LangGraph Swarm]:::auth
+    end
+
+    subgraph Oracle ["Deterministic Resolution"]
+        PO[Policy Oracle]:::forest
+    end
+
+    subgraph Blockchain ["Solana State"]
+        ZK[Solana ZK Mint]:::ochre
+        Escrow[Smart Escrow]:::auth
+    end
+
+    subgraph Disbursal ["Fiat Gateway"]
+        UPI[UPI Bank Transfer]:::forest
+    end
+
+    subgraph Weather ["Intelligence Engine"]
+        OM[Open-Meteo]:::ink
+        HI[Heat Index]:::ochre
+        CA[Crop Advisor]:::forest
+        HT[Harvest Timer]:::auth
+        SA[Storage Alerts]:::ochre
+        MP[Market Prices]:::light
+    end
+
+    %% Connections
+    PWA --> Crypto
+    Crypto --> AG
     
-    C -.->|If Offline| J
-    F -.->|If Offline| J
-    J -.->|Background Sync when Online| G
+    AG --> Gemini
+    AG --> OM
+    
+    Gemini --> LG
+    LG --> PO
+    PO --> ZK
+    ZK --> Escrow
+    Escrow --> UPI
+    
+    OM --> HI
+    OM --> CA
+    OM --> HT
+    OM --> SA
+    OM --> MP
 ```
 
----
+## Feature Matrix
 
-## 📱 Complete 8-Screen Production Flow
+| Feature Category | Description | Technology | Status |
+| :--- | :--- | :--- | :--- |
+| **Authentication** | Passwordless Auth (OTP) | Secure one-time password flow tied to mobile | Next-Auth / Twilio | ✅ Live |
+| **Data Intake** | Multimodal Intake (Camera + Voice) | Simultaneous capture of crop distress media | HTML5 Media API | ✅ Live |
+| **Security** | WebCrypto Telemetry Attestation | Cryptographic binding of hardware sensors to payloads | WebCrypto API | ✅ Live |
+| **Analytics** | Cascading Risk Graph | Predictive impact modeling of local climate events | D3.js | 🔄 In Progress |
+| **Meteorology** | Live Weather Intelligence | Hyper-local environmental parameter tracking | Open-Meteo | ✅ Live |
+| **Advisory** | Crop Profitability Advisor | Yield forecasting based on current soil/weather states | Gemini Pro | ✅ Live |
+| **Advisory** | Harvest Timing Optimizer | Precise harvest window calculation to avoid weather loss | AI + Open-Meteo | 🔄 In Progress |
+| **Advisory** | Post-Harvest Storage Alerts | Predictive warnings for rot/spoilage based on humidity | Temporal Rules | ✅ Live |
+| **Economics** | Live Mandi Price Comparison | Real-time regional agricultural commodity valuation | Gov API | 🔄 In Progress |
+| **Verification** | Gemini Vision Validation | Automated severity assessment of crop damage imagery | Gemini Pro Vision | ✅ Live |
+| **Verification** | Google Earth Engine Field Analysis | Satellite cross-reference of reported claim coordinates | GEE API | 🔄 In Progress |
+| **Processing** | LangGraph Swarm Triage | Multi-agent coordination for claim validity consensus | LangGraph | ✅ Live |
+| **Execution** | Deterministic Policy Oracle | Smart contract parameters updated by validated claims | Rust / Solana | ✅ Live |
+| **Ledger** | Solana ZK-Compressed Proof Mint | Low-cost privacy-preserving state verification | Solana ZK-Compression | 🔄 In Progress |
+| **Disbursal** | Smart Escrow Disbursal | Automated fund release upon oracle confirmation | Solana Anchor | ✅ Live |
+| **Accessibility**| ElevenLabs Vernacular Voice Guidance | Local language audio prompts for low-literacy users | ElevenLabs | ✅ Live |
+| **Notification** | Direct Bank Transfer Notification | SMS/WhatsApp alerts confirming fiat settlement | Twilio/Webhooks | 🔄 In Progress |
+| **Resilience** | Offline-First PWA | Full operational capability during connectivity loss | Service Workers | ✅ Live |
+| **Safety** | Govt Disaster Alert Relay | Real-time broadcast of state-level emergency warnings | WebSockets | ✅ Live |
 
-| Screen | Route | Key Features |
-|---|---|---|
-| **0. Auth & Routing** | `/` | Hydration guard, session token inspection, automatic routing |
-| **1. Onboarding** | `/onboarding` | Passwordless phone OTP, 7-dialect vernacular selector (Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, English) |
-| **2. Home Dashboard** | `/dashboard` | Ambient heat index gauge, cascading risk summary, offline snapshot banner, rapid reporting CTA |
-| **3. Multimodal Intake** | `/intake` | WebRTC camera viewfinder, audio recorder, live hardware GPS/Gyro HUD, cryptographic telemetry attestation |
-| **4. Cascading Risk** | `/cascade` | 3-node dependency graph (Climate 44°C $\rightarrow$ Health Extreme $\rightarrow$ Livelihood \$18 at risk), vernacular breakdown |
-| **5. Action Recommendation** | `/action` | Grant-eligible preventative protocol (\$5.00), ElevenLabs voice guidance playback with visual audio waveform |
-| **6. Verification Capture** | `/verification/capture` | Native camera capture, cryptographic proof packaging, sensor telemetry overlay |
-| **7. Verification Status** | `/verification/status` | Real-time 4-step vertical tracker: Gemini Audit $\rightarrow$ Oracle Validation $\rightarrow$ Solana ZK Mint $\rightarrow$ Escrow Disbursal |
-| **8. Grant Payout** | `/payout` | \$5.00 grant receipt, instant UPI settlement badge, copyable Solana transaction signature, Solana Explorer link |
-| **Fallback** | `/offline` | Full offline UX with local cache viewing and background sync indicators |
+## Flow Overview
 
----
+1. **Onboarding & Auth**: Passwordless SMS OTP ensures immediate, low-friction access for rural operators.
+2. **Dashboard**: Real-time hyper-local metrics (Open-Meteo integration) displaying current threat levels.
+3. **Multimodal Capture**: Camera interface utilizing GPS and gyroscope attestation to prevent spoofing.
+4. **AI Triage**: Gemini Vision analyzes the intake payload immediately, evaluating crop distress.
+5. **Swarm Consensus**: LangGraph agents cross-verify imagery against historical Earth Engine data and local weather.
+6. **Oracle Commit**: Deterministic validation pushes a state change to the Policy Oracle.
+7. **ZK Mint & Escrow**: Solana processes a zero-knowledge compressed proof, triggering the escrow release.
+8. **Disbursal**: Fiat conversion executes via UPI directly to the farmer's registered bank account.
 
-## 🛡️ Security & Defensive Engineering
+## Security Architecture
 
-- **Deterministic Oracle Isolation**: No LLM makes financial or disbursal decisions directly. AI swarm scores provide informational recommendations; strict deterministic oracles enforce validation rules before smart contract invocation.
-- **Hardware Telemetry Attestation**: Image frames captured in `/verification/capture` and `/intake` are bound to device coordinates (latitude, longitude, accuracy) and motion vectors (alpha, beta, gamma) via client-side `crypto.subtle.digest("SHA-256")`.
-- **Zero Key Leaks**: All client code accesses only public environment parameters prefixed with `NEXT_PUBLIC_`. Private API keys and sovereign secrets reside exclusively on secure backend runtimes.
-- **Offline Integrity**: The offline store guarantees idempotency; buffered sync queues prevent duplicate grant submissions.
+> [!IMPORTANT]
+> Zero LLM keys in frontend. All AI calls routed via OmniRoute gateway. WebCrypto SHA-256 binds GPS + Gyroscope + Timestamp to every submission.
 
----
+By utilizing hardware-level attestation, AetherWeave ensures that all telemetry is geographically and temporally immutable. The API Gateway explicitly strips malformed payloads before they reach the execution environment, isolating the intelligence swarm from injection vectors.
 
-## 🚀 Getting Started
+## Technology Stack
 
-### Prerequisites
-- Node.js 18.x, 20.x, or 22+
-- npm or pnpm
+<table width="100%">
+  <thead>
+    <tr>
+      <th align="left">Layer</th>
+      <th align="left">Technology</th>
+      <th align="left">Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>Frontend</b></td>
+      <td>Next.js 15, Tailwind v4, R3F</td>
+      <td>Offline-first PWA, institutional UI, interactive 3D elements</td>
+    </tr>
+    <tr>
+      <td><b>API Gateway</b></td>
+      <td>OmniRoute / Next.js API Routes</td>
+      <td>Rate limiting, telemetry validation, secure routing</td>
+    </tr>
+    <tr>
+      <td><b>AI & Logic</b></td>
+      <td>Gemini Vision, LangGraph</td>
+      <td>Multimodal validation, agentic swarm consensus</td>
+    </tr>
+    <tr>
+      <td><b>Blockchain</b></td>
+      <td>Solana Devnet, Anchor, ZK</td>
+      <td>Immutable state, smart escrow, deterministic payouts</td>
+    </tr>
+    <tr>
+      <td><b>Data & APIs</b></td>
+      <td>Open-Meteo, GEE</td>
+      <td>Live meteorological intelligence, spatial satellite validation</td>
+    </tr>
+    <tr>
+      <td><b>Infrastructure</b></td>
+      <td>Vercel, GitHub Actions</td>
+      <td>Continuous deployment, edge caching, CI/CD pipelines</td>
+    </tr>
+  </tbody>
+</table>
 
-### Installation
+## Quick Start
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/AetherWeave.git
-cd AetherWeave
-
-# Install dependencies
-npm install
-
-# Setup environment variables
+git clone https://github.com/Ayushnot41/AetherWave
+cd AetherWave && npm install
 cp .env.example .env.local
-
-# Run the development server
 npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) on your desktop or mobile browser.
+## Environment Variables
 
----
+| Variable | Description |
+| :--- | :--- |
+| `NEXT_PUBLIC_SOLANA_RPC_URL` | Endpoint for Solana Devnet connection |
+| `GEMINI_API_KEY` | Key for Google Gemini Vision inference |
+| `ELEVENLABS_API_KEY` | Key for vernacular voice synthesis |
+| `TWILIO_AUTH_TOKEN` | Token for passwordless SMS OTP |
+| `OPEN_METEO_ENDPOINT` | Base URL for weather intelligence |
+| `DB_CONNECTION_STRING` | PostgreSQL connection string for state sync |
+| `NEXT_PUBLIC_APP_URL` | Canonical origin for cryptographic binding |
 
-## 🧪 Verification & Typechecking
+## Contributing
 
-All production components adhere to strict TypeScript standards with zero ambient errors:
+We enforce a strict [Conventional Commits](https://www.conventionalcommits.org/) format for all pull requests. Ensure all cryptographic attestation tests pass before requesting a review.
+- `feat:` for new features
+- `fix:` for bug resolutions
+- `docs:` for documentation updates
+- `chore:` for maintenance
 
-```bash
-# Verify TypeScript without emitting files
-npm run typecheck # or: node node_modules/typescript/bin/tsc --noEmit
-```
+## License
 
----
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 📜 License
+<div align="center">
+  <!-- Animated 3D SVG Seal -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200">
+    <defs>
+      <filter id="seal-emboss">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
+        <feSpecularLighting in="blur" surfaceScale="3" specularConstant=".8" specularExponent="15" lighting-color="#B96A28" result="specOut">
+          <fePointLight x="-1000" y="-2000" z="5000"/>
+        </feSpecularLighting>
+        <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+        <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+      </filter>
+    </defs>
+    
+    <g transform="translate(150, 100)">
+      <circle cx="0" cy="0" r="80" fill="#153350" />
+      
+      <!-- Rotating outer dashed border -->
+      <circle cx="0" cy="0" r="72" fill="none" stroke="#B96A28" stroke-width="3" stroke-dasharray="10, 5">
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="15s" repeatCount="indefinite" />
+      </circle>
+      
+      <!-- Inner solid border -->
+      <circle cx="0" cy="0" r="64" fill="none" stroke="#EEECE3" stroke-width="2" />
+      
+      <!-- Center Emblem -->
+      <g filter="url(#seal-emboss)">
+        <path d="M -30 -20 L 0 -50 L 30 -20 L 0 10 Z" fill="#33573C" />
+        <path d="M -30 20 L 0 50 L 30 20 L 0 -10 Z" fill="#EEECE3" />
+        <circle cx="0" cy="0" r="15" fill="#B96A28" />
+      </g>
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+      <!-- Pulsing verification text -->
+      <text x="0" y="4" text-anchor="middle" font-family="'Mukta', sans-serif" font-weight="bold" font-size="10" fill="#153350" letter-spacing="1">VERIFIED</text>
+      
+      <g opacity="0.9">
+        <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" />
+        <path d="M -20 -6 L -10 4 L 20 -10" fill="none" stroke="#EEECE3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  </svg>
+</div>
