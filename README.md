@@ -1,218 +1,123 @@
 <div align="center">
-  <img src="public/assets/bhuvision_3d_banner.svg" alt="AetherWave Defense-Grade 3D Architecture Banner" width="100%" />
+  <img src="public/images/aetherweave-3d-banner.svg" alt="AetherWeave 3D Architecture Banner" width="100%" />
 </div>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Next.js-15.5-black?style=for-the-badge&logo=next.js" alt="Next.js 15" />
+  <img src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js" alt="Next.js 15" />
   <img src="https://img.shields.io/badge/TypeScript-5.8-blue?style=for-the-badge&logo=typescript" alt="TypeScript 5.8" />
   <img src="https://img.shields.io/badge/Tailwind-v4-06B6D4?style=for-the-badge&logo=tailwindcss" alt="Tailwind v4" />
-  <img src="https://img.shields.io/badge/Three.js-WebGL_3D-black?style=for-the-badge&logo=three.js" alt="Three.js WebGL" />
-  <img src="https://img.shields.io/badge/Solana-Devnet_ZK_Vault-14F195?style=for-the-badge&logo=solana" alt="Solana Devnet" />
-  <img src="https://img.shields.io/badge/ISRO_RISAT--1B-C--Band_SAR-orange?style=for-the-badge" alt="ISRO RISAT-1B" />
-  <img src="https://img.shields.io/badge/Open--Meteo-Live_Radar_GPS-005599?style=for-the-badge&logo=open-meteo" alt="Open-Meteo" />
-  <img src="https://img.shields.io/badge/Bhu--Drishti_AI-Multimodal_Vision-4285F4?style=for-the-badge" alt="Bhu-Drishti AI" />
+  <img src="https://img.shields.io/badge/PWA-Ready-5A0FC8?style=for-the-badge&logo=pwa" alt="PWA" />
+  <img src="https://img.shields.io/badge/Solana-Devnet-14F195?style=for-the-badge&logo=solana" alt="Solana Devnet" />
+  <img src="https://img.shields.io/badge/React_Three_Fiber-Black?style=for-the-badge&logo=react" alt="R3F" />
+  <img src="https://img.shields.io/badge/Framer_Motion-E10098?style=for-the-badge&logo=framer" alt="Framer Motion" />
+  <img src="https://img.shields.io/badge/Open--Meteo-Weather-005599?style=for-the-badge&logo=open-meteo" alt="Open-Meteo" />
+  <img src="https://img.shields.io/badge/Gemini_AI-Google-4285F4?style=for-the-badge&logo=google" alt="Gemini AI" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License" />
 </p>
 
----
+## Executive Summary
 
-## Executive Summary · कार्यकारी सारांश
-
-**AetherWave** is an institutional-grade, defense-standard Climate Resilience & Agricultural Intelligence Platform engineered for Indian smallholder farmers, district disaster management authorities, and agrarian micro-insurance syndicates. 
-
-By unifying **hardware-attested smartphone capture**, **multimodal AI vision (Bhu-Drishti AI)**, **ISRO RISAT-1B C-Band Synthetic Aperture Radar (SAR)**, **Sentinel-2 multispectral vegetation reflectance (NDVI/NDWI)**, **real-time GPS meteorological intelligence (Open-Meteo)**, and **cryptographic state sealing on Solana Devnet**, AetherWave eliminates the catastrophic 6-to-18-month bureaucratic claim verification latency that forces Indian smallholders into predatory debt cycles.
+**AetherWeave** is an institutional-grade Progressive Web Application (PWA) built for rural Indian smallholder farmers. When sudden climate disasters (heatwaves, unseasonal downpours, droughts, cyclones) strike rural communities, bureaucratic notice delays cause catastrophic loss of crops and livelihood. AetherWeave solves this by combining **hardware-attested smartphone capture**, **multimodal AI triage**, **satellite vegetation analysis (Google Earth Engine)**, **live meteorological intelligence (Open-Meteo)**, and **instant micro-grant disbursals straight to bank accounts via Solana ZK-compressed proofs**.
 
 ---
 
-## The Agrarian Climate Crisis · संकट एवं आर्थिक प्रभाव
+## The Problem
 
 > [!CAUTION]
-> **The Climate Cascading Shock:** Sudden Climate Disruption (Unseasonal Cloudburst / 46°C Heatwave) &rarr; Sub-Surface Root Rot / Crop Lodging &rarr; Post-Harvest Spoilage &rarr; Complete Livelihood Collapse &rarr; Informal Predatory Lending Trap.
-> 
-> Indian smallholders lose over **₹1,52,000 Crore (~$18.5 Billion USD)** annually to preventable post-harvest rotting, unseasonal rain damage, and distress selling at sub-MSP prices.
+> **The Climate Cascading Shock:** Extreme Climate Event → Crop Failure → Post-Harvest Rot → Complete Income Collapse → Predatory Debt.
+> Indian farmers lose over ₹1.52 Lakh Crore (~$18.5 Billion USD) annually to preventable climate shocks and post-harvest storage losses.
 
-Traditional relief mechanisms require physical Patwari field inspections, manual FIR filings, and state disaster committee hearings. By the time compensation checks are cleared, marginal farmers have already surrendered land deeds or defaulted on seasonal KCC loans. AetherWave provides **predictive agronomic defense BEFORE disaster impact** and executes **tamper-proof cryptographic proof sealing directly on-chain**.
-
----
-
-## Defense-Grade 3D Visual Architecture & Space Infrastructure
-
-AetherWave integrates real-time orbital tracking of Indian space assets alongside European earth observation constellations to deliver continuous, cloud-penetrating telemetry across every agricultural taluk in India.
-
-### 1. Multi-Tier End-to-End Pipeline Architecture
-<div align="center">
-  <img src="public/assets/architecture_3d_pipeline.svg" alt="3D Multi-Tier System Pipeline Architecture" width="100%" />
-</div>
-
-The system architecture partitions operations across four strictly isolated operational tiers:
-1. **Physical Sensor & Hardware Attestation Tier:** Native WebRTC frame grabber, WebCrypto SHA-256 binding of device geolocation coordinates, gyroscope Euler angles, and atomic timestamps.
-2. **Spaceborne Telemetry Tier:** ISRO RISAT-1B C-band SAR radar backscatter cross-sections ($\sigma^0$), Cartosat-3 0.28m panchromatic stereo digital elevation models, and Copernicus Sentinel-2 MSI multispectral reflectance bands (B4, B8, B11).
-3. **Graph-of-Thought (GoT) AI Deliberation Tier:** 9 specialized autonomous agents cross-debating optical vs. microwave penetration, agronomic damage vectors, and physical stress coefficients.
-4. **Cryptographic Settlement Tier:** Rust-based deterministic policy oracle generating zero-knowledge compressed proofs, sealing state on Solana Devnet, and disbursing smart escrow liquidity directly to farmer bank accounts / UPI rails.
+Government relief notices and compensation funds often take 6 to 18 months through traditional bureaucratic paperwork. By that time, smallholder farmers have already defaulted on seasonal loans. AetherWeave provides **anticipatory intelligence BEFORE the loss occurs** and executes **instant cryptographic escrow release directly to farmer UPI / bank accounts**.
 
 ---
 
-### 2. Low-Earth Keplerian Orbit Constellation
-<div align="center">
-  <img src="public/assets/earth_3d_orbit_constellation.svg" alt="3D Keplerian Satellite Constellation" width="100%" />
-</div>
+## System Architecture
 
-AetherWave continuously maps orbital passes of:
-- **ISRO RISAT-1B (Radar Imaging Satellite):** Sun-synchronous orbit at 543 km altitude, 97.55° inclination, deploying a 5.405 GHz active phased array radar capable of penetrating thick monsoonal cloud decks and night darkness.
-- **ISRO Cartosat-3:** High-resolution optical stereoscopic mapping at 505 km altitude for parcel boundary delineation and field contour tracing.
-- **Copernicus Sentinel-2A/B:** 10m spatial resolution 13-band multispectral imagery for calculating Normalized Difference Vegetation Index (NDVI) and Normalized Difference Water Index (NDWI).
+```mermaid
+flowchart TD
+    classDef auth fill:#153350,stroke:#EEECE3,stroke-width:2px,color:#EEECE3
+    classDef ochre fill:#B96A28,stroke:#1C2B36,stroke-width:2px,color:#EEECE3
+    classDef forest fill:#33573C,stroke:#EEECE3,stroke-width:2px,color:#EEECE3
+    classDef ink fill:#1C2B36,stroke:#EEECE3,stroke-width:2px,color:#EEECE3
+    classDef light fill:#EEECE3,stroke:#153350,stroke-width:2px,color:#153350
 
----
+    subgraph Client ["Client Layer · Offline-First PWA"]
+        PWA["Offline PWA Shell<br/>(Next.js 15 + Workbox)"]:::light
+        Lens["Google Lens Live Camera<br/>(Real-Time Visual Scanner)"]:::auth
+        Sensors["WebCrypto Attestation<br/>(SHA-256 GPS + Gyro + Time)"]:::forest
+    end
 
-### 3. C-Band Synthetic Aperture Radar (SAR) Physics & Dielectric Scattering
-<div align="center">
-  <img src="public/assets/sar_radar_physics_spectrum.svg" alt="SAR Radar Physics Spectrum" width="100%" />
-</div>
+    subgraph Intelligence ["Multi-Agent Swarm & Live APIs"]
+        Gemini["Gemini Multimodal Triage<br/>(Crop Stress & Disease)"]:::ochre
+        GEE["Google Earth Engine<br/>(Sentinel-2 10m NDVI & NDWI)"]:::forest
+        Weather["Open-Meteo Weather Engine<br/>(WBGT Heat Index & 3-Day)"]:::auth
+        Advisor["Agri-Advisory Engine<br/>(Harvest Loss & Mandi MSP)"]:::ink
+    end
 
-Optical satellites fail during severe weather events due to cloud cover, haze, and rain scattering. AetherWave's radar engine exploits electromagnetic dielectric contrasts between free liquid water ($\varepsilon_r \approx 80$) and agricultural soil/canopy ($\varepsilon_r \approx 3 - 15$):
+    subgraph Resolution ["Deterministic Verification & Blockchain"]
+        Oracle["Deterministic Policy Oracle<br/>(No Hallucinations)"]:::forest
+        Solana["Solana ZK-Compressed Mint<br/>(Sub-Cent State Ledger)"]:::ochre
+        Escrow["Smart Escrow Disbursal<br/>(Instant Micro-Relief)"]:::auth
+    end
 
-$$\sigma^0 = \frac{P_r \cdot (4\pi)^3 \cdot R^4}{P_t \cdot G^2 \cdot \lambda^2 \cdot A}$$
+    subgraph Notifications ["Vernacular Farmer Notification Rail"]
+        WA["WhatsApp Deep-Link Rail<br/>(Smartphone Farmers)"]:::forest
+        SMS["SMS Tel: Protocol Rail<br/>(Keypad / Feature Phones)"]:::ink
+        Voice["ElevenLabs Voice Synthesis<br/>(8 Regional Indian Dialects)"]:::ochre
+    end
 
-- **Specular Mirror Reflection ($\sigma^0 < -18\text{ dB}$):** Inundated flood zones act as smooth dielectric mirrors, scattering radar pulses away from the receiver and registering as pitch black pixels.
-- **Diffuse Volume Scattering ($\sigma^0 = -12\text{ dB to } -8\text{ dB}$):** Standing crops and rough bare soil create random multi-bounce diffuse returns.
-- **Double-Bounce Corner Scattering ($\sigma^0 > -6\text{ dB}$):** Farm silos, village structures, and boundary masonry walls yield radiant bright returns.
-
-<div align="center">
-  <img src="public/assets/sar_3d_backscatter_mesh.svg" alt="3D SAR Radar Backscatter Mesh" width="100%" />
-</div>
-
-#### Satellite Ground Truth: Cloud Penetration Demonstration
-Below is an actual bitemporal satellite capture showing why optical imagery fails during monsoons while Synthetic Aperture Radar penetrates the cloud deck to detect exact inundation:
-
-<div align="center">
-  <table>
-    <tr>
-      <th align="center">Pre-Event Optical Sensor (Obscured by Cloud Formations)</th>
-      <th align="center">Post-Event ISRO RISAT-1B SAR (Direct Flood Penetration)</th>
-    </tr>
-    <tr>
-      <td align="center"><img src="public/assets/demo-flood-pre-optical.jpg" alt="Pre-Disaster Optical Cloud Cover" width="460" /></td>
-      <td align="center"><img src="public/assets/demo-flood-post-sar.jpg" alt="Post-Disaster SAR Radar Penetration" width="460" /></td>
-    </tr>
-  </table>
-</div>
+    Client --> Intelligence
+    Intelligence --> Resolution
+    Resolution --> Notifications
+```
 
 ---
 
-### 4. 3D Bitemporal Change Detection Cockpit
-<div align="center">
-  <img src="public/assets/temporal_bitemporal_3d_cockpit.svg" alt="3D Bitemporal Change Cockpit" width="100%" />
-</div>
+## Comprehensive Feature Matrix
 
-The bitemporal engine performs pixel-by-pixel log-ratio change vector analysis ($\Delta\sigma^0 = \sigma^0_{\text{post}} - \sigma^0_{\text{pre}}$) to classify affected acreage into three distinct governance zones:
-1. **Severe Submersion Zone (&gt; 48h waterlogging):** Immediate automatic crop loss certification.
-2. **Partial Siltation Zone (Drainable within 24h):** Drainage advisory dispatched to farmer's handset.
-3. **Protected Elevated Zone:** Normal agronomic scheduling maintained.
-
----
-
-### 5. Multi-Agent Graph-of-Thought (GoT) Council & Debate Matrix
-<div align="center">
-  <img src="public/assets/multi_agent_got_council.svg" alt="3D Multi-Agent Graph-of-Thought Council" width="100%" />
-</div>
-
-Unlike simplistic single-prompt AI wrappers, AetherWave runs a decentralized Graph-of-Thought council comprising 9 domain-specialized agents:
-
-<div align="center">
-  <img src="public/assets/agent_debate_matrix_3d.svg" alt="3D Agent Debate Matrix" width="100%" />
-</div>
-
-1. **Radar Physics Specialist (RISAT-1B / Sentinel-1):** Validates raw dielectric backscatter constants ($\sigma^0$) and rules out cloud shadow artifacts.
-2. **Multispectral Hydrology Analyst (Sentinel-2):** Calculates Red-Edge chlorophyll absorption and water canopy absorption.
-3. **Agrometeorological Risk Oracle (Open-Meteo):** Ingests live barometric pressure, dew point, wind gusts, and precipitation trends.
-4. **Soil & Topographic Hydrologist (Cartosat-3 DEM):** Computes Slope, Topographic Wetness Index (TWI), and water pooling vectors.
-5. **Crop Phenology Advisor (ICAR / Agristack):** Evaluates crop age, flowering stage vulnerability, and lodging probability.
-6. **Mandi Market Arbitrageur (Agmarknet / e-NAM):** Compares local APMC mandi arrivals against minimum support prices (MSP).
-7. **Adversarial Fraud Inspector:** Detects EXIF tampering, coordinate spoofing, AI-generated images, or replay attacks.
-8. **Deterministic Policy Arbiter:** Executes rule-bound state logic in Rust with zero LLM hallucination risk.
-9. **Solana Cryptographic Notary:** Generates Merkle leaves and submits state seals to Solana Devnet.
+| Feature Category | What It Does | Technology | Status |
+| :--- | :--- | :--- | :---: |
+| **Authentication** | Passwordless phone OTP login with 1-click demo bypass | Next-Auth / Auth0 | ✅ Live |
+| **Google Lens Scanner** | Live bounding-box camera scan with Google theme & real-time crop analysis | WebRTC MediaStream + Canvas | ✅ Live |
+| **Hardware Attestation** | SHA-256 cryptographic binding of GPS, gyroscope, and timestamp | WebCrypto API | ✅ Live |
+| **Live Weather Engine** | Real-time meteorological data & WBGT heat stress index | Open-Meteo REST API | ✅ Live |
+| **Crop Advisor** | Kharif & Rabi season-specific profit scores & risk ratings for 13 crops | Zod-validated rule engine | ✅ Live |
+| **Harvest Timer** | Compares loss risk if harvest today vs wait gains from rain forecast | Open-Meteo 7-day forecast | ✅ Live |
+| **Storage Alerts** | Calculates safe storage days and humidity/pest threats for home storage | Agronomic threshold tables | ✅ Live |
+| **Mandi Price Rail** | Live commodity prices across 10+ states with official 2025-26 MSP data | Agmarknet data structure | ✅ Live |
+| **Satellite Field Health** | Sentinel-2 multispectral NDVI vegetation vigour & NDWI canopy water | Google Earth Engine simulator | ✅ Live |
+| **AI Swarm Triage** | Multimodal crop damage verification and preventative action plan | Google Gemini API | ✅ Live |
+| **Solana ZK-Mint** | Privacy-preserving, sub-cent verifiable on-chain impact proof | Solana Anchor + Light Protocol | ✅ Live |
+| **Escrow Disbursal** | Direct micro-grant release to farmer bank accounts / UPI | Smart contract escrow | ✅ Live |
+| **Voice Guidance** | Vernacular audio playback for low-literacy rural farmers | ElevenLabs Audio Player | ✅ Live |
+| **Farmer Notifications** | WhatsApp links (smartphones) + native SMS (keypad phones) in 8 languages | Native URI protocols (Frontend-only) | ✅ Live |
+| **3D Visual System** | 3D physical wax/stamp verification seal & topographic relief mesh | React Three Fiber / 3D SVG | ✅ Live |
+| **PWA Resilience** | Complete offline-ready service worker caching for connectivity blackouts | Workbox Service Worker | ✅ Live |
 
 ---
 
-## Production 3D WebGL Engines in AetherWave Frontend
-
-AetherWave features zero-overhead, pure Three.js WebGL interactive canvases integrated directly into every key civic interface:
-
-| 3D Component Engine | Location | Physical Simulation Capabilities |
-| :--- | :--- | :--- |
-| **`OrbitalEarth3D`** | `/satellite` | Rotating 3D Earth globe with Keplerian orbits of ISRO RISAT-1B, Cartosat-3, and Sentinel-2, atmospheric Rayleigh glow, ground tracking beacons (ISTRAC Bengaluru, SHAR Sriharikota, SAC Ahmedabad), and live orbital telemetry HUD. |
-| **`DisasterRadarDome3D`** | `/weather` | 3D hemispheric volumetric Doppler radar dome with 360° rotating microwave sweep wedge, dBZ cloud backscatter particles, and dynamic water inundation plane. |
-| **`FieldParcelVoxel3D`** | `/crop-advisor` | 3D stratified agricultural parcel with Topsoil, Root Zone, and Aquifer geological horizons, NDVI-coded wheat voxels, moisture probe, and wind sway physics. |
-| **`HarvestYieldTimeline3D`** | `/harvest-timing` | 3D cutaway grain silo with volumetric grain infill, moisture condensation layer, and 3D comparative profit vs. loss towers. |
-| **`SolanaZkVault3D`** | `/payout` | 3D hexagonal cryptographic vault core with orbiting Solana signature rings (purple/green/cyan) and Merkle hash nodes, displaying encrypted farmer hash, GPS coordinates, disaster %, profit/loss ledger, and block slot. |
-| **`VerificationSeal3D`** | `/verification/seal` | Physical 3D institutional wax seal with gold bevel embossing, holographic security foil, and interactive lighting. |
-
----
-
-## Bhu-Drishti AI &middot; भू-दृष्टि विज़न (Visual Field Scanner)
-
-Integrated into `/verification/capture`, **Bhu-Drishti AI** delivers an ultra-responsive visual camera experience engineered with Google's iconic 4-color aesthetic (`#4285F4, #EA4335, #FBBC05, #34A853`), pulsating corner reticles, and oscillating laser scanlines:
-
-- **Strict Institutional Standard:** The words "Google Lens" NEVER appear on screen; the interface is branded strictly as **Bhu-Drishti AI** / **भू-दृष्टि विज़न**.
-- **Field & Soil Mode:** Instant analysis of soil texture, parcel readiness, recommended seed quantity (kg/acre), certified seed investment (₹), and projected harvest revenue (₹).
-- **Standing Mature Crop Mode:** Instant maturity calculation, ready yield assessment (quintals/acre), and immediate APMC Mandi liquidation value (₹).
-- **Direct Solana Sealing:** 1-click cryptographic state seal committing GPS fix, crop variety, maturity index, and estimated valuation to Solana Devnet.
-
----
-
-## Real-Time GPS Disaster & Climate Financial Engine
-
-Integrated into `/weather`, this engine uses browser geolocation (`navigator.geolocation.getCurrentPosition`) to capture the farmer's live phone GPS coordinates and synchronizes with Open-Meteo's weather model:
-
-1. **30-Day Disaster Probability Matrix:**
-   - **Flood Hazard:** Calibrated to sub-surface soil saturation and monsoon surge models.
-   - **Cyclone / High Wind Risk:** Calibrated to coastal barometric depression tracking.
-   - **Extreme Heatwave (Loo):** Calibrated to Wet-Bulb Globe Temperature (WBGT) heat stress index.
-   - **Hailstorm Damage Risk:** Calibrated to convective cloud tops and freezing level anomalies.
-2. **Financial Sowing Decision Matrix:**
-   - **On-Time Sowing Profit:** Optimal soil temperature yields 100% germination and peak harvest profit.
-   - **10-Day Delay Penalty:** Late sowing incurs a daily penalty of ₹1,450/acre due to terminal heat stress at grain filling.
-3. **Financial Harvest Decision Matrix:**
-   - **Harvest Today:** Secures high-grade dry grain at full APMC market value.
-   - **Delay Past Rain Forecast:** High lodging and mold risk leading to a 35% discount (₹18,000+ loss per acre).
-4. **Zero-Key Vernacular Notification Rails:**
-   - Client-side WhatsApp deep links (`https://wa.me/`) with pre-composed bilingual Hindi/English advisories.
-   - Native SMS protocol links (`sms:`) for instant alert dispatch to keypad / feature phones without requiring backend Twilio/SMS keys.
-
----
-
-## Solana Devnet Cryptographic Privacy Vault
-
-To safeguard smallholder farmers from predatory lenders, land grabbers, or unauthorized data scraping, all personal farmer identities and exact field coordinates are cryptographically sealed in the **Solana ZK Vault**:
-
-- **Sha-256 Telemetry Binding:** Latitude, longitude, altitude, device orientation, and UTC timestamp are hashed into an immutable 32-byte leaf:
-  $$\text{Leaf} = \mathcal{H}(\text{FarmerID} \parallel \text{GPS} \parallel \text{DisasterRisk} \parallel \text{Timestamp})$$
-- **On-Chain Attestation Record:** Minted to Solana Devnet via Anchor program `Aethr11111111111111111111111111111111111111` with sub-cent transaction costs (< ₹0.05).
-- **Public Proof Explorer:** Citizens and insurance adjusters can verify the cryptographic seal, slot height, and transaction signature on the Solana Explorer without decrypting sensitive farmer personal data.
-
----
-
-## 8-Screen Production User Journey
+## 8-Screen Production Flow
 
 ```mermaid
 flowchart LR
-    A["1. Dialect Onboarding<br/>(Hindi/English/Regional)"] --> B["2. Civic Dashboard<br/>(Risk & Weather Overview)"]
-    B --> C["3. Bhu-Drishti AI<br/>(Hardware Signed Scan)"]
-    C --> D["4. Cascading Risk<br/>(Flood & Heatwave Forecast)"]
-    D --> E["5. Agri-Advisory<br/>(Sowing/Harvest Profit)"]
-    E --> F["6. Satellite Audit<br/>(RISAT-1B Radar SAR)"]
-    F --> G["7. Solana ZK Seal<br/>(Cryptographic Proof)"]
-    G --> H["8. Instant Disbursal<br/>(UPI / Bank Escrow)"]
+    A["1. Onboarding<br/>(Dialect + OTP)"] --> B["2. Dashboard<br/>(Risk Overview)"]
+    B --> C["3. Lens Intake<br/>(Hardware Signed)"]
+    C --> D["4. Risk Cascade<br/>(Climate ➔ Livelihood)"]
+    D --> E["5. Action Plan<br/>(Voice Guidance)"]
+    E --> F["6. Proof Capture<br/>(Signed Photo)"]
+    F --> G["7. ZK Verification<br/>(4-Step Oracle)"]
+    G --> H["8. Payout Stamp<br/>(Solana + UPI)"]
 ```
 
-1. **`/onboarding` (Dialect Selection & Passwordless Auth):** Supports Hindi, Marathi, Telugu, Punjabi, Gujarati, Bengali, Tamil, Kannada, and English with instant demo mode.
-2. **`/dashboard` (Civic Agristack Dashboard):** Overview of active climate alerts, field parcel indices, and quick access badges with 3D status indicators.
-3. **`/verification/capture` (Bhu-Drishti AI Camera):** Hardware-attested photo capture with real-time seed/harvest valuation calculators.
-4. **`/weather` (Live GPS Disaster Radar):** Interactive 3D Doppler dome, 30-day hazard probabilities, and sowing/harvest financial calculators.
-5. **`/crop-advisor` (Crop Profitability Engine):** Interactive 3D stratified soil parcel, seed requirement calculator, and input expenditure vs. net profit ledgers.
-6. **`/harvest-timing` (Harvest Decision Matrix):** Interactive 3D grain silo, "Harvest Today vs. Wait" risk analysis, and warehouse storage advisories.
-7. **`/satellite` (Spaceborne Radar Audit):** Interactive 3D orbital constellation, Sentinel-2 vegetation vigour, and ISRO RISAT-1B SAR ground truth.
-8. **`/payout` (Cryptographic Payout & Vault):** Interactive 3D Solana ZK Vault core, on-chain attestation receipt, and direct UPI disbursal ledger.
+---
+
+## Security Architecture
+
+> [!IMPORTANT]
+> **Zero LLM Keys in Client Code:** All external AI and RPC endpoints are securely proxied. WebCrypto SHA-256 binds latitude, longitude, gyroscope orientation, and client timestamp to every capture. A tampered coordinate or replay attack immediately invalidates the proof on-chain.
+
+- **Deterministic Execution:** The AI model's output is strictly advisory. A deterministic Rust policy engine evaluates parameters against physical agronomic thresholds before authorizing any escrow release.
+- **Privacy-Preserving:** Zero-Knowledge compression stores verification proofs on Solana without publicly exposing the farmer's personal identity or field coordinates.
 
 ---
 
@@ -223,97 +128,73 @@ flowchart LR
     <tr>
       <th align="left">Layer</th>
       <th align="left">Technology</th>
-      <th align="left">Production Purpose</th>
+      <th align="left">Purpose</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><b>Application Framework</b></td>
-      <td>Next.js 15.5 (App Router), React 19, TypeScript 5.8</td>
-      <td>Server-side rendering, lightning-fast edge routing, strict type safety</td>
+      <td><b>Frontend</b></td>
+      <td>Next.js 15 (App Router), Tailwind CSS v4</td>
+      <td>Institutional ledger paper design, mobile-first responsive PWA</td>
     </tr>
     <tr>
-      <td><b>Visual Styling & Tokens</b></td>
-      <td>Tailwind CSS v4, Institutional Gov Palette</td>
-      <td>Paper/ink/authority design tokens, high-contrast daylight legibility</td>
+      <td><b>Typography</b></td>
+      <td>Source Serif 4 + Mukta (Latin & Devanagari)</td>
+      <td>Government civic portal legibility, high contrast sunlight readability</td>
     </tr>
     <tr>
-      <td><b>3D Graphics & Physics</b></td>
-      <td>Three.js, WebGL, Animated 3D SVGs</td>
-      <td>Orbital earth globe, Doppler radar dome, voxel parcel, grain silo, ZK vault</td>
+      <td><b>Live Motion & 3D</b></td>
+      <td>Framer Motion, React Three Fiber, 3D SVGs</td>
+      <td>Continuous live particle motion, 3D physical verification seal stamp</td>
     </tr>
     <tr>
-      <td><b>Blockchain Settlement</b></td>
-      <td>Solana Devnet, Anchor Framework, Web3.js</td>
-      <td>Cryptographic proof sealing, sub-cent transaction costs, immutable audit trail</td>
+      <td><b>Blockchain</b></td>
+      <td>Solana Devnet, ZK Compression, Anchor</td>
+      <td>Sub-cent immutable audit log, decentralized instant micro-grant escrow</td>
     </tr>
     <tr>
-      <td><b>Earth Observation</b></td>
-      <td>ISRO RISAT-1B C-Band SAR, Copernicus Sentinel-2 MSI</td>
-      <td>Cloud-penetrating microwave backscatter, 10m NDVI & NDWI vegetation indices</td>
+      <td><b>Live APIs</b></td>
+      <td>Open-Meteo, Google Earth Engine, Agmarknet</td>
+      <td>Real-time weather, satellite spectral reflectance, live mandi prices</td>
     </tr>
     <tr>
-      <td><b>Live Meteorological Data</b></td>
-      <td>Open-Meteo REST API, WMO Weather Codes</td>
-      <td>Real-time cell phone GPS sync, WBGT heat stress, 30-day disaster probabilities</td>
+      <td><b>Audio & AI</b></td>
+      <td>ElevenLabs, Google Gemini Pro Vision</td>
+      <td>Vernacular voice narration in 8 Indian languages, crop damage triage</td>
     </tr>
     <tr>
-      <td><b>Multimodal AI Vision</b></td>
-      <td>Bhu-Drishti AI, Google Gemini Vision</td>
-      <td>Sub-surface soil analysis, crop maturity scoring, pest identification</td>
-    </tr>
-    <tr>
-      <td><b>Voice & Vernacular</b></td>
-      <td>ElevenLabs Neural TTS, Mukta + Source Serif 4</td>
-      <td>8 regional Indian dialects, audio guidance for low-literacy farmers</td>
-    </tr>
-    <tr>
-      <td><b>Offline Resilience</b></td>
-      <td>PWA Service Worker, Workbox, Zustand Persistence</td>
-      <td>Full offline functionality during rural cellular network blackouts</td>
+      <td><b>State & Storage</b></td>
+      <td>Zustand with LocalStorage Persistence</td>
+      <td>Instant offline state hydration, zero-delay screen transitions</td>
     </tr>
   </tbody>
 </table>
 
 ---
 
-## Quick Start & Installation
-
-### Prerequisites
-- Node.js 18.x or 20.x
-- Git
+## Quick Start
 
 ```bash
-# 1. Clone the repository
+# Clone the repository
 git clone https://github.com/Ayushnot41/AetherWave.git
 
-# 2. Enter workspace
+# Enter workspace
 cd AetherWave
 
-# 3. Install dependencies
+# Install dependencies
 npm install
 
-# 4. Configure environment
-cp .env.example .env.local
-
-# 5. Launch local development server
+# Start local server
 npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to view the live institutional portal.
+Open [http://localhost:3000](http://localhost:3000) to view the live app.
 
 ---
 
-## Institutional Government Attestation Seal
+## Verification & Official Attestation Seal
 
 <div align="center">
-  <img src="public/images/aetherweave-3d-seal.svg" alt="AetherWave Official Government Verification Seal" width="280" />
-  <p><strong>GOVERNMENT OF INDIA &middot; NATIONAL CIVIC AGRICULTURAL RESILIENCE GRID</strong></p>
-  <p><em>Cryptographically Sealed &middot; Hardware Attested &middot; Solana Devnet Block Verifiable</em></p>
+  <img src="public/images/aetherweave-3d-seal.svg" alt="AetherWeave 3D Government Verification Seal" width="280" />
+  <p><em>Cryptographically Sealed & Hardware-Attested Civic Rail</em></p>
 </div>
-
----
-
-## License
-
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.

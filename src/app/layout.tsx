@@ -37,7 +37,10 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-background text-text-primary antialiased">
         <ConnectivityWrapper>
-          {children}
+          <CivicNavigation />
+          <div className="flex-1 pb-20 md:pb-0">
+            {children}
+          </div>
         </ConnectivityWrapper>
       </body>
     </html>
@@ -49,3 +52,4 @@ export default function RootLayout({
  * and shows the offline banner when needed.
  */
 import { ConnectivityWrapper } from '@/components/layout/connectivity-wrapper';
+import { CivicNavigation } from '@/components/layout/civic-navigation';
