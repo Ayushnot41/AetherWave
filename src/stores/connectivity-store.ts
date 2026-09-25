@@ -26,7 +26,7 @@ const SLOW_EFFECTIVE_TYPES = new Set(['slow-2g', '2g']);
 const SLOW_RTT_THRESHOLD_MS = 1000;
 
 function detectSlowConnection(): boolean {
-  if (typeof navigator === 'undefined') return false;
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') return false;
 
   const connection = (
     navigator as unknown as { connection?: NetworkInformation }
@@ -60,10 +60,9 @@ let offlineHandler: (() => void) | null = null;
 let connectionChangeHandler: (() => void) | null = null;
 
 export const useConnectivityStore = create<ConnectivityStore>()((set) => ({
-  isOnline: typeof navigator !== 'undefined' ? navigator.onLine : true,
-  isSlowConnection: detectSlowConnection(),
-  lastOnlineAt:
-    typeof navigator !== 'undefined' && navigator.onLine ? Date.now() : null,
+  isOnline: true,
+  isSlowConnection: false,
+  lastOnlineAt: null,
 
   initialize: () => {
     if (typeof window === 'undefined') return;
