@@ -80,7 +80,7 @@ export async function GET(req: Request) {
   let fetchError: string | null = null;
   try {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,precipitation_sum&hourly=relativehumidity_2m&timezone=Asia/Kolkata&forecast_days=7`;
-    const res = await fetch(url, { next: { revalidate: 3600 } } as RequestInit);
+    const res = await fetch(url, { next: { revalidate: 3600 } });
     if (res.ok) {
       const data = await res.json();
       // Average hourly humidity per day

@@ -312,45 +312,60 @@ export default function DashboardPage() {
               className="p-3 border border-border-default hover:border-authority transition-colors cursor-pointer"
               onClick={() => router.push('/weather')}
             >
-              <div className="text-xl mb-1">🌦️</div>
-              <div className="font-bold text-xs text-text-primary">Live Weather</div>
-              <div className="text-[10px] text-text-muted">WBGT Heat Index & 3-Day</div>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xl">🌦️</span>
+                <span className="text-[9px] font-bold bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded">3D Radar</span>
+              </div>
+              <div className="font-bold text-xs text-text-primary">Live Weather & Hazards</div>
+              <div className="text-[10px] text-text-muted">3D Doppler Dome & Disasters</div>
             </Card>
 
             <Card
               className="p-3 border border-border-default hover:border-authority transition-colors cursor-pointer"
               onClick={() => router.push('/crop-advisor')}
             >
-              <div className="text-xl mb-1">🌱</div>
-              <div className="font-bold text-xs text-text-primary">Crop Advisor</div>
-              <div className="text-[10px] text-text-muted">Profitable Kharif/Rabi Picks</div>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xl">🌱</span>
+                <span className="text-[9px] font-bold bg-green-100 text-green-800 px-1.5 py-0.5 rounded">3D Strata</span>
+              </div>
+              <div className="font-bold text-xs text-text-primary">Crop & Seeds Advisor</div>
+              <div className="text-[10px] text-text-muted">3D Parcel Voxel & Seed Rates</div>
             </Card>
 
             <Card
               className="p-3 border border-border-default hover:border-authority transition-colors cursor-pointer"
               onClick={() => router.push('/harvest-timing')}
             >
-              <div className="text-xl mb-1">⏱️</div>
-              <div className="font-bold text-xs text-text-primary">Harvest Timer</div>
-              <div className="text-[10px] text-text-muted">Loss Risk vs Wait Gains</div>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xl">⏱️</span>
+                <span className="text-[9px] font-bold bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">3D Silo</span>
+              </div>
+              <div className="font-bold text-xs text-text-primary">Harvest Timing</div>
+              <div className="text-[10px] text-text-muted">3D Grain Silo & Loss Risk</div>
             </Card>
 
             <Card
               className="p-3 border border-border-default hover:border-authority transition-colors cursor-pointer"
               onClick={() => router.push('/market-prices')}
             >
-              <div className="text-xl mb-1">📊</div>
-              <div className="font-bold text-xs text-text-primary">Mandi Prices</div>
-              <div className="text-[10px] text-text-muted">Live Agmarknet Mandi MSP</div>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xl">📊</span>
+                <span className="text-[9px] font-bold bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Agmarknet</span>
+              </div>
+              <div className="font-bold text-xs text-text-primary">Live Mandi Prices</div>
+              <div className="text-[10px] text-text-muted">Spot Rates & e-NAM Booking</div>
             </Card>
 
             <Card
               className="p-3 border border-border-default hover:border-authority transition-colors cursor-pointer"
               onClick={() => router.push('/satellite')}
             >
-              <div className="text-xl mb-1">🛰️</div>
-              <div className="font-bold text-xs text-text-primary">Satellite NDVI</div>
-              <div className="text-[10px] text-text-muted">Sentinel-2 Field Vigour</div>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xl">🛰️</span>
+                <span className="text-[9px] font-bold bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded">3D Orbit</span>
+              </div>
+              <div className="font-bold text-xs text-text-primary">Space Surveillance</div>
+              <div className="text-[10px] text-text-muted">3D Earth & Sentinel-2/SAR</div>
             </Card>
 
             <Card
