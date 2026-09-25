@@ -40,13 +40,29 @@ export const PipelineStepStatusSchema = z
   .describe('Current state of a single verification pipeline step');
 export type PipelineStepStatus = z.infer<typeof PipelineStepStatusSchema>;
 
-const PipelineStepSchema = z.object({
+export const PipelineStepSchema = z.object({
   status: PipelineStepStatusSchema,
   failureReason: z
     .string()
     .describe('Human-readable failure reason when status is "failed"')
     .optional(),
 });
+export type PipelineStep = z.infer<typeof PipelineStepSchema>;
+
+export const GeminiAuditResultSchema = z.object({
+  isCropImage: z.boolean().describe('False if the image is not identifiable as agricultural/crop content'),
+  cropStressLevel: z.number().min(0).max(10).describe('0 = healthy, 10 = total crop loss'),
+  immediateRiskFactor: z.string().min(1).describe('Single sentence naming the dominant visible risk'),
+  recommendedMicroAction: z.string().min(1).describe('Single sentence, concrete, low-cost intervention'),
+  confidence: z.number().min(0).max(1).describe('Confidence score between 0 and 1'),
+});
+export type GeminiAuditResult = z.infer<typeof GeminiAuditResultSchema>;
+
+export const GeminiPipelineStepSchema = PipelineStepSchema.extend({
+  result: GeminiAuditResultSchema.optional(),
+  retryable: z.boolean().optional().describe('Whether the failure is transient and can be retried'),
+});
+export type GeminiPipelineStep = z.infer<typeof GeminiPipelineStepSchema>;
 
 // ---------------------------------------------------------------------------
 // Telemetry
@@ -240,12 +256,16 @@ export type RecommendedAction = z.infer<typeof RecommendedActionSchema>;
 export const VerificationSubmissionSchema = z.object({
   actionId: z
     .string()
-    .uuid()
+    .min(1)
     .describe('The recommended action being verified'),
   proofImageBlobRef: z
     .string()
     .min(1)
     .describe('Cloud storage reference key for the uploaded proof photograph'),
+  proofImageBase64: z
+    .string()
+    .min(1)
+    .describe('Base64-encoded JPEG of the captured proof photo, sent directly since no blob storage exists yet'),
   telemetry: TelemetryPayloadSchema.describe(
     'Device telemetry snapshot captured at the moment of proof submission',
   ),
@@ -255,7 +275,7 @@ export type VerificationSubmission = z.infer<typeof VerificationSubmissionSchema
 export const VerificationSubmissionResponseSchema = z.object({
   verificationId: z
     .string()
-    .uuid()
+    .min(1)
     .describe('Unique identifier for this verification attempt'),
   status: z
     .enum(['queued', 'processing'])
@@ -268,9 +288,9 @@ export type VerificationSubmissionResponse = z.infer<typeof VerificationSubmissi
 // ---------------------------------------------------------------------------
 
 export const VerificationStatusSchema = z.object({
-  verificationId: z.string().uuid().describe('Identifier of the verification being tracked'),
+  verificationId: z.string().min(1).describe('Identifier of the verification being tracked'),
   steps: z.object({
-    geminiValidation: PipelineStepSchema.describe(
+    geminiValidation: GeminiPipelineStepSchema.describe(
       'Step 1 – Gemini Vision validates the proof photo against the action requirements',
     ),
     oracleCheck: PipelineStepSchema.describe(

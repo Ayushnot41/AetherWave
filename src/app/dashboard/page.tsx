@@ -34,6 +34,7 @@ export default function DashboardPage() {
   const { dialectCode, availableDialects } = useLocaleStore();
   const { swarmResult, fetchSwarmResult } = useRiskStore();
 
+  const [mounted, setMounted] = useState(false);
   const [activeState, setActiveState] = useState<DashboardState>('elevated-risk');
   const heatIndex = {
     temp: 41.2,
@@ -41,6 +42,10 @@ export default function DashboardPage() {
     level: 'Extreme Caution',
   };
   const lastCheckTime = '12 mins ago';
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!useAuthStore.persist.hasHydrated()) {
@@ -63,6 +68,7 @@ export default function DashboardPage() {
   }, [isAuthenticated, router, fetchSwarmResult]);
 
   useEffect(() => {
+    if (!mounted) return;
     if (!isOnline) {
       setActiveState('offline-cached');
     } else if (swarmResult?.overallRisk === 'none') {
@@ -70,7 +76,7 @@ export default function DashboardPage() {
     } else if (swarmResult?.overallRisk === 'elevated' || swarmResult?.overallRisk === 'critical') {
       setActiveState('elevated-risk');
     }
-  }, [isOnline, swarmResult]);
+  }, [mounted, isOnline, swarmResult]);
 
   const currentDialect = availableDialects.find((d: { code: string }) => d.code === dialectCode) || availableDialects[0];
 
@@ -106,9 +112,9 @@ export default function DashboardPage() {
         <div>
           <span className="text-xs uppercase tracking-wider font-bold text-text-muted">AetherWeave Hub</span>
           <h1 className="text-2xl font-bold text-text-primary tracking-tight">
-            {getGreeting()},{' '}
+            {mounted ? getGreeting() : 'नमस्ते'},{' '}
             <span style={{ color: colors.terracotta[500] }}>
-              {user?.phone ? user.phone.slice(-4) : 'Guardian'}
+              {mounted && user?.phone ? user.phone.slice(-4) : 'Guardian'}
             </span>
           </h1>
         </div>
@@ -117,7 +123,7 @@ export default function DashboardPage() {
           <div
             className={cn(
               'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border',
-              isOnline
+              !mounted || isOnline
                 ? 'bg-earth-green-50 text-earth-green-600 border-earth-green-200'
                 : 'bg-amber-50 text-amber-600 border-amber-200',
             )}
@@ -125,16 +131,16 @@ export default function DashboardPage() {
             <span
               className={cn(
                 'h-2 w-2 rounded-full',
-                isOnline ? 'bg-earth-green-500 animate-pulse' : 'bg-amber-500',
+                !mounted || isOnline ? 'bg-earth-green-500 animate-pulse' : 'bg-amber-500',
               )}
             />
-            {isOnline ? (isSlowConnection ? '2G Sync' : 'Live Swarm') : 'Offline Vault'}
+            {!mounted || isOnline ? (mounted && isSlowConnection ? '2G Sync' : 'Live Swarm') : 'Offline Vault'}
           </div>
         </div>
       </FadeIn>
 
       {/* ─── Offline Cached Alert ───────────────────────────────────── */}
-      {activeState === 'offline-cached' && (
+      {mounted && activeState === 'offline-cached' && (
         <FadeIn delay={0.1} className="mb-4">
           <div
             role="status"
@@ -288,7 +294,7 @@ export default function DashboardPage() {
                   </span>
                 </div>
                 <p className="text-xs text-text-secondary mt-0.5">
-                  Vernacular audio guide ready in {currentDialect.nativeName}
+                  Vernacular audio guide ready in {mounted ? currentDialect.nativeName : 'हिन्दी'}
                 </p>
               </div>
             </div>

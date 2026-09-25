@@ -9,9 +9,22 @@ import { useVerificationStore } from '@/stores/verification-store';
 import { submitVerification } from '@/lib/api-client';
 import type { TelemetryPayload } from '@/contracts';
 
+function blobToBase64(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const result = reader.result as string;
+      const base64 = result.includes(',') ? result.split(',')[1] : result;
+      resolve(base64);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
 export default function VerificationCapturePage() {
   const router = useRouter();
-  const { startPolling } = useVerificationStore();
+  const { startPolling, setLastSubmission } = useVerificationStore();
 
   const [capturedImage, setCapturedImage] = useState<Blob | null>(null);
   const [telemetry, setTelemetry] = useState<TelemetryPayload | null>(null);
@@ -39,13 +52,18 @@ export default function VerificationCapturePage() {
     setErrorMessage(null);
 
     try {
+      const proofImageBase64 = await blobToBase64(capturedImage);
       const proofImageBlobRef = `proof-blob-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.jpg`;
 
-      const result = await submitVerification({
+      const payload = {
         actionId: 'act-402',
         proofImageBlobRef,
+        proofImageBase64,
         telemetry,
-      });
+      };
+      setLastSubmission(payload);
+
+      const result = await submitVerification(payload);
 
       if (!result.ok) {
         setErrorMessage(result.error.message);

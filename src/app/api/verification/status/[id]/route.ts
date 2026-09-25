@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
+import { getGeminiAuditEntry } from '@/lib/verification-state';
+import type { GeminiPipelineStep } from '@/contracts';
 
-// In-memory poll counter map for demo simulation
+// In-memory poll counter map for demo simulation (untouched for oracleCheck, solanaMint, escrowUnlock)
 const pollCounts: Record<string, number> = {};
 
 export async function GET(
@@ -11,7 +13,34 @@ export async function GET(
   const count = (pollCounts[id] || 0) + 1;
   pollCounts[id] = count;
 
-  // Progressive simulation over poll intervals:
+  // Real Gemini crop canopy audit status lookup
+  const audit = getGeminiAuditEntry(id);
+
+  let geminiValidation: GeminiPipelineStep;
+  if (!audit || audit.status === 'processing') {
+    geminiValidation = {
+      status: 'processing',
+    };
+  } else if (audit.status === 'success') {
+    geminiValidation = {
+      status: 'success',
+      result: audit.result,
+    };
+  } else {
+    // status === 'failed'
+    const failureReason =
+      audit.result && !audit.result.isCropImage
+        ? 'Submitted photo does not appear to show crop or field content.'
+        : audit.failureReason || 'Verification check failed';
+
+    geminiValidation = {
+      status: 'failed',
+      failureReason,
+      retryable: audit.retryable,
+    };
+  }
+
+  // Progressive simulation over poll intervals (untouched):
   // Poll 1: Gemini processing
   // Poll 2: Gemini success, Oracle processing
   // Poll 3: Oracle success, Solana minting
@@ -19,10 +48,7 @@ export async function GET(
   return NextResponse.json({
     verificationId: id,
     steps: {
-      geminiValidation: {
-        status: count >= 2 ? 'success' : 'processing',
-        updatedAt: new Date().toISOString(),
-      },
+      geminiValidation,
       oracleCheck: {
         status: count >= 3 ? 'success' : count >= 2 ? 'processing' : 'pending',
         updatedAt: new Date().toISOString(),
@@ -36,6 +62,6 @@ export async function GET(
         updatedAt: new Date().toISOString(),
       },
     },
-    overallStatus: count >= 4 ? 'success' : 'processing',
+    updatedAt: new Date().toISOString(),
   });
 }
