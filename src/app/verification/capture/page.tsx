@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, ShieldCheck, Upload, AlertCircle, RefreshCcw } from 'lucide-react';
-import { CameraViewfinder } from '@/components/capture/camera-viewfinder';
+import { GoogleLensScanner } from '@/components/capture/google-lens-scanner';
 import { Button, LoadingScreen } from '@/components/ui';
 import { useVerificationStore } from '@/stores/verification-store';
 import { submitVerification } from '@/lib/api-client';
@@ -107,11 +107,11 @@ export default function VerificationCapturePage() {
         </button>
 
         <span className="text-xs font-bold uppercase tracking-wider text-earth-green-700 bg-earth-green-50 px-2.5 py-1 rounded-full border border-earth-green-300">
-          Hardware Proof Capture
+          Bhu-Drishti AI Agro-Vision Scanner
         </span>
       </div>
 
-      <div className="flex-1 flex flex-col max-w-md w-full mx-auto p-4 space-y-4">
+      <div className="flex-1 flex flex-col max-w-lg w-full mx-auto p-4 space-y-4">
         {errorMessage && (
           <div className="p-3.5 bg-red-50 border-2 border-red-300 rounded-lg text-sm text-red-900 flex items-start gap-2.5">
             <AlertCircle className="h-5 w-5 text-error shrink-0 mt-0.5" />
@@ -123,9 +123,9 @@ export default function VerificationCapturePage() {
         )}
 
         {!capturedImage ? (
-          <CameraViewfinder
+          <GoogleLensScanner
             onCapture={handleCaptureComplete}
-            titleBadge="PROOF OF COMPLETED ACTION"
+            dialect="hi-IN"
           />
         ) : (
           /* ─── Proof Review & Hardware Signing Attestation ──────── */

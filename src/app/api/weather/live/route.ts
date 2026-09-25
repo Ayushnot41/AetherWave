@@ -14,7 +14,7 @@ export async function GET(req: Request) {
   const { lat, lon } = parsed.data;
   try {
     const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,apparent_temperature,windspeed_10m,precipitation,weathercode,relativehumidity_2m&timezone=Asia/Kolkata&forecast_days=3&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max`;
-    const res = await fetch(apiUrl, { next: { revalidate: 1800 } } as RequestInit);
+    const res = await fetch(apiUrl, { next: { revalidate: 1800 } });
     if (!res.ok) throw new Error(`Open-Meteo error: ${res.status}`);
     const data = await res.json();
     const temp = data.current.temperature_2m;

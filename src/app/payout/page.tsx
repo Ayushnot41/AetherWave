@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Button, Card, ScaleIn, FadeIn } from '@/components/ui';
 import { VerificationSeal3D } from '@/components/3d/verification-seal-3d';
+import { SolanaZkVault3D } from '@/components/3d/solana-zk-vault-3d';
 import { useVerificationStore } from '@/stores/verification-store';
 import { truncateAddress, solanaExplorerUrl, formatCurrency } from '@/lib/utils';
 
@@ -24,13 +25,13 @@ export default function PayoutSuccessPage() {
 
   const [copied, setCopied] = useState(false);
 
-  // Fallback signature for demo resilience if live mock hasn't finished
+  // Fallback signature for demo resilience
   const signature =
     payoutResult?.transactionSignature ||
     '5KnhB9QZ7G3hN4tXpL1sV8wU2yA6bC8dE9fG0hJ1kM2nP3rS4tU5vW6xY7zA8bC9dE0fG';
 
-  const amount = payoutResult?.amount ?? 5.0;
-  const paymentMethod = payoutResult?.paymentMethod || 'UPI Instant Settlement';
+  const amount = payoutResult?.amount ?? 12500;
+  const paymentMethod = payoutResult?.paymentMethod || 'Direct DBT / PM-KISAN Instant UPI Settlement';
   const explorerUrl = solanaExplorerUrl(signature, 'devnet');
 
   const handleCopySignature = async () => {
@@ -44,7 +45,7 @@ export default function PayoutSuccessPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col justify-between p-4 max-w-md mx-auto pb-10 pt-8">
+    <div className="min-h-screen bg-background flex flex-col justify-between p-4 max-w-2xl mx-auto pb-12 pt-8">
       <div className="space-y-6">
         {/* ─── Celebratory 3D Physical Seal Hero ──────────────────── */}
         <div className="flex flex-col items-center text-center space-y-3 pt-2">
@@ -53,16 +54,36 @@ export default function PayoutSuccessPage() {
           <FadeIn delay={0.15}>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sand-200 text-text-secondary text-xs font-bold mb-1">
               <Sparkles className="h-3.5 w-3.5 text-amber-500" />
-              <span>Anticipatory Resilience Disbursed</span>
+              <span>National Anticipatory Climate Resilience Disbursed</span>
             </div>
             <h1 className="text-3xl font-extrabold text-text-primary tracking-tight">
-              {formatCurrency(amount, 'USD')} Micro-Grant
+              ₹{amount.toLocaleString('en-IN')} Direct Disbursal
             </h1>
-            <p className="text-xs text-text-muted max-w-xs mt-1">
-              Preventative protocol executed and cryptographically sealed on Solana before the climate shock peaked.
+            <p className="text-xs text-text-muted max-w-md mt-1">
+              Anticipatory relief protocol executed and cryptographically sealed on Solana before climate shock threshold.
             </p>
           </FadeIn>
         </div>
+
+        {/* ─── 3D Solana Cryptographic Vault ───────────────────────── */}
+        <FadeIn delay={0.2}>
+          <div className="rounded-xl overflow-hidden shadow-lg border border-purple-900/40">
+            <SolanaZkVault3D
+              height="380px"
+              farmerName="Rameshwar Patil (रामेश्वर पाटिल)"
+              gpsCoords="20.5937° N, 78.9629° E [Attested]"
+              disasterRiskPercent={28}
+              onTimeProfitInr={91440}
+              delayedLossInr={34500}
+              harvestEarningsInr={143088}
+              blockSlot={284910283}
+              txSignature={signature}
+            />
+          </div>
+          <div className="text-center text-xs text-text-muted mt-2">
+            Rotate 3D Vault: Sealed data represents immutable on-chain state hash
+          </div>
+        </FadeIn>
 
         {/* ─── Payout Details Receipt Card ─────────────────────────── */}
         <FadeIn delay={0.25}>
@@ -89,72 +110,77 @@ export default function PayoutSuccessPage() {
                 <span className="text-text-muted">On-Chain Protocol:</span>
                 <span className="font-bold text-text-primary flex items-center gap-1">
                   <ShieldCheck className="h-3.5 w-3.5 text-earth-green-600" />
-                  Solana ZK-Compressed Mint
+                  Solana ZK-Compressed Merkle Attestation
                 </span>
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-text-muted">Disbursal Time:</span>
+                <span className="text-text-muted">Disbursal Timestamp:</span>
                 <span className="font-mono text-text-primary">
-                  {payoutResult ? new Date(payoutResult.timestamp).toLocaleTimeString() : new Date().toLocaleTimeString()}
+                  {payoutResult ? new Date(payoutResult.timestamp).toLocaleString() : new Date().toLocaleString()}
                 </span>
               </div>
 
-              <div className="pt-2 border-t border-border-subtle space-y-1.5">
-                <span className="text-text-muted block">Transaction Signature:</span>
-                <div className="flex items-center justify-between gap-2 p-2 rounded bg-sand-50 border border-border-subtle font-mono text-[11px]">
-                  <span className="truncate text-text-secondary">{truncateAddress(signature)}</span>
+              <div className="flex items-center justify-between">
+                <span className="text-text-muted">Aadhaar Beneficiary Hash:</span>
+                <span className="font-mono text-text-primary">0x7f4a...8b9c [Attested]</span>
+              </div>
+
+              <div className="flex flex-col gap-1 pt-1 border-t border-border-subtle">
+                <span className="text-text-muted">Solana Transaction Signature:</span>
+                <div className="flex items-center gap-2 bg-background p-2 rounded border border-border-subtle">
+                  <span className="font-mono text-[11px] text-text-secondary truncate flex-1">
+                    {signature}
+                  </span>
                   <button
                     type="button"
                     onClick={handleCopySignature}
-                    className="flex items-center gap-1 px-2 py-1 rounded bg-sand-200 hover:bg-sand-300 text-text-primary font-sans font-bold text-[10px] shrink-0"
-                    aria-label="Copy Transaction Signature"
+                    className="text-text-muted hover:text-text-primary p-1"
+                    title="Copy Signature"
                   >
-                    {copied ? <Check className="h-3 w-3 text-earth-green-600" /> : <Copy className="h-3 w-3" />}
-                    <span>{copied ? 'Copied' : 'Copy'}</span>
+                    {copied ? (
+                      <Check className="h-3.5 w-3.5 text-earth-green-600" />
+                    ) : (
+                      <Copy className="h-3.5 w-3.5" />
+                    )}
                   </button>
                 </div>
               </div>
+            </div>
 
-              {/* Solana Explorer Deep Link */}
-              <div className="pt-2">
-                <a
-                  href={explorerUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-lg border border-earth-green-300 bg-earth-green-50 hover:bg-earth-green-100 text-earth-green-800 font-bold text-xs transition-colors"
-                >
-                  <span>Verify on Solana Explorer</span>
-                  <ExternalLink className="h-3.5 w-3.5" />
-                </a>
+            {/* Solana Explorer Action Button */}
+            <div className="p-4 bg-sand-50/50 flex justify-between items-center">
+              <a
+                href={explorerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-bold text-earth-green-700 hover:text-earth-green-800 transition-colors"
+              >
+                <span>Verify on Solana Explorer</span>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+
+              <div className="flex items-center gap-1 text-xs font-mono font-bold text-text-muted">
+                <Building2 className="h-3.5 w-3.5" />
+                <span>NPCI / Agristack Gateway</span>
               </div>
             </div>
           </Card>
         </FadeIn>
-
-        {/* Impact Attestation Note */}
-        <FadeIn delay={0.3}>
-          <div className="p-3.5 bg-sand-100 rounded-lg border border-border-subtle text-xs text-text-secondary flex items-start gap-2.5">
-            <Building2 className="h-4 w-4 text-terracotta-500 shrink-0 mt-0.5" />
-            <p>
-              This transaction provides public, immutable proof of proactive climate defense without disclosing the farmer's private personal identity.
-            </p>
-          </div>
-        </FadeIn>
       </div>
 
-      {/* ─── Bottom CTA ───────────────────────────────────────────── */}
-      <FadeIn delay={0.35} className="pt-6">
+      {/* ─── Footer Action ───────────────────────────────────────── */}
+      <div className="mt-8 space-y-3">
         <Button
-          onClick={() => router.push('/dashboard')}
+          variant="primary"
           size="lg"
-          fullWidth
-          className="h-16 text-base font-bold bg-earth-green-500 hover:bg-earth-green-600 text-white shadow-lg flex items-center justify-center gap-2"
+          className="w-full justify-center shadow-md font-bold"
+          onClick={() => router.push('/dashboard')}
         >
-          <span>Return to Dashboard</span>
-          <ArrowRight className="h-5 w-5" />
+          <span>Return to Dashboard / मुख्य पृष्ठ</span>
+          <ArrowRight className="h-4 w-4 ml-1" />
         </Button>
-      </FadeIn>
+      </div>
     </div>
   );
 }
