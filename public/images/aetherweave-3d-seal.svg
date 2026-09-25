@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <defs>
+    <!-- Wax & Stamp Gradients -->
+    <radialGradient id="seal-radial" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#244D75"/>
+      <stop offset="60%" stop-color="#153350"/>
+      <stop offset="100%" stop-color="#0B1A2A"/>
+    </radialGradient>
+
+    <linearGradient id="stamp-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8AD14"/>
+      <stop offset="50%" stop-color="#B96A28"/>
+      <stop offset="100%" stop-color="#8B431D"/>
+    </linearGradient>
+
+    <filter id="seal-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+
+    <filter id="inner-emboss">
+      <feOffset dx="1" dy="2"/>
+      <feGaussianBlur stdDeviation="1" result="offset-blur"/>
+      <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse"/>
+      <feFlood flood-color="#000" flood-opacity="0.6" result="color"/>
+      <feComposite operator="in" in="color" in2="inverse" result="shadow"/>
+      <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+
+  <style>
+    .rotate-slow { animation: rotateSeal 25s infinite linear; transform-origin: 160px 160px; }
+    .pulse-mark { animation: pulseEmboss 3s infinite ease-in-out; }
+    @keyframes rotateSeal {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulseEmboss {
+      0%, 100% { opacity: 0.85; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); }
+    }
+  </style>
+
+  <g filter="url(#seal-shadow)">
+    <!-- Main Embossed Circular Seal Body -->
+    <circle cx="160" cy="160" r="140" fill="url(#seal-radial)" stroke="url(#stamp-gold)" stroke-width="4"/>
+
+    <!-- Concentric Decorative Rims -->
+    <circle cx="160" cy="160" r="132" fill="none" stroke="#EEECE3" stroke-width="1.5" opacity="0.4"/>
+    
+    <!-- Rotating Dashed Outer Ring -->
+    <circle cx="160" cy="160" r="122" fill="none" stroke="url(#stamp-gold)" stroke-width="2.5" stroke-dasharray="8 6" class="rotate-slow"/>
+
+    <circle cx="160" cy="160" r="112" fill="none" stroke="#EEECE3" stroke-width="1" stroke-dasharray="2 3" opacity="0.6"/>
+
+    <!-- Central Diamond Crest (Government Civic Attestation) -->
+    <g class="pulse-mark" transform-origin="160px 160px">
+      <!-- Background Diamond -->
+      <polygon points="160,85 215,160 160,235 105,160" fill="#1C2B36" stroke="#33573C" stroke-width="3"/>
+      
+      <!-- Inner Verified Leaf Motif -->
+      <path d="M 160 115 Q 185 140 185 165 Q 185 190 160 205 Q 135 190 135 165 Q 135 140 160 115 Z" fill="#33573C" stroke="#14F195" stroke-width="1.5"/>
+      <path d="M 160 125 L 160 195" stroke="#14F195" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- Center Gold Core -->
+      <circle cx="160" cy="160" r="12" fill="url(#stamp-gold)"/>
+      <circle cx="160" cy="160" r="6" fill="#EEECE3"/>
+    </g>
+
+    <!-- Arc Text Overlay: VERIFIED BY SOLANA ZK PROTOCOL -->
+    <path id="text-arc-top" d="M 60 160 A 100 100 0 0 1 260 160" fill="none"/>
+    <text font-family="'Source Serif 4', serif" font-size="11" font-weight="bold" fill="#EEECE3" letter-spacing="3" text-anchor="middle">
+      <textPath href="#text-arc-top" startOffset="50%">* HARDWARE ATTESTED *</textPath>
+    </text>
+
+    <path id="text-arc-bottom" d="M 260 160 A 100 100 0 0 1 60 160" fill="none"/>
+    <text font-family="'Mukta', sans-serif" font-size="10" font-weight="700" fill="#B96A28" letter-spacing="2" text-anchor="middle">
+      <textPath href="#text-arc-bottom" startOffset="50%">SOLANA ZK MINT · ZERO TAMPER</textPath>
+    </text>
+  </g>
+</svg>

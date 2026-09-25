@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="1000" height="320">
+  <defs>
+    <!-- Background & Lighting Gradients -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1E2C"/>
+      <stop offset="45%" stop-color="#153350"/>
+      <stop offset="85%" stop-color="#1C2B36"/>
+      <stop offset="100%" stop-color="#0A141C"/>
+    </linearGradient>
+
+    <linearGradient id="gold-metal" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#D4920B"/>
+      <stop offset="50%" stop-color="#B96A28"/>
+      <stop offset="100%" stop-color="#8E4D1A"/>
+    </linearGradient>
+
+    <linearGradient id="solana-neon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9945FF"/>
+      <stop offset="50%" stop-color="#14F195"/>
+      <stop offset="100%" stop-color="#00C2FF"/>
+    </linearGradient>
+
+    <linearGradient id="forest-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#33573C"/>
+      <stop offset="100%" stop-color="#1B3A23"/>
+    </linearGradient>
+
+    <!-- 3D Extrusion Filters -->
+    <filter id="shadow-3d" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <style>
+    .particle { animation: floatParticle 8s infinite ease-in-out; }
+    .pulse-glow { animation: pulse 3s infinite ease-in-out; }
+    .scan-line { animation: scanDown 4s infinite linear; }
+    .iso-plane { transform: rotateX(55deg) rotateZ(-45deg); transform-origin: 50% 50%; }
+
+    @keyframes floatParticle {
+      0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+      50% { transform: translateY(-25px) translateX(15px); opacity: 0.9; }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.05); }
+    }
+    @keyframes scanDown {
+      0% { transform: translateY(-50px); opacity: 0; }
+      20% { opacity: 0.8; }
+      80% { opacity: 0.8; }
+      100% { transform: translateY(350px); opacity: 0; }
+    }
+  </style>
+
+  <!-- Deep Canvas Background -->
+  <rect width="1000" height="320" rx="12" fill="url(#bg-grad)"/>
+
+  <!-- Isometric Topographic Ground Mesh (Low-Poly Field Relief) -->
+  <g opacity="0.22" stroke="#4A90E2" stroke-width="1" fill="none">
+    <!-- Perspective Grid Lines -->
+    <path d="M 0 280 L 1000 280 M 0 250 L 1000 250 M 0 220 L 1000 220 M 0 190 L 1000 190 M 0 160 L 1000 160"/>
+    <path d="M 100 320 L 300 140 M 250 320 L 400 140 M 400 320 L 500 140 M 550 320 L 600 140 M 700 320 L 700 140 M 850 320 L 800 140"/>
+    <!-- Topographic Contour Curves -->
+    <path d="M 50 260 Q 200 230 400 270 T 800 240 T 980 260" stroke="#14F195" stroke-width="1.5" opacity="0.6"/>
+    <path d="M 80 290 Q 300 260 550 295 T 950 280" stroke="#9945FF" stroke-width="1.5" opacity="0.5"/>
+  </g>
+
+  <!-- Animated Live Scanning Telemetry Beam -->
+  <line x1="50" y1="0" x2="950" y2="0" stroke="url(#solana-neon)" stroke-width="2" opacity="0.7" class="scan-line"/>
+
+  <!-- Left: Agricultural Resilience Motif (Low-Poly Wheat/Crop Canopy) -->
+  <g transform="translate(60, 40)" opacity="0.9">
+    <path d="M 40 180 Q 55 120 70 80 Q 80 60 90 40" stroke="#33573C" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Crop Nodes -->
+    <polygon points="90,40 105,30 100,50" fill="#B96A28"/>
+    <polygon points="80,65 98,55 92,75" fill="#33573C"/>
+    <polygon points="70,95 88,85 82,105" fill="#B96A28"/>
+    <polygon points="60,125 78,115 72,135" fill="#33573C"/>
+    <!-- Sensor Signal Ring around crop -->
+    <circle cx="90" cy="40" r="16" stroke="#14F195" stroke-width="1.5" fill="none" opacity="0.6" class="pulse-glow"/>
+    <circle cx="90" cy="40" r="28" stroke="#14F195" stroke-width="1" fill="none" stroke-dasharray="4,4" opacity="0.3"/>
+  </g>
+
+  <!-- Right: Cryptographic Blockchain / Hardware Attestation Traces -->
+  <g transform="translate(820, 40)" opacity="0.9">
+    <!-- Blockchain Blocks -->
+    <rect x="30" y="30" width="45" height="45" rx="6" fill="#153350" stroke="#9945FF" stroke-width="2" filter="url(#shadow-3d)"/>
+    <text x="52" y="58" text-anchor="middle" font-family="'Source Serif 4', serif" font-weight="bold" font-size="16" fill="#14F195">ZK</text>
+
+    <path d="M 52 75 L 52 110" stroke="#00C2FF" stroke-width="2" stroke-dasharray="3,3"/>
+
+    <rect x="30" y="110" width="45" height="45" rx="6" fill="#153350" stroke="#14F195" stroke-width="2" filter="url(#shadow-3d)"/>
+    <text x="52" y="138" text-anchor="middle" font-family="'Mukta', sans-serif" font-weight="bold" font-size="14" fill="#FFFFFF">SOL</text>
+
+    <!-- Circuit Interconnects -->
+    <path d="M 30 52 L -10 52 L -30 90 L -60 90" stroke="#9945FF" stroke-width="2" fill="none"/>
+    <circle cx="-60" cy="90" r="4" fill="#14F195"/>
+    <circle cx="-10" cy="52" r="3" fill="#00C2FF"/>
+  </g>
+
+  <!-- Floating Particles in Background -->
+  <circle cx="180" cy="90" r="3" fill="#14F195" class="particle"/>
+  <circle cx="320" cy="70" r="2.5" fill="#00C2FF" class="particle" style="animation-delay: -2s;"/>
+  <circle cx="680" cy="110" r="3.5" fill="#9945FF" class="particle" style="animation-delay: -4s;"/>
+  <circle cx="790" cy="65" r="2" fill="#B96A28" class="particle" style="animation-delay: -6s;"/>
+  <circle cx="450" cy="45" r="2" fill="#EEECE3" class="particle" style="animation-delay: -1s;"/>
+
+  <!-- Center Hero Branding: 3D Extruded Title & Typography -->
+  <g transform="translate(500, 115)" text-anchor="middle">
+    <!-- Outer Decorative Verification Pill -->
+    <rect x="-180" y="-72" width="360" height="28" rx="14" fill="#0E1E2C" stroke="#B96A28" stroke-width="1.5" opacity="0.9"/>
+    <text x="0" y="-54" font-family="'Mukta', sans-serif" font-weight="700" font-size="11" fill="#EEECE3" letter-spacing="3">
+      🏛️ GOVERNMENT-GRADE CIVIC AGRI-RAIL · SOLANA ZK
+    </text>
+
+    <!-- 3D Shadow Layers for Main Title -->
+    <text x="3" y="18" font-family="'Source Serif 4', Georgia, serif" font-weight="900" font-size="64" fill="#070D12" letter-spacing="4">
+      AETHERWEAVE
+    </text>
+    <text x="2" y="16" font-family="'Source Serif 4', Georgia, serif" font-weight="900" font-size="64" fill="#0A1824" letter-spacing="4">
+      AETHERWEAVE
+    </text>
+    <text x="1" y="14" font-family="'Source Serif 4', Georgia, serif" font-weight="900" font-size="64" fill="#0E2335" letter-spacing="4">
+      AETHERWEAVE
+    </text>
+    <!-- Main Face of 3D Text -->
+    <text x="0" y="12" font-family="'Source Serif 4', Georgia, serif" font-weight="900" font-size="64" fill="#EEECE3" letter-spacing="4" filter="url(#shadow-3d)">
+      AETHERWEAVE
+    </text>
+
+    <!-- Subtitle / Tagline -->
+    <text x="0" y="48" font-family="'Mukta', sans-serif" font-weight="600" font-size="16" fill="#B96A28" letter-spacing="1.5">
+      प्रत्याशित जलवायु-आजीविका लचीलापन और तत्काल राहत रेल
+    </text>
+    <text x="0" y="74" font-family="'Mukta', sans-serif" font-weight="400" font-size="13" fill="#A0AAB5" letter-spacing="0.5">
+      Hardware Telemetry Attestation · AI Swarm Triage · Deterministic Escrow Payouts
+    </text>
+
+    <!-- 4 Core Pillars Badge Strip -->
+    <g transform="translate(0, 110)">
+      <g transform="translate(-240, 0)">
+        <rect x="-65" y="-14" width="130" height="26" rx="13" fill="#1C2B36" stroke="#33573C" stroke-width="1.2"/>
+        <text x="0" y="4" font-family="'Mukta', sans-serif" font-size="11" font-weight="600" fill="#88FF99">🛰️ Earth Engine</text>
+      </g>
+      <g transform="translate(-80, 0)">
+        <rect x="-65" y="-14" width="130" height="26" rx="13" fill="#1C2B36" stroke="#B96A28" stroke-width="1.2"/>
+        <text x="0" y="4" font-family="'Mukta', sans-serif" font-size="11" font-weight="600" fill="#FFCC88">🌦️ Open-Meteo</text>
+      </g>
+      <g transform="translate(80, 0)">
+        <rect x="-65" y="-14" width="130" height="26" rx="13" fill="#1C2B36" stroke="#9945FF" stroke-width="1.2"/>
+        <text x="0" y="4" font-family="'Mukta', sans-serif" font-size="11" font-weight="600" fill="#D099FF">⛓️ Solana ZK</text>
+      </g>
+      <g transform="translate(240, 0)">
+        <rect x="-65" y="-14" width="130" height="26" rx="13" fill="#1C2B36" stroke="#00C2FF" stroke-width="1.2"/>
+        <text x="0" y="4" font-family="'Mukta', sans-serif" font-size="11" font-weight="600" fill="#77DDFF">🔊 ElevenLabs</text>
+      </g>
+    </g>
+  </g>
+</svg>

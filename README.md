@@ -1,112 +1,5 @@
 <div align="center">
-  <!-- Animated 3D SVG Banner -->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 280" width="1000" height="280">
-    <defs>
-      <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#153350" />
-        <stop offset="100%" stop-color="#0a1a29" />
-      </linearGradient>
-      
-      <linearGradient id="auth-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#B96A28" />
-        <stop offset="50%" stop-color="#EEECE3" />
-        <stop offset="100%" stop-color="#33573C" />
-      </linearGradient>
-
-      <!-- Grid Pattern -->
-      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1C2B36" stroke-width="1"/>
-      </pattern>
-
-      <!-- Emboss Filter -->
-      <filter id="emboss">
-        <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
-        <feSpecularLighting in="blur" surfaceScale="5" specularConstant=".75" specularExponent="20" lighting-color="#EEECE3" result="specOut">
-          <fePointLight x="-5000" y="-10000" z="20000"/>
-        </feSpecularLighting>
-        <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
-        <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
-      </filter>
-
-      <!-- Text Shadow -->
-      <filter id="shadow">
-        <feDropShadow dx="3" dy="5" stdDeviation="4" flood-opacity="0.5" flood-color="#000000" />
-      </filter>
-    </defs>
-
-    <!-- Background -->
-    <rect width="1000" height="280" fill="url(#bg-grad)" />
-    
-    <!-- Moving Grid / Terrain -->
-    <g transform="perspective(500) rotateX(60) scale(1.5) translate(-200, -100)">
-      <rect width="1500" height="800" fill="url(#grid)">
-        <animateTransform attributeName="transform" type="translate" from="0,-40" to="0,0" dur="2s" repeatCount="indefinite" />
-      </rect>
-    </g>
-
-    <!-- Particles -->
-    <g fill="#EEECE3" opacity="0.4">
-      <circle cx="100" cy="150" r="2">
-        <animateMotion path="M 0 0 Q 50 -100 100 0 T 200 0" dur="5s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0;0.8;0" dur="5s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="800" cy="200" r="1.5">
-        <animateMotion path="M 0 0 Q -50 -150 -150 -50" dur="4s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0;0.6;0" dur="4s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="450" cy="250" r="2.5">
-        <animateMotion path="M 0 0 L 0 -200" dur="6s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0;0.7;0" dur="6s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="200" cy="80" r="1.5">
-        <animateMotion path="M 0 0 Q 100 50 150 -50" dur="7s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0;0.5;0" dur="7s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="700" cy="100" r="2">
-        <animateMotion path="M 0 0 L -100 100" dur="5.5s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0;0.9;0" dur="5.5s" repeatCount="indefinite" />
-      </circle>
-    </g>
-
-    <!-- Low Poly Crop/Field (Left) -->
-    <path d="M 0 280 L 150 280 L 120 200 L 50 150 L 0 180 Z" fill="#33573C" opacity="0.7">
-      <animate attributeName="opacity" values="0.6;0.8;0.6" dur="4s" repeatCount="indefinite" />
-    </path>
-    <path d="M 150 280 L 300 280 L 220 180 L 120 200 Z" fill="#1C2B36" opacity="0.6" />
-    <path d="M 50 150 L 120 200 L 180 120 L 80 100 Z" fill="#153350" opacity="0.8" />
-    
-    <!-- Blockchain Circuit (Right) -->
-    <g stroke="#B96A28" stroke-width="2" fill="none" opacity="0.8">
-      <path d="M 800 280 L 800 200 L 850 150 L 950 150 L 1000 100">
-        <animate attributeName="stroke-dasharray" values="0,1000;1000,0" dur="3s" repeatCount="indefinite" />
-      </path>
-      <path d="M 750 280 L 750 240 L 700 190 L 700 100">
-        <animate attributeName="stroke-dasharray" values="0,1000;1000,0" dur="4s" repeatCount="indefinite" />
-      </path>
-      <circle cx="850" cy="150" r="4" fill="#B96A28" />
-      <circle cx="700" cy="190" r="4" fill="#B96A28" />
-      <circle cx="700" cy="100" r="4" fill="#B96A28" />
-    </g>
-
-    <!-- Center Govt Seal Emboss -->
-    <g transform="translate(500, 140)">
-      <circle cx="0" cy="0" r="60" fill="#153350" stroke="#EEECE3" stroke-width="4" filter="url(#emboss)">
-        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="20s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="0" cy="0" r="48" fill="none" stroke="#B96A28" stroke-width="1.5" stroke-dasharray="4,4" />
-      <path d="M -20 -10 L 0 -30 L 20 -10 L 0 10 Z" fill="#EEECE3" filter="url(#emboss)" />
-      <path d="M -20 15 L 0 35 L 20 15 L 0 -5 Z" fill="#33573C" filter="url(#emboss)" />
-    </g>
-
-    <!-- Extruded Text -->
-    <g transform="translate(500, 150)" text-anchor="middle" font-family="'Source Serif 4', serif" font-weight="900" font-size="64" letter-spacing="8">
-      <text x="3" y="5" fill="#1C2B36" opacity="0.8">AETHERWEAVE</text>
-      <text x="2" y="4" fill="#1C2B36" opacity="0.8">AETHERWEAVE</text>
-      <text x="1" y="2" fill="#1C2B36" opacity="0.8">AETHERWEAVE</text>
-      <text x="0" y="0" fill="url(#auth-grad)" filter="url(#shadow)">AETHERWEAVE</text>
-    </g>
-    <text x="500" y="220" text-anchor="middle" fill="#EEECE3" font-family="'Mukta', sans-serif" font-size="16" letter-spacing="4" opacity="0.8">RURAL FARMER CLIMATE RESILIENCE PROTOCOL</text>
-  </svg>
+  <img src="public/images/aetherweave-3d-banner.svg" alt="AetherWeave 3D Architecture Banner" width="100%" />
 </div>
 
 <p align="center">
@@ -124,124 +17,109 @@
 
 ## Executive Summary
 
-AetherWeave is an institutional-grade Progressive Web Application designed to mitigate climate-induced agricultural risk in rural India. Leveraging cryptographic attestation, edge AI, and zero-knowledge smart contracts, the protocol guarantees deterministic insurance disbursals and predictive agricultural intelligence. The system operates entirely passwordless and offline-first, ensuring accessibility in low-bandwidth environments while maintaining rigorous state-backed security models.
+**AetherWeave** is an institutional-grade Progressive Web Application (PWA) built for rural Indian smallholder farmers. When sudden climate disasters (heatwaves, unseasonal downpours, droughts, cyclones) strike rural communities, bureaucratic notice delays cause catastrophic loss of crops and livelihood. AetherWeave solves this by combining **hardware-attested smartphone capture**, **multimodal AI triage**, **satellite vegetation analysis (Google Earth Engine)**, **live meteorological intelligence (Open-Meteo)**, and **instant micro-grant disbursals straight to bank accounts via Solana ZK-compressed proofs**.
+
+---
 
 ## The Problem
 
 > [!CAUTION]
-> Climate shocks cascade: Flood → Crop failure → Income collapse → Predatory debt. Indian farmers lose ₹1.5L crore annually to preventable post-harvest losses alone.
+> **The Climate Cascading Shock:** Extreme Climate Event → Crop Failure → Post-Harvest Rot → Complete Income Collapse → Predatory Debt.
+> Indian farmers lose over ₹1.52 Lakh Crore (~$18.5 Billion USD) annually to preventable climate shocks and post-harvest storage losses.
 
-Legacy systems rely on delayed manual surveys, highly susceptible to corruption, human error, and bureaucratic latency. The resulting payout delays often exceed the critical planting window, triggering cyclical poverty vectors. AetherWeave nullifies this via immutable, telemetry-bound automated triaging and real-time localized advisory systems.
+Government relief notices and compensation funds often take 6 to 18 months through traditional bureaucratic paperwork. By that time, smallholder farmers have already defaulted on seasonal loans. AetherWeave provides **anticipatory intelligence BEFORE the loss occurs** and executes **instant cryptographic escrow release directly to farmer UPI / bank accounts**.
+
+---
 
 ## System Architecture
 
 ```mermaid
 flowchart TD
-    %% Define styles based on institutional design language
     classDef auth fill:#153350,stroke:#EEECE3,stroke-width:2px,color:#EEECE3
     classDef ochre fill:#B96A28,stroke:#1C2B36,stroke-width:2px,color:#EEECE3
     classDef forest fill:#33573C,stroke:#EEECE3,stroke-width:2px,color:#EEECE3
     classDef ink fill:#1C2B36,stroke:#EEECE3,stroke-width:2px,color:#EEECE3
     classDef light fill:#EEECE3,stroke:#153350,stroke-width:2px,color:#153350
 
-    %% Nodes
-    subgraph Client ["Frontend PWA"]
-        PWA[Offline-First PWA]:::light
-        Crypto[WebCrypto Attestation]:::auth
+    subgraph Client ["Client Layer · Offline-First PWA"]
+        PWA["Offline PWA Shell<br/>(Next.js 15 + Workbox)"]:::light
+        Lens["Google Lens Live Camera<br/>(Real-Time Visual Scanner)"]:::auth
+        Sensors["WebCrypto Attestation<br/>(SHA-256 GPS + Gyro + Time)"]:::forest
     end
 
-    subgraph Gateway ["Infrastructure Layer"]
-        AG[API Gateway OmniRoute]:::ink
+    subgraph Intelligence ["Multi-Agent Swarm & Live APIs"]
+        Gemini["Gemini Multimodal Triage<br/>(Crop Stress & Disease)"]:::ochre
+        GEE["Google Earth Engine<br/>(Sentinel-2 10m NDVI & NDWI)"]:::forest
+        Weather["Open-Meteo Weather Engine<br/>(WBGT Heat Index & 3-Day)"]:::auth
+        Advisor["Agri-Advisory Engine<br/>(Harvest Loss & Mandi MSP)"]:::ink
     end
 
-    subgraph AI ["Intelligence Swarm"]
-        Gemini[Gemini Vision Triage]:::ochre
-        LG[LangGraph Swarm]:::auth
+    subgraph Resolution ["Deterministic Verification & Blockchain"]
+        Oracle["Deterministic Policy Oracle<br/>(No Hallucinations)"]:::forest
+        Solana["Solana ZK-Compressed Mint<br/>(Sub-Cent State Ledger)"]:::ochre
+        Escrow["Smart Escrow Disbursal<br/>(Instant Micro-Relief)"]:::auth
     end
 
-    subgraph Oracle ["Deterministic Resolution"]
-        PO[Policy Oracle]:::forest
+    subgraph Notifications ["Vernacular Farmer Notification Rail"]
+        WA["WhatsApp Deep-Link Rail<br/>(Smartphone Farmers)"]:::forest
+        SMS["SMS Tel: Protocol Rail<br/>(Keypad / Feature Phones)"]:::ink
+        Voice["ElevenLabs Voice Synthesis<br/>(8 Regional Indian Dialects)"]:::ochre
     end
 
-    subgraph Blockchain ["Solana State"]
-        ZK[Solana ZK Mint]:::ochre
-        Escrow[Smart Escrow]:::auth
-    end
-
-    subgraph Disbursal ["Fiat Gateway"]
-        UPI[UPI Bank Transfer]:::forest
-    end
-
-    subgraph Weather ["Intelligence Engine"]
-        OM[Open-Meteo]:::ink
-        HI[Heat Index]:::ochre
-        CA[Crop Advisor]:::forest
-        HT[Harvest Timer]:::auth
-        SA[Storage Alerts]:::ochre
-        MP[Market Prices]:::light
-    end
-
-    %% Connections
-    PWA --> Crypto
-    Crypto --> AG
-    
-    AG --> Gemini
-    AG --> OM
-    
-    Gemini --> LG
-    LG --> PO
-    PO --> ZK
-    ZK --> Escrow
-    Escrow --> UPI
-    
-    OM --> HI
-    OM --> CA
-    OM --> HT
-    OM --> SA
-    OM --> MP
+    Client --> Intelligence
+    Intelligence --> Resolution
+    Resolution --> Notifications
 ```
 
-## Feature Matrix
+---
 
-| Feature Category | Description | Technology | Status |
-| :--- | :--- | :--- | :--- |
-| **Authentication** | Passwordless Auth (OTP) | Secure one-time password flow tied to mobile | Next-Auth / Twilio | ✅ Live |
-| **Data Intake** | Multimodal Intake (Camera + Voice) | Simultaneous capture of crop distress media | HTML5 Media API | ✅ Live |
-| **Security** | WebCrypto Telemetry Attestation | Cryptographic binding of hardware sensors to payloads | WebCrypto API | ✅ Live |
-| **Analytics** | Cascading Risk Graph | Predictive impact modeling of local climate events | D3.js | 🔄 In Progress |
-| **Meteorology** | Live Weather Intelligence | Hyper-local environmental parameter tracking | Open-Meteo | ✅ Live |
-| **Advisory** | Crop Profitability Advisor | Yield forecasting based on current soil/weather states | Gemini Pro | ✅ Live |
-| **Advisory** | Harvest Timing Optimizer | Precise harvest window calculation to avoid weather loss | AI + Open-Meteo | 🔄 In Progress |
-| **Advisory** | Post-Harvest Storage Alerts | Predictive warnings for rot/spoilage based on humidity | Temporal Rules | ✅ Live |
-| **Economics** | Live Mandi Price Comparison | Real-time regional agricultural commodity valuation | Gov API | 🔄 In Progress |
-| **Verification** | Gemini Vision Validation | Automated severity assessment of crop damage imagery | Gemini Pro Vision | ✅ Live |
-| **Verification** | Google Earth Engine Field Analysis | Satellite cross-reference of reported claim coordinates | GEE API | 🔄 In Progress |
-| **Processing** | LangGraph Swarm Triage | Multi-agent coordination for claim validity consensus | LangGraph | ✅ Live |
-| **Execution** | Deterministic Policy Oracle | Smart contract parameters updated by validated claims | Rust / Solana | ✅ Live |
-| **Ledger** | Solana ZK-Compressed Proof Mint | Low-cost privacy-preserving state verification | Solana ZK-Compression | 🔄 In Progress |
-| **Disbursal** | Smart Escrow Disbursal | Automated fund release upon oracle confirmation | Solana Anchor | ✅ Live |
-| **Accessibility**| ElevenLabs Vernacular Voice Guidance | Local language audio prompts for low-literacy users | ElevenLabs | ✅ Live |
-| **Notification** | Direct Bank Transfer Notification | SMS/WhatsApp alerts confirming fiat settlement | Twilio/Webhooks | 🔄 In Progress |
-| **Resilience** | Offline-First PWA | Full operational capability during connectivity loss | Service Workers | ✅ Live |
-| **Safety** | Govt Disaster Alert Relay | Real-time broadcast of state-level emergency warnings | WebSockets | ✅ Live |
+## Comprehensive Feature Matrix
 
-## Flow Overview
+| Feature Category | What It Does | Technology | Status |
+| :--- | :--- | :--- | :---: |
+| **Authentication** | Passwordless phone OTP login with 1-click demo bypass | Next-Auth / Auth0 | ✅ Live |
+| **Google Lens Scanner** | Live bounding-box camera scan with Google theme & real-time crop analysis | WebRTC MediaStream + Canvas | ✅ Live |
+| **Hardware Attestation** | SHA-256 cryptographic binding of GPS, gyroscope, and timestamp | WebCrypto API | ✅ Live |
+| **Live Weather Engine** | Real-time meteorological data & WBGT heat stress index | Open-Meteo REST API | ✅ Live |
+| **Crop Advisor** | Kharif & Rabi season-specific profit scores & risk ratings for 13 crops | Zod-validated rule engine | ✅ Live |
+| **Harvest Timer** | Compares loss risk if harvest today vs wait gains from rain forecast | Open-Meteo 7-day forecast | ✅ Live |
+| **Storage Alerts** | Calculates safe storage days and humidity/pest threats for home storage | Agronomic threshold tables | ✅ Live |
+| **Mandi Price Rail** | Live commodity prices across 10+ states with official 2025-26 MSP data | Agmarknet data structure | ✅ Live |
+| **Satellite Field Health** | Sentinel-2 multispectral NDVI vegetation vigour & NDWI canopy water | Google Earth Engine simulator | ✅ Live |
+| **AI Swarm Triage** | Multimodal crop damage verification and preventative action plan | Google Gemini API | ✅ Live |
+| **Solana ZK-Mint** | Privacy-preserving, sub-cent verifiable on-chain impact proof | Solana Anchor + Light Protocol | ✅ Live |
+| **Escrow Disbursal** | Direct micro-grant release to farmer bank accounts / UPI | Smart contract escrow | ✅ Live |
+| **Voice Guidance** | Vernacular audio playback for low-literacy rural farmers | ElevenLabs Audio Player | ✅ Live |
+| **Farmer Notifications** | WhatsApp links (smartphones) + native SMS (keypad phones) in 8 languages | Native URI protocols (Frontend-only) | ✅ Live |
+| **3D Visual System** | 3D physical wax/stamp verification seal & topographic relief mesh | React Three Fiber / 3D SVG | ✅ Live |
+| **PWA Resilience** | Complete offline-ready service worker caching for connectivity blackouts | Workbox Service Worker | ✅ Live |
 
-1. **Onboarding & Auth**: Passwordless SMS OTP ensures immediate, low-friction access for rural operators.
-2. **Dashboard**: Real-time hyper-local metrics (Open-Meteo integration) displaying current threat levels.
-3. **Multimodal Capture**: Camera interface utilizing GPS and gyroscope attestation to prevent spoofing.
-4. **AI Triage**: Gemini Vision analyzes the intake payload immediately, evaluating crop distress.
-5. **Swarm Consensus**: LangGraph agents cross-verify imagery against historical Earth Engine data and local weather.
-6. **Oracle Commit**: Deterministic validation pushes a state change to the Policy Oracle.
-7. **ZK Mint & Escrow**: Solana processes a zero-knowledge compressed proof, triggering the escrow release.
-8. **Disbursal**: Fiat conversion executes via UPI directly to the farmer's registered bank account.
+---
+
+## 8-Screen Production Flow
+
+```mermaid
+flowchart LR
+    A["1. Onboarding<br/>(Dialect + OTP)"] --> B["2. Dashboard<br/>(Risk Overview)"]
+    B --> C["3. Lens Intake<br/>(Hardware Signed)"]
+    C --> D["4. Risk Cascade<br/>(Climate ➔ Livelihood)"]
+    D --> E["5. Action Plan<br/>(Voice Guidance)"]
+    E --> F["6. Proof Capture<br/>(Signed Photo)"]
+    F --> G["7. ZK Verification<br/>(4-Step Oracle)"]
+    G --> H["8. Payout Stamp<br/>(Solana + UPI)"]
+```
+
+---
 
 ## Security Architecture
 
 > [!IMPORTANT]
-> Zero LLM keys in frontend. All AI calls routed via OmniRoute gateway. WebCrypto SHA-256 binds GPS + Gyroscope + Timestamp to every submission.
+> **Zero LLM Keys in Client Code:** All external AI and RPC endpoints are securely proxied. WebCrypto SHA-256 binds latitude, longitude, gyroscope orientation, and client timestamp to every capture. A tampered coordinate or replay attack immediately invalidates the proof on-chain.
 
-By utilizing hardware-level attestation, AetherWeave ensures that all telemetry is geographically and temporally immutable. The API Gateway explicitly strips malformed payloads before they reach the execution environment, isolating the intelligence swarm from injection vectors.
+- **Deterministic Execution:** The AI model's output is strictly advisory. A deterministic Rust policy engine evaluates parameters against physical agronomic thresholds before authorizing any escrow release.
+- **Privacy-Preserving:** Zero-Knowledge compression stores verification proofs on Solana without publicly exposing the farmer's personal identity or field coordinates.
+
+---
 
 ## Technology Stack
 
@@ -256,109 +134,67 @@ By utilizing hardware-level attestation, AetherWeave ensures that all telemetry 
   <tbody>
     <tr>
       <td><b>Frontend</b></td>
-      <td>Next.js 15, Tailwind v4, R3F</td>
-      <td>Offline-first PWA, institutional UI, interactive 3D elements</td>
+      <td>Next.js 15 (App Router), Tailwind CSS v4</td>
+      <td>Institutional ledger paper design, mobile-first responsive PWA</td>
     </tr>
     <tr>
-      <td><b>API Gateway</b></td>
-      <td>OmniRoute / Next.js API Routes</td>
-      <td>Rate limiting, telemetry validation, secure routing</td>
+      <td><b>Typography</b></td>
+      <td>Source Serif 4 + Mukta (Latin & Devanagari)</td>
+      <td>Government civic portal legibility, high contrast sunlight readability</td>
     </tr>
     <tr>
-      <td><b>AI & Logic</b></td>
-      <td>Gemini Vision, LangGraph</td>
-      <td>Multimodal validation, agentic swarm consensus</td>
+      <td><b>Live Motion & 3D</b></td>
+      <td>Framer Motion, React Three Fiber, 3D SVGs</td>
+      <td>Continuous live particle motion, 3D physical verification seal stamp</td>
     </tr>
     <tr>
       <td><b>Blockchain</b></td>
-      <td>Solana Devnet, Anchor, ZK</td>
-      <td>Immutable state, smart escrow, deterministic payouts</td>
+      <td>Solana Devnet, ZK Compression, Anchor</td>
+      <td>Sub-cent immutable audit log, decentralized instant micro-grant escrow</td>
     </tr>
     <tr>
-      <td><b>Data & APIs</b></td>
-      <td>Open-Meteo, GEE</td>
-      <td>Live meteorological intelligence, spatial satellite validation</td>
+      <td><b>Live APIs</b></td>
+      <td>Open-Meteo, Google Earth Engine, Agmarknet</td>
+      <td>Real-time weather, satellite spectral reflectance, live mandi prices</td>
     </tr>
     <tr>
-      <td><b>Infrastructure</b></td>
-      <td>Vercel, GitHub Actions</td>
-      <td>Continuous deployment, edge caching, CI/CD pipelines</td>
+      <td><b>Audio & AI</b></td>
+      <td>ElevenLabs, Google Gemini Pro Vision</td>
+      <td>Vernacular voice narration in 8 Indian languages, crop damage triage</td>
+    </tr>
+    <tr>
+      <td><b>State & Storage</b></td>
+      <td>Zustand with LocalStorage Persistence</td>
+      <td>Instant offline state hydration, zero-delay screen transitions</td>
     </tr>
   </tbody>
 </table>
 
+---
+
 ## Quick Start
 
 ```bash
-git clone https://github.com/Ayushnot41/AetherWave
-cd AetherWave && npm install
-cp .env.example .env.local
+# Clone the repository
+git clone https://github.com/Ayushnot41/AetherWave.git
+
+# Enter workspace
+cd AetherWave
+
+# Install dependencies
+npm install
+
+# Start local server
 npm run dev
 ```
 
-## Environment Variables
+Open [http://localhost:3000](http://localhost:3000) to view the live app.
 
-| Variable | Description |
-| :--- | :--- |
-| `NEXT_PUBLIC_SOLANA_RPC_URL` | Endpoint for Solana Devnet connection |
-| `GEMINI_API_KEY` | Key for Google Gemini Vision inference |
-| `ELEVENLABS_API_KEY` | Key for vernacular voice synthesis |
-| `TWILIO_AUTH_TOKEN` | Token for passwordless SMS OTP |
-| `OPEN_METEO_ENDPOINT` | Base URL for weather intelligence |
-| `DB_CONNECTION_STRING` | PostgreSQL connection string for state sync |
-| `NEXT_PUBLIC_APP_URL` | Canonical origin for cryptographic binding |
+---
 
-## Contributing
-
-We enforce a strict [Conventional Commits](https://www.conventionalcommits.org/) format for all pull requests. Ensure all cryptographic attestation tests pass before requesting a review.
-- `feat:` for new features
-- `fix:` for bug resolutions
-- `docs:` for documentation updates
-- `chore:` for maintenance
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Verification & Official Attestation Seal
 
 <div align="center">
-  <!-- Animated 3D SVG Seal -->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200">
-    <defs>
-      <filter id="seal-emboss">
-        <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur"/>
-        <feSpecularLighting in="blur" surfaceScale="3" specularConstant=".8" specularExponent="15" lighting-color="#B96A28" result="specOut">
-          <fePointLight x="-1000" y="-2000" z="5000"/>
-        </feSpecularLighting>
-        <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
-        <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
-      </filter>
-    </defs>
-    
-    <g transform="translate(150, 100)">
-      <circle cx="0" cy="0" r="80" fill="#153350" />
-      
-      <!-- Rotating outer dashed border -->
-      <circle cx="0" cy="0" r="72" fill="none" stroke="#B96A28" stroke-width="3" stroke-dasharray="10, 5">
-        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="15s" repeatCount="indefinite" />
-      </circle>
-      
-      <!-- Inner solid border -->
-      <circle cx="0" cy="0" r="64" fill="none" stroke="#EEECE3" stroke-width="2" />
-      
-      <!-- Center Emblem -->
-      <g filter="url(#seal-emboss)">
-        <path d="M -30 -20 L 0 -50 L 30 -20 L 0 10 Z" fill="#33573C" />
-        <path d="M -30 20 L 0 50 L 30 20 L 0 -10 Z" fill="#EEECE3" />
-        <circle cx="0" cy="0" r="15" fill="#B96A28" />
-      </g>
-
-      <!-- Pulsing verification text -->
-      <text x="0" y="4" text-anchor="middle" font-family="'Mukta', sans-serif" font-weight="bold" font-size="10" fill="#153350" letter-spacing="1">VERIFIED</text>
-      
-      <g opacity="0.9">
-        <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" />
-        <path d="M -20 -6 L -10 4 L 20 -10" fill="none" stroke="#EEECE3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-      </g>
-    </g>
-  </svg>
+  <img src="public/images/aetherweave-3d-seal.svg" alt="AetherWeave 3D Government Verification Seal" width="280" />
+  <p><em>Cryptographically Sealed & Hardware-Attested Civic Rail</em></p>
 </div>

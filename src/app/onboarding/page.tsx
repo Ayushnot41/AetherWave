@@ -58,9 +58,17 @@ const phoneSchema = z.object({
   phone: z
     .string()
     .min(1, 'Phone number is required')
-    .regex(
-      /^\+[1-9]\d{6,14}$/,
-      'Enter a valid phone number in E.164 format (e.g. +919876543210)',
+    .transform((val) => {
+      const clean = val.trim().replace(/[\s-]/g, '');
+      if (/^\d{10}$/.test(clean)) return `+91${clean}`;
+      if (/^91\d{10}$/.test(clean)) return `+${clean}`;
+      return clean.startsWith('+') ? clean : `+${clean}`;
+    })
+    .pipe(
+      z.string().regex(
+        /^\+[1-9]\d{6,14}$/,
+        'Enter a valid 10-digit mobile number (e.g. 9876543210)',
+      ),
     ),
 });
 
@@ -90,7 +98,7 @@ export default function OnboardingPage() {
   const shouldReduceMotion = useReducedMotion();
 
   // ── Stores ──────────────────────────────────────────────────────────
-  const { isAuthenticated, isLoading, error, requestOtp, verifyOtp, clearError } =
+  const { isAuthenticated, isLoading, error, requestOtp, verifyOtp, demoLogin, clearError } =
     useAuthStore();
   const { dialectCode, setDialect } = useLocaleStore();
   const isOnline = useConnectivityStore((s: { isOnline: boolean }) => s.isOnline);
@@ -458,6 +466,16 @@ export default function OnboardingPage() {
                   Send verification code
                   <ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </Button>
+
+                {/* Instant 1-Click Demo Bypass */}
+                <button
+                  type="button"
+                  onClick={() => demoLogin(dialectCode)}
+                  className="mt-2 w-full py-3 px-4 text-xs font-bold rounded-[var(--radius-md)] border border-authority/40 bg-authority/5 text-authority hover:bg-authority/10 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>⚡</span>
+                  <span>Instant Demo Access / सीधा डेमो लॉगिन (1-Click)</span>
+                </button>
               </form>
 
               {/* Trust signal */}
@@ -492,6 +510,20 @@ export default function OnboardingPage() {
                     {phoneValue}
                   </span>
                 </p>
+                <div className="mt-2 inline-flex items-center gap-2 px-3 py-1 rounded bg-authority/10 border border-authority/30 text-xs font-semibold text-authority">
+                  <span>ℹ️ Demo OTP: enter <strong>123456</strong> or any 6 digits</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const demoDigits = ['1', '2', '3', '4', '5', '6'];
+                      setOtpDigits(demoDigits);
+                      setOtpValue('otp', '123456', { shouldValidate: true });
+                    }}
+                    className="underline hover:text-authority cursor-pointer ml-1 font-bold"
+                  >
+                    (Autofill / स्वतः भरें)
+                  </button>
+                </div>
               </div>
 
               <form

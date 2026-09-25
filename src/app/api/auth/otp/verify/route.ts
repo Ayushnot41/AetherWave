@@ -17,15 +17,18 @@ export async function POST(req: Request) {
       );
     }
 
-    // For any valid 6-digit OTP in demo / sandbox
+    const accessToken = `aether-jwt-${Date.now()}-${Math.random().toString(36).substring(2, 10)}`;
+    const expiresAt = new Date(Date.now() + 86400 * 1000).toISOString();
+
     return NextResponse.json({
-      token: `aether-jwt-${Date.now()}-${Math.random().toString(36).substring(2, 10)}`,
+      accessToken,
+      expiresAt,
+      token: accessToken,
       user: {
         id: `usr-${Math.random().toString(36).substring(2, 8)}`,
         phone: '+919876543210',
         dialectCode: 'hi-IN',
       },
-      expiresInSeconds: 86400,
     });
   } catch {
     return NextResponse.json(

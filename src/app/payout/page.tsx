@@ -14,6 +14,7 @@ import {
   Building2,
 } from 'lucide-react';
 import { Button, Card, ScaleIn, FadeIn } from '@/components/ui';
+import { VerificationSeal3D } from '@/components/3d/verification-seal-3d';
 import { useVerificationStore } from '@/stores/verification-store';
 import { truncateAddress, solanaExplorerUrl, formatCurrency } from '@/lib/utils';
 
@@ -45,13 +46,9 @@ export default function PayoutSuccessPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col justify-between p-4 max-w-md mx-auto pb-10 pt-8">
       <div className="space-y-6">
-        {/* ─── Celebratory Restrained Hero ─────────────────────────── */}
-        <div className="flex flex-col items-center text-center space-y-3 pt-4">
-          <ScaleIn>
-            <div className="h-20 w-20 rounded-full bg-earth-green-100 border-4 border-earth-green-500 flex items-center justify-center shadow-lg">
-              <CheckCircle2 className="h-10 w-10 text-earth-green-600" />
-            </div>
-          </ScaleIn>
+        {/* ─── Celebratory 3D Physical Seal Hero ──────────────────── */}
+        <div className="flex flex-col items-center text-center space-y-3 pt-2">
+          <VerificationSeal3D size={180} />
 
           <FadeIn delay={0.15}>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sand-200 text-text-secondary text-xs font-bold mb-1">
