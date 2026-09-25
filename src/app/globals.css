@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+Devanagari:wght@400;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  /* Earth-tone palette */
+  --color-terracotta-50: #FDF2EC;
+  --color-terracotta-100: #FAE0D0;
+  --color-terracotta-200: #F5C1A1;
+  --color-terracotta-300: #E99A6D;
+  --color-terracotta-400: #D4783F;
+  --color-terracotta-500: #C2662D;
+  --color-terracotta-600: #A85424;
+  --color-terracotta-700: #8B431D;
+  --color-terracotta-800: #6E3417;
+  --color-terracotta-900: #4A2310;
+
+  --color-earth-green-50: #EDF5F0;
+  --color-earth-green-100: #D4E8DA;
+  --color-earth-green-200: #A8D1B5;
+  --color-earth-green-300: #6FB488;
+  --color-earth-green-400: #3D9460;
+  --color-earth-green-500: #1B5E3B;
+  --color-earth-green-600: #174F32;
+  --color-earth-green-700: #134029;
+  --color-earth-green-800: #0F3120;
+  --color-earth-green-900: #0A2116;
+
+  --color-sand-50: #FAF7F2;
+  --color-sand-100: #F5EFE4;
+  --color-sand-200: #E8DCC8;
+  --color-sand-300: #D9C7A8;
+  --color-sand-400: #C9B18A;
+  --color-sand-500: #B89B6E;
+  --color-sand-600: #9A7F55;
+  --color-sand-700: #7C6443;
+  --color-sand-800: #5E4B33;
+  --color-sand-900: #3F3222;
+
+  --color-amber-50: #FFF8E6;
+  --color-amber-100: #FEECC0;
+  --color-amber-200: #FCD97A;
+  --color-amber-300: #F5C23A;
+  --color-amber-400: #E8AD14;
+  --color-amber-500: #D4920B;
+  --color-amber-600: #B17A09;
+  --color-amber-700: #8E6207;
+  --color-amber-800: #6B4A06;
+  --color-amber-900: #483204;
+
+  /* Semantic colors */
+  --color-background: #FAF7F2;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #F5EFE4;
+  --color-border-default: #D9C7A8;
+  --color-border-subtle: #E8DCC8;
+  --color-text-primary: #1A2E1A;
+  --color-text-secondary: #5E4B33;
+  --color-text-muted: #7C6443;
+  --color-success: #1B5E3B;
+  --color-warning: #D4920B;
+  --color-error: #B91C1C;
+  --color-info: #1E40AF;
+
+  /* Typography */
+  --font-family-sans: 'Atkinson Hyperlegible', 'Noto Sans Devanagari', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(26, 46, 26, 0.05);
+  --shadow-md: 0 4px 6px rgba(26, 46, 26, 0.07);
+  --shadow-lg: 0 10px 15px rgba(26, 46, 26, 0.1);
+
+  /* Border radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+/* Base styles */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure all interactive elements have visible focus */
+:focus-visible {
+  outline: 3px solid var(--color-amber-500);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Minimum tap target size */
+button,
+[role="button"],
+a,
+input,
+select,
+textarea {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* PWA safe area handling */
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Offline indicator bar animation */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+/* Camera viewfinder overlay */
+.viewfinder-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+  background-size: 33.33% 33.33%;
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
