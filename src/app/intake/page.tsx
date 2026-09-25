@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, CheckCircle2, ShieldCheck, Upload, AlertCircle, RefreshCcw } from 'lucide-react';
 import { CameraViewfinder } from '@/components/capture/camera-viewfinder';
+import { GoogleLensScanner } from '@/components/capture/google-lens-scanner';
 import { AudioRecorder } from '@/components/capture/audio-recorder';
 import { Button, LoadingScreen } from '@/components/ui';
 import { useLocaleStore } from '@/stores/locale-store';
@@ -117,9 +118,9 @@ export default function IntakeCapturePage() {
 
         {!capturedImage ? (
           <>
-            <CameraViewfinder
+            <GoogleLensScanner
               onCapture={handleCaptureComplete}
-              titleBadge="CROP CANOPY TELEMETRY"
+              dialect={dialectCode}
             />
 
             <div className="pt-2">

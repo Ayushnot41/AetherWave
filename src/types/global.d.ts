@@ -2,6 +2,22 @@
  * Global ambient declarations for AetherWeave
  */
 
+// Allow CSS imports in TypeScript
+declare module '*.css' {
+  const content: Record<string, string>;
+  export default content;
+}
+
+// Extend global RequestInit for Next.js extended fetch options
+declare global {
+  interface RequestInit {
+    next?: {
+      revalidate?: number | false;
+      tags?: string[];
+    };
+  }
+}
+
 declare namespace NodeJS {
   interface ProcessEnv {
     readonly NEXT_PUBLIC_API_URL?: string;
@@ -66,6 +82,25 @@ declare module 'next/server' {
     static redirect(url: string | URL, status?: number): NextResponse;
     static next(init?: ResponseInit): NextResponse;
   }
+}
+
+declare module 'next/link' {
+  import { ComponentType, AnchorHTMLAttributes, PropsWithChildren } from 'react';
+  
+  export interface LinkProps extends PropsWithChildren<Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>> {
+    href: string | { pathname?: string; query?: Record<string, string> };
+    as?: string;
+    replace?: boolean;
+    scroll?: boolean;
+    shallow?: boolean;
+    passHref?: boolean;
+    prefetch?: boolean;
+    locale?: string | false;
+    legacyBehavior?: boolean;
+  }
+  
+  const Link: ComponentType<LinkProps>;
+  export default Link;
 }
 
 declare module 'react-hook-form' {

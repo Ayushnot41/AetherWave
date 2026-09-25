@@ -43,6 +43,17 @@ export default function DashboardPage() {
   const lastCheckTime = '12 mins ago';
 
   useEffect(() => {
+    if (!useAuthStore.persist.hasHydrated()) {
+      const unsub = useAuthStore.persist.onFinishHydration(() => {
+        if (!useAuthStore.getState().isAuthenticated) {
+          router.replace('/onboarding');
+        } else {
+          void fetchSwarmResult('intake-current');
+        }
+      });
+      return () => unsub();
+    }
+
     if (!isAuthenticated) {
       router.replace('/onboarding');
       return;

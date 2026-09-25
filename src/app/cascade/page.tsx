@@ -14,6 +14,7 @@ import {
   Info,
 } from 'lucide-react';
 import { Button, Card, FadeIn, LoadingScreen } from '@/components/ui';
+import { TerrainMesh3D } from '@/components/3d/terrain-mesh-3d';
 import { useRiskStore } from '@/stores/risk-store';
 import { useLocaleStore } from '@/stores/locale-store';
 import { cn } from '@/lib/utils';
@@ -106,7 +107,10 @@ export default function CascadeVisualizationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col pb-12">
+    <div className="relative min-h-screen bg-background flex flex-col pb-12 overflow-hidden">
+      {/* 3D Ambient Topographic Ground Mesh */}
+      <TerrainMesh3D heatIntensity={0.7} opacity={0.35} />
+
       {/* ─── Header ──────────────────────────────────────────────── */}
       <div className="p-4 flex items-center justify-between border-b border-border-subtle bg-surface sticky top-0 z-30">
         <button

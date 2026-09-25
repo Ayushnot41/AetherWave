@@ -17,9 +17,13 @@ export async function POST(req: Request) {
       );
     }
 
+    const requestId = crypto.randomUUID();
+    const expiresAt = new Date(Date.now() + 300_000).toISOString();
+
     return NextResponse.json({
-      requestId: `otp-req-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
-      expiresInSeconds: 300,
+      requestId,
+      expiresAt,
+      retryAfterSeconds: 30,
       phone: parsed.data.phone,
     });
   } catch {
