@@ -8,25 +8,35 @@ import {
   RefreshCw,
   CheckCircle2,
   Lock,
+  Sparkles,
+  Camera,
 } from 'lucide-react';
 import { Button, Card, ProgressTracker, FadeIn, type Step } from '@/components/ui';
 import { useVerificationStore } from '@/stores/verification-store';
+import { cn } from '@/lib/utils';
 import type { PipelineStepStatus } from '@/contracts';
 
 export default function VerificationStatusPage() {
   const router = useRouter();
-  const { status, verificationId, stopPolling } = useVerificationStore();
+  const { status, verificationId, stopPolling, lastSubmission, retrySubmission } =
+    useVerificationStore();
 
   const [hasNavigated, setHasNavigated] = useState(false);
+  const [isRetrying, setIsRetrying] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const geminiStep = status?.steps.geminiValidation;
 
   // Map backend pipeline stages to ProgressTracker steps
   const steps: Step[] = [
     {
       id: 'gemini',
-      label: 'Gemini Multimodal Crop Canopy Audit',
-      status: (status?.steps.geminiValidation.status as PipelineStepStatus) || 'processing',
-      failureReason: status?.steps.geminiValidation.failureReason,
+      label:
+        geminiStep?.status === 'success' && geminiStep.result
+          ? `Gemini Audit: ${geminiStep.result.immediateRiskFactor}`
+          : 'Gemini Multimodal Crop Canopy Audit',
+      status: (geminiStep?.status as PipelineStepStatus) || 'processing',
+      failureReason: geminiStep?.failureReason,
     },
     {
       id: 'oracle',
@@ -61,6 +71,16 @@ export default function VerificationStatusPage() {
     status?.steps.escrowUnlock.status === 'failed';
 
   const failedStep = steps.find((s) => s.status === 'failed');
+  const isRetryable = Boolean(geminiStep?.status === 'failed' && geminiStep.retryable);
+  const hasCapturedState = Boolean(lastSubmission?.proofImageBase64);
+
+  const handleRetry = async () => {
+    if (lastSubmission) {
+      setIsRetrying(true);
+      await retrySubmission();
+      setIsRetrying(false);
+    }
+  };
 
   // Auto-advance to Payout Success when all 4 stages pass
   useEffect(() => {
@@ -69,7 +89,7 @@ export default function VerificationStatusPage() {
       stopPolling();
       timeoutRef.current = setTimeout(() => {
         router.push('/payout');
-      }, 1200);
+      }, 2500);
     }
 
     return () => {
@@ -111,8 +131,50 @@ export default function VerificationStatusPage() {
 
         {/* ─── 4-Step Vertical Progress Tracker ─────────────────────── */}
         <FadeIn delay={0.1}>
-          <Card className="border border-border-default bg-surface p-5 shadow-sm">
+          <Card className="border border-border-default bg-surface p-5 shadow-sm space-y-4">
             <ProgressTracker steps={steps} />
+
+            {/* Real Gemini Vision Audit Output */}
+            {geminiStep?.status === 'success' && geminiStep.result && (
+              <div className="mt-4 p-4 rounded-xl bg-earth-green-50/80 border border-earth-green-300 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-earth-green-800 flex items-center gap-1.5">
+                    <Sparkles className="h-3.5 w-3.5 text-earth-green-600" />
+                    Gemini Vision Crop Audit
+                  </span>
+                  <span className="text-[11px] font-semibold text-earth-green-700 bg-earth-green-100 px-2 py-0.5 rounded-full">
+                    {Math.round(geminiStep.result.confidence * 100)}% confidence
+                  </span>
+                </div>
+
+                <div>
+                  <p className="text-[11px] font-bold text-text-secondary uppercase tracking-wide">
+                    Dominant Visible Risk
+                  </p>
+                  <p className="text-xs text-text-primary mt-0.5 font-medium">
+                    {geminiStep.result.immediateRiskFactor}
+                  </p>
+                </div>
+
+                <div className="pt-2 border-t border-earth-green-200">
+                  <p className="text-[11px] font-bold text-earth-green-900 uppercase tracking-wide">
+                    Recommended Micro-Action
+                  </p>
+                  <p className="text-xs text-earth-green-800 mt-0.5 font-medium">
+                    {geminiStep.result.recommendedMicroAction}
+                  </p>
+                </div>
+
+                {geminiStep.result.cropStressLevel > 0 && (
+                  <div className="text-[11px] text-text-muted">
+                    Assessed Stress Level:{' '}
+                    <span className="font-bold text-text-secondary">
+                      {geminiStep.result.cropStressLevel}/10
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
           </Card>
         </FadeIn>
 
@@ -136,21 +198,38 @@ export default function VerificationStatusPage() {
               <div>
                 <h4 className="font-bold text-sm">Verification Check Failed</h4>
                 <p className="text-xs text-red-800 mt-0.5">
-                  {failedStep?.failureReason || 'Physical proof does not match deterministic telemetry thresholds.'}
+                  {failedStep?.failureReason ||
+                    'Physical proof does not match deterministic telemetry thresholds.'}
                 </p>
               </div>
             </div>
 
-            <Button
-              onClick={() => router.push('/verification/capture')}
-              variant="secondary"
-              size="lg"
-              fullWidth
-              className="flex items-center justify-center gap-2 border border-border-default h-14"
-            >
-              <RefreshCw className="h-4 w-4" />
-              <span>Retake Hardware Proof</span>
-            </Button>
+            <div className="space-y-2">
+              {isRetryable && hasCapturedState && (
+                <Button
+                  onClick={handleRetry}
+                  disabled={isRetrying}
+                  variant="primary"
+                  size="lg"
+                  fullWidth
+                  className="flex items-center justify-center gap-2 h-14"
+                >
+                  <RefreshCw className={cn('h-4 w-4', isRetrying && 'animate-spin')} />
+                  <span>{isRetrying ? 'Retrying Verification...' : 'Try Again'}</span>
+                </Button>
+              )}
+
+              <Button
+                onClick={() => router.push('/verification/capture')}
+                variant="secondary"
+                size="lg"
+                fullWidth
+                className="flex items-center justify-center gap-2 border border-border-default h-14"
+              >
+                <Camera className="h-4 w-4" />
+                <span>Retake Photo</span>
+              </Button>
+            </div>
           </FadeIn>
         ) : (
           <FadeIn delay={0.15}>

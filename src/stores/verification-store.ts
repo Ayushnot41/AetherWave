@@ -52,10 +52,13 @@ interface VerificationState {
   isPolling: boolean;
   isSubmitting: boolean;
   error: string | null;
+  lastSubmission: VerificationSubmission | null;
 }
 
 interface VerificationActions {
   submitVerification: (data: VerificationSubmission) => Promise<void>;
+  setLastSubmission: (data: VerificationSubmission | null) => void;
+  retrySubmission: () => Promise<void>;
   startPolling: (verificationId: string) => void;
   stopPolling: () => void;
   clearVerification: () => void;
@@ -70,6 +73,7 @@ const initialState: VerificationState = {
   isPolling: false,
   isSubmitting: false,
   error: null,
+  lastSubmission: null,
 };
 
 /** Handle for the active polling interval. */
@@ -78,8 +82,19 @@ let pollingHandle: ReturnType<typeof setInterval> | null = null;
 export const useVerificationStore = create<VerificationStore>()((set, get) => ({
   ...initialState,
 
+  setLastSubmission: (data: VerificationSubmission | null) => {
+    set({ lastSubmission: data });
+  },
+
+  retrySubmission: async () => {
+    const { lastSubmission, submitVerification } = get();
+    if (lastSubmission) {
+      await submitVerification(lastSubmission);
+    }
+  },
+
   submitVerification: async (data: VerificationSubmission) => {
-    set({ isSubmitting: true, error: null });
+    set({ isSubmitting: true, error: null, lastSubmission: data });
     try {
       const result = await apiSubmitVerification(data);
 

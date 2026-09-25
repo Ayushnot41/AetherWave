@@ -3,6 +3,9 @@ export {
   RiskLevelSchema,
   DialectCodeSchema,
   PipelineStepStatusSchema,
+  PipelineStepSchema,
+  GeminiAuditResultSchema,
+  GeminiPipelineStepSchema,
   TelemetryPayloadSchema,
 
   // Auth
@@ -37,6 +40,9 @@ export type {
   RiskLevel,
   DialectCode,
   PipelineStepStatus,
+  PipelineStep,
+  GeminiAuditResult,
+  GeminiPipelineStep,
   TelemetryPayload,
   AuthOtpRequest,
   AuthOtpResponse,
