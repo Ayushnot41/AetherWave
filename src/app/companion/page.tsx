@@ -232,7 +232,7 @@ export default function CompanionPage() {
     };
   };
 
-  const handleSend = (text?: string) => {
+  const handleSend = async (text?: string) => {
     const query = text || inputQuery;
     if (!query.trim()) return;
 
@@ -248,11 +248,43 @@ export default function CompanionPage() {
     setInputQuery('');
     setIsTyping(true);
 
+    try {
+      const res = await fetch('/api/companion/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: query,
+          language: activeLang,
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const baseCard = generateAnswer(query);
+        const responseMsg: Message = {
+          id: `msg-${Date.now()}`,
+          sender: 'assistant',
+          textEn: activeLang === 'en' ? data.reply : baseCard.textEn,
+          textHi: activeLang === 'hi' ? data.reply : baseCard.textHi,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          category: baseCard.category,
+          actionUrl: baseCard.actionUrl,
+          actionLabel: baseCard.actionLabel,
+          dataCard: baseCard.dataCard,
+        };
+        setMessages((prev) => [...prev, responseMsg]);
+        setIsTyping(false);
+        return;
+      }
+    } catch {
+      // Fall through to heuristic answer
+    }
+
     setTimeout(() => {
       const responseMsg = generateAnswer(query);
       setMessages((prev) => [...prev, responseMsg]);
       setIsTyping(false);
-    }, 750);
+    }, 600);
   };
 
   return (
