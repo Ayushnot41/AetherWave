@@ -42,5 +42,10 @@
     "eslint-config-next": "^15.2.1",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "allowScripts": {
+    "protobufjs@7.6.6": true,
+    "unrs-resolver@1.12.2": true,
+    "@google/genai@2.24.0": true
   }
 }
