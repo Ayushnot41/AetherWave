@@ -186,7 +186,7 @@ export default function VerificationStatusPage() {
               <div>
                 <h4 className="font-bold text-sm">All Cryptographic Gates Cleared!</h4>
                 <p className="text-xs text-earth-green-800">
-                  ZK Proof minted on Solana. Disbursing $5.00 grant...
+                  ZK Proof minted on Solana. Disbursing ₹500 micro-relief grant...
                 </p>
               </div>
             </div>
@@ -236,7 +236,7 @@ export default function VerificationStatusPage() {
             <div className="p-3.5 bg-sand-100 rounded-lg border border-border-subtle flex items-center gap-2.5 text-xs text-text-secondary">
               <Lock className="h-4 w-4 text-terracotta-500 shrink-0" />
               <span>
-                Smart escrow holds $5.00 locked in multisig custody until all 4 verification barriers sign off.
+                Smart escrow holds ₹500 locked in multisig custody until all 4 verification barriers sign off.
               </span>
             </div>
           </FadeIn>

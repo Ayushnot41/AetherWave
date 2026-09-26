@@ -102,7 +102,6 @@ export async function POST(req: Request) {
             language,
           });
         }
->>>>>>> c2a15cb (feat(backend-blockchain): implement resilient dual-mode architecture, clean typecheck, and 100% unit tests)
       } catch (geminiErr) {
         console.warn('Gemini chat error, falling back to heuristic engine:', geminiErr);
         // Fall back to heuristic response below if API quota or network issue occurs

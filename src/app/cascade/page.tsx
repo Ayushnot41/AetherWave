@@ -275,7 +275,7 @@ export default function CascadeVisualizationPage() {
             <ArrowRight className="h-5 w-5" />
           </Button>
           <p className="text-center text-xs text-text-muted mt-2">
-            Disburses $5.00 grant immediately upon verified physical execution
+            Disburses ₹500 micro-relief grant immediately upon verified physical execution
           </p>
         </div>
       </div>

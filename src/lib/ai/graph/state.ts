@@ -20,7 +20,7 @@ export const AgentState = Annotation.Root({
     schemeMatches: Annotation<any>(),
 
     errors: Annotation<string[]>({
-        reducer: (current, update) => [
+        reducer: (current: string[] = [], update: string[] = []) => [
             ...current,
             ...update,
         ],

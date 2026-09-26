@@ -201,7 +201,7 @@ export default function DashboardPage() {
             <p className="text-sm text-text-secondary leading-relaxed">
               {activeState === 'no-risk'
                 ? 'Local atmospheric telemetry and micro-climate indicators show nominal risk. Preventive micro-escrows remain armed.'
-                : 'Severe heat stress and soil moisture depletion detected in your sector. Immediate ground insulation will unlock $5.00 grant.'}
+                : 'Severe heat stress and soil moisture depletion detected in your sector. Immediate ground insulation will unlock ₹500 grant.'}
             </p>
 
             {/* Live Environmental Matrix Chips */}
@@ -290,7 +290,7 @@ export default function DashboardPage() {
                 <div className="flex items-center gap-2">
                   <h4 className="text-base font-bold text-text-primary">Ground Mulching Directive</h4>
                   <span className="bg-earth-green-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
-                    $5.00
+                    ₹500
                   </span>
                 </div>
                 <p className="text-xs text-text-secondary mt-0.5">

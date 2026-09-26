@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { Button, Card, CardHeader, CardTitle, CardContent, FadeIn } from '@/components/ui';
 import { useLocaleStore } from '@/stores/locale-store';
+import { voicePlayer } from '@/lib/audio-player';
 
 export default function RecommendedActionPage() {
   const router = useRouter();
@@ -38,7 +39,7 @@ export default function RecommendedActionPage() {
         instructions:
           '1. खेत की क्यारियों में सूखी घास या पत्तियों की 3 इंच मोटी परत फैलाएं।\n2. यह मिट्टी की नमी को 60% तक सुरक्षित रखेगा और जड़ों को 42°C की तेज गर्मी से बचाएगा।\n3. काम पूरा होने के बाद कैमरे से 1 स्पष्ट तस्वीर लें।',
         audioTranscript:
-          'नमस्ते किसान भाई। आगामी गंभीर गर्मी की लहर से अपनी फसल बचाने के लिए तुरंत क्यारियों में 3 इंच मल्चिंग बिछाएं। काम पूरा होने पर तस्वीर खींचें। नीति सत्यापन के तुरंत बाद ₹400 ($5.00) आपके खाते में भेज दिए जाएंगे।',
+          'नमस्ते किसान भाई। आगामी गंभीर गर्मी की लहर से अपनी फसल बचाने के लिए तुरंत क्यारियों में 3 इंच मल्चिंग बिछाएं। काम पूरा होने पर तस्वीर खींचें। नीति सत्यापन के तुरंत बाद ₹500 आपके खाते में भेज दिए जाएंगे।',
       };
     }
     return {
@@ -47,7 +48,7 @@ export default function RecommendedActionPage() {
       instructions:
         '1. Spread a 3-inch layer of dry straw or crop residue across active root beds.\n2. This prevents up to 60% soil moisture transpiration and protects roots from 42°C heat spikes.\n3. Capture 1 hardware-signed photo once mulching is laid.',
       audioTranscript:
-        'Greetings guardian. To protect your crop canopy from the incoming 42°C thermal shock, apply a 3-inch biomass ground mulch over the bed. Once complete, photograph the field. $5.00 will disburse into your UPI/escrow wallet immediately upon cryptographic verification.',
+        'Greetings guardian. To protect your crop canopy from the incoming 42°C thermal shock, apply a 3-inch biomass ground mulch over the bed. Once complete, photograph the field. ₹500 will disburse into your UPI/escrow wallet immediately upon cryptographic verification.',
     };
   };
 
@@ -57,27 +58,20 @@ export default function RecommendedActionPage() {
     if (audioError) return;
 
     if (!isPlaying) {
-      setIsPlaying(true);
-      // Simulate or play actual speech synthesis / audio playback
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(content.audioTranscript);
-        utterance.lang = dialectCode === 'hi-IN' ? 'hi-IN' : 'en-US';
-        utterance.rate = 0.95;
-        utterance.onend = () => {
+      voicePlayer.playVoice(content.audioTranscript, {
+        dialect: dialectCode,
+        onStart: () => setIsPlaying(true),
+        onEnd: () => {
           setIsPlaying(false);
           setCurrentTime(0);
-        };
-        utterance.onerror = () => {
+        },
+        onError: () => {
           setAudioError(true);
           setIsPlaying(false);
-        };
-        window.speechSynthesis.speak(utterance);
-      }
+        },
+      });
     } else {
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
+      voicePlayer.stop();
       setIsPlaying(false);
     }
   };
@@ -98,10 +92,14 @@ export default function RecommendedActionPage() {
     return () => clearInterval(interval);
   }, [isPlaying, duration]);
 
+  useEffect(() => {
+    return () => {
+      voicePlayer.stop();
+    };
+  }, []);
+
   const handleProceedToVerification = () => {
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-    }
+    voicePlayer.stop();
     router.push('/verification/capture');
   };
 
@@ -130,7 +128,7 @@ export default function RecommendedActionPage() {
           <div className="flex items-center gap-2">
             <span className="bg-earth-green-500 text-white text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
               <Sparkles className="h-3.5 w-3.5" />
-              $5.00 Grant Eligible
+              ₹500 Grant Eligible
             </span>
             <span className="text-xs font-bold text-terracotta-600 bg-sand-200 px-2 py-0.5 rounded">
               Escrow Armed

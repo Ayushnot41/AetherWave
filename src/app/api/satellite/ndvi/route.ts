@@ -39,7 +39,7 @@ export async function GET(req: Request) {
     try {
       const agroRes = await fetch(
         `http://api.agromonitoring.com/agro/1.0/soil?lat=${lat}&lon=${lon}&appid=${agroKey}`,
-        { next: { revalidate: 3600 } }
+        { next: { revalidate: 3600 } } as any
       );
       if (agroRes.ok) {
         const agroJson = await agroRes.json();

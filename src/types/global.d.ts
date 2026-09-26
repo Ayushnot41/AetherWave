@@ -108,6 +108,26 @@ declare module '@solana/web3.js' {
   export const TransactionInstruction: any;
   export const sendAndConfirmTransaction: any;
 }
+
+declare module '@google/genai' {
+  export class GoogleGenAI {
+    constructor(opts: { apiKey?: string });
+    models: any;
+  }
+}
+
+declare module '@langchain/langgraph' {
+  export const StateGraph: any;
+  export const END: any;
+  export const START: any;
+  export interface AnnotationType {
+    <T = any>(options?: any): any;
+    Root: (schema: any) => any;
+  }
+  export const Annotation: AnnotationType;
+}
+
+declare module 'dotenv/config';
 declare module 'react-hook-form' {
   import type { RefCallback } from 'react';
 
