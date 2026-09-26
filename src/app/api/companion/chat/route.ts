@@ -31,8 +31,18 @@ Key Directives:
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const parsed = ChatRequestSchema.safeParse(body);
+    const rawBody = await req.json().catch(() => ({}));
+    const extractedMessage =
+      rawBody.message ||
+      (Array.isArray(rawBody.messages) ? rawBody.messages[rawBody.messages.length - 1]?.content : '') ||
+      '';
+    const lang = rawBody.language || (String(rawBody.dialectCode || '').startsWith('hi') ? 'hi' : 'hi');
+
+    const parsed = ChatRequestSchema.safeParse({
+      ...rawBody,
+      message: extractedMessage,
+      language: lang === 'en' ? 'en' : 'hi',
+    });
 
     if (!parsed.success) {
       return NextResponse.json(
