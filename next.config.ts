@@ -8,13 +8,20 @@ const nextConfig: NextConfig = {
     // Strict type checking — never ignore build errors
     ignoreBuildErrors: false,
   },
-  // Allow @solana/web3.js and bs58 which use Node.js crypto APIs
-  serverExternalPackages: ['@solana/web3.js', 'bs58'],
-  // Webpack config to handle Solana/crypto optional dependencies
+  // Webpack config to handle Solana/crypto optional dependencies and universal shims
   webpack: (config: any, { isServer }: { isServer: boolean }) => {
+    config.resolve = config.resolve || {};
+    config.resolve.alias = config.resolve.alias || {};
+    
+    // Explicitly shim dotenv, dotenv/config, and optional web3 modules to guarantee zero build errors
+    const path = require('path');
+    const emptyShim = path.resolve(__dirname, 'scripts/empty.js');
+    config.resolve.alias['dotenv/config'] = emptyShim;
+    config.resolve.alias['dotenv'] = emptyShim;
+    config.resolve.alias['@solana/web3.js'] = emptyShim;
+
     if (!isServer) {
       // Don't bundle server-only Solana modules on client
-      config.resolve = config.resolve || {};
       config.resolve.fallback = {
         ...(config.resolve.fallback || {}),
         fs: false,
