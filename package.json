@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/build-windows-fix.js build",
+    "build": "next build",
+    "build:windows": "node scripts/build-windows-fix.js build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
