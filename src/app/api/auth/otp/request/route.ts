@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { AuthOtpRequestSchema } from '@/contracts';
+import { OtpService } from '@/lib/services/otp-service';
 
 export async function POST(req: Request) {
   try {
@@ -17,20 +18,28 @@ export async function POST(req: Request) {
       );
     }
 
-    const requestId = crypto.randomUUID();
-    const expiresAt = new Date(Date.now() + 300_000).toISOString();
+    const { requestId, expiresAt, demoOtp, sentViaFast2Sms } = await OtpService.requestOtp(
+      parsed.data.phone,
+      parsed.data.dialect,
+    );
 
     return NextResponse.json({
       requestId,
       expiresAt,
       retryAfterSeconds: 30,
       phone: parsed.data.phone,
+      demoOtp,
+      sentViaFast2Sms,
+      message: sentViaFast2Sms
+        ? `OTP dispatched to ${parsed.data.phone} via Fast2SMS gateway`
+        : `Demonstration OTP generated for instant login: ${demoOtp}`,
     });
-  } catch {
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Could not process OTP request';
     return NextResponse.json(
       {
         code: 'INTERNAL_ERROR',
-        message: 'Could not process OTP request',
+        message,
         retryable: true,
       },
       { status: 500 },

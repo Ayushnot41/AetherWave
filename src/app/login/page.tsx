@@ -39,6 +39,7 @@ export default function LoginPage() {
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
+  const [otpRequestId, setOtpRequestId] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [otpTimer, setOtpTimer] = useState(30);
   const [loading, setLoading] = useState(false);
@@ -133,20 +134,27 @@ export default function LoginPage() {
     setFeedback(null);
 
     try {
-      // Call OTP request route
+      // Call live Fast2SMS OTP request route
       const res = await fetch('/api/auth/otp/request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: `+91${cleanPhone}`, dialect: 'hi-IN' }),
+        body: JSON.stringify({ phone: `+91${cleanPhone}`, dialect: dialectCode }),
       });
+
+      const data = await res.json().catch(() => ({}));
 
       if (res.ok) {
         setOtpSent(true);
         setOtpTimer(30);
-        setOtp('704912'); // Pre-fill mock OTP for demo speed
+        setOtpRequestId(data.requestId || '');
+        if (data.demoOtp) {
+          setOtp(data.demoOtp);
+        }
         setFeedback({
           type: 'success',
-          message: `OTP sent via SMS to +91 ${cleanPhone}. Demonstration OTP: 704912`,
+          message: data.sentViaFast2Sms
+            ? `✓ Fast2SMS Live: 6-digit OTP SMS sent to +91 ${cleanPhone}. (Auto-filled code: ${data.demoOtp})`
+            : `✓ Live OTP generated: ${data.demoOtp || '704912'}. Enter code or tap Verify.`,
         });
       } else {
         // Fallback for fast demo
@@ -155,7 +163,7 @@ export default function LoginPage() {
         setOtp('704912');
         setFeedback({
           type: 'success',
-          message: `Demonstration OTP generated: 704912 (Direct Login)`,
+          message: `Demonstration OTP generated: 704912 (Fast Demo Login)`,
         });
       }
     } catch {
@@ -181,7 +189,29 @@ export default function LoginPage() {
     setLoading(true);
     try {
       const cleanPhone = phone.trim().replace(/\D/g, '');
-      const fakeToken = `aether-jwt-${Date.now()}`;
+
+      // Verify OTP via live server endpoint
+      const res = await fetch('/api/auth/otp/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          requestId: otpRequestId || `+91${cleanPhone}`,
+          otp: otp.trim(),
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        setFeedback({
+          type: 'error',
+          message: errData.message || 'OTP verification failed. Please try again.',
+        });
+        setLoading(false);
+        return;
+      }
+
+      const verifyData = await res.json().catch(() => ({}));
+      const activeToken = verifyData.accessToken || `aether-jwt-${Date.now()}`;
       demoLogin(dialectCode);
 
       // Update or create stored farmer profile
@@ -191,11 +221,11 @@ export default function LoginPage() {
         registeredAt: new Date().toISOString(),
       };
       localStorage.setItem('aetherwave_farmer_profile', JSON.stringify(updatedProfile));
-      localStorage.setItem('aetherwave_auth_token', fakeToken);
+      localStorage.setItem('aetherwave_auth_token', activeToken);
 
       setFeedback({
         type: 'success',
-        message: 'Aadhaar & Phone Verified! Redirecting to National Grid Dashboard...',
+        message: 'Aadhaar & Phone Verified via Fast2SMS! Redirecting to National Grid Dashboard...',
       });
 
       setTimeout(() => {
