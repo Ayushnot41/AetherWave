@@ -4,34 +4,38 @@ import { OtpService } from '@/lib/services/otp-service';
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const parsed = AuthOtpRequestSchema.safeParse(body);
+    const body = await req.json().catch(() => ({}));
+    const rawPhone = String(body.phone || '').trim();
+    const cleanPhone = rawPhone.replace(/\D/g, '').slice(-10);
 
-    if (!parsed.success) {
+    if (cleanPhone.length !== 10) {
       return NextResponse.json(
         {
           code: 'VALIDATION_ERROR',
-          message: parsed.error.issues[0]?.message || 'Invalid phone or dialect',
+          message: 'Please provide a valid 10-digit Indian mobile number',
           retryable: false,
         },
         { status: 400 },
       );
     }
 
+    const dialect = body.dialect || 'hi-IN';
+    const e164Phone = `+91${cleanPhone}`;
+
     const { requestId, expiresAt, demoOtp, sentViaFast2Sms } = await OtpService.requestOtp(
-      parsed.data.phone,
-      parsed.data.dialect,
+      e164Phone,
+      dialect,
     );
 
     return NextResponse.json({
       requestId,
       expiresAt,
       retryAfterSeconds: 30,
-      phone: parsed.data.phone,
+      phone: e164Phone,
       demoOtp,
       sentViaFast2Sms,
       message: sentViaFast2Sms
-        ? `OTP dispatched to ${parsed.data.phone} via Fast2SMS gateway`
+        ? `OTP dispatched to ${e164Phone} via Fast2SMS gateway`
         : `Demonstration OTP generated for instant login: ${demoOtp}`,
     });
   } catch (err: unknown) {

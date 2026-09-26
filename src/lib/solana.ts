@@ -38,6 +38,37 @@ function explorerTxUrl(sig: string): string {
   return `${SOLANA_EXPLORER_BASE}/tx/${sig}${cluster}`;
 }
 
+const BASE58_ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+
+function decodeBase58(str: string): Uint8Array {
+  const trimmed = (str || '').trim();
+  if (trimmed.length === 0) return new Uint8Array(0);
+  const bytes = [0];
+  for (let i = 0; i < trimmed.length; i++) {
+    const c = trimmed[i];
+    const value = BASE58_ALPHABET.indexOf(c);
+    if (value === -1) throw new Error(`Invalid Base58 character: ${c}`);
+    for (let j = 0; j < bytes.length; j++) {
+      bytes[j] *= 58;
+    }
+    bytes[0] += value;
+    let carry = 0;
+    for (let j = 0; j < bytes.length; j++) {
+      bytes[j] += carry;
+      carry = bytes[j] >> 8;
+      bytes[j] &= 0xff;
+    }
+    while (carry > 0) {
+      bytes.push(carry & 0xff);
+      carry >>= 8;
+    }
+  }
+  for (let i = 0; i < trimmed.length && trimmed[i] === '1'; i++) {
+    bytes.push(0);
+  }
+  return new Uint8Array(bytes.reverse());
+}
+
 /**
  * Derive a deterministic-looking mint address from verificationId.
  * In production this would be a real compressed token mint account.
@@ -85,9 +116,7 @@ export async function mintVerificationProof(params: {
     const { Connection, Keypair, Transaction, TransactionInstruction, PublicKey, sendAndConfirmTransaction } = solanaWeb3;
 
     // Load fee-payer from env — secret is base-58 encoded 64-byte secret key
-    const bs58Module: any = await import('bs58');
-    const bs58Decode = bs58Module.decode || bs58Module.default?.decode;
-    const secretBytes = bs58Decode(env.SOLANA_FEE_PAYER_SECRET);
+    const secretBytes = decodeBase58(env.SOLANA_FEE_PAYER_SECRET);
     const feePayer = Keypair.fromSecretKey(secretBytes);
 
     const connection = new Connection(env.SOLANA_RPC_URL, 'confirmed');
@@ -182,10 +211,8 @@ export async function releaseEscrow(params: {
   try {
     const solanaWeb3: any = await import('@solana/web3.js');
     const { Connection, Keypair, SystemProgram, Transaction, sendAndConfirmTransaction, PublicKey } = solanaWeb3;
-    const bs58Module: any = await import('bs58');
-    const bs58Decode = bs58Module.decode || bs58Module.default?.decode;
-
-    const feePayer = Keypair.fromSecretKey(bs58Decode(env.SOLANA_FEE_PAYER_SECRET));
+    const secretBytes = decodeBase58(env.SOLANA_FEE_PAYER_SECRET);
+    const feePayer = Keypair.fromSecretKey(secretBytes);
     const farmerPubkey = new PublicKey(params.farmerWalletAddress);
     const connection = new Connection(env.SOLANA_RPC_URL, 'confirmed');
 

@@ -4,21 +4,21 @@ import { OtpService } from '@/lib/services/otp-service';
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const parsed = AuthOtpVerifySchema.safeParse(body);
+    const body = await req.json().catch(() => ({}));
+    const requestId = (body.requestId || body.phone || '').trim();
+    const otp = (body.otp || '').trim();
 
-    if (!parsed.success) {
+    if (!otp || otp.length !== 6) {
       return NextResponse.json(
         {
           code: 'VALIDATION_ERROR',
-          message: parsed.error.issues[0]?.message || 'Invalid OTP',
+          message: '6-digit OTP is required',
           retryable: false,
         },
         { status: 400 },
       );
     }
 
-    const { requestId, otp } = parsed.data;
     const verification = OtpService.verifyOtp(requestId, otp);
 
     if (!verification.valid) {

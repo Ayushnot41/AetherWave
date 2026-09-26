@@ -30,7 +30,7 @@ export default function PayoutSuccessPage() {
     payoutResult?.transactionSignature ||
     '5KnhB9QZ7G3hN4tXpL1sV8wU2yA6bC8dE9fG0hJ1kM2nP3rS4tU5vW6xY7zA8bC9dE0fG';
 
-  const amount = payoutResult?.amount ?? 12500;
+  const amount = payoutResult?.amount ?? 500;
   const paymentMethod = payoutResult?.paymentMethod || 'Direct DBT / PM-KISAN Instant UPI Settlement';
   const explorerUrl = solanaExplorerUrl(signature, 'devnet');
 

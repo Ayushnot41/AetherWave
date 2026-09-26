@@ -1,6 +1,4 @@
 import { geminiAgent } from "./agents/gemini.agent";
-
-import "dotenv/config";
 import fs from "node:fs";
 
 const imageBase64 = fs

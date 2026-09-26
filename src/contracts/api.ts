@@ -101,17 +101,16 @@ export type TelemetryPayload = z.infer<typeof TelemetryPayloadSchema>;
 export const AuthOtpRequestSchema = z.object({
   phone: z
     .string()
-    .regex(/^\+[1-9]\d{6,14}$/)
-    .describe('E.164 formatted phone number to receive the OTP'),
-  dialect: DialectCodeSchema.describe('Preferred dialect for the OTP voice/SMS message'),
+    .min(10)
+    .describe('Phone number to receive the OTP'),
+  dialect: DialectCodeSchema.optional().default('hi-IN').describe('Preferred dialect for the OTP voice/SMS message'),
 });
 export type AuthOtpRequest = z.infer<typeof AuthOtpRequestSchema>;
 
 export const AuthOtpResponseSchema = z.object({
-  requestId: z.string().uuid().describe('Server-generated request ID to correlate the OTP flow'),
+  requestId: z.string().min(1).describe('Server-generated request ID to correlate the OTP flow'),
   expiresAt: z
     .string()
-    .datetime({ offset: true })
     .describe('ISO-8601 timestamp after which the OTP is no longer valid'),
   retryAfterSeconds: z
     .number()
@@ -122,7 +121,7 @@ export const AuthOtpResponseSchema = z.object({
 export type AuthOtpResponse = z.infer<typeof AuthOtpResponseSchema>;
 
 export const AuthOtpVerifySchema = z.object({
-  requestId: z.string().uuid().describe('The requestId returned from the OTP request call'),
+  requestId: z.string().min(1).describe('The requestId or phone identifier returned from the OTP request call'),
   otp: z
     .string()
     .length(6)
@@ -135,7 +134,6 @@ export const AuthOtpVerifyResponseSchema = z.object({
   accessToken: z.string().min(1).describe('Short-lived JWT access token for API authorisation'),
   expiresAt: z
     .string()
-    .datetime({ offset: true })
     .describe('ISO-8601 timestamp when the access token expires'),
 });
 export type AuthOtpVerifyResponse = z.infer<typeof AuthOtpVerifyResponseSchema>;
@@ -317,12 +315,13 @@ export type VerificationStatus = z.infer<typeof VerificationStatusSchema>;
 export const PayoutResultSchema = z.object({
   verificationId: z
     .string()
-    .uuid()
+    .min(1)
     .describe('The verification that triggered this payout'),
   amount: z
     .number()
     .positive()
-    .describe('Disbursed amount in local currency'),
+    .describe('Disbursed amount in local currency (₹500)'),
+  currency: z.string().default('INR'),
   transactionSignature: z
     .string()
     .min(1)
@@ -332,11 +331,12 @@ export const PayoutResultSchema = z.object({
     .url()
     .describe('URL to view the transaction on a Solana block explorer'),
   paymentMethod: z
-    .enum(['upi', 'bank_transfer', 'mobile_wallet', 'solana_wallet'])
+    .string()
+    .min(1)
     .describe('Disbursement rail used for payout'),
+  isLive: z.boolean().optional(),
   timestamp: z
     .string()
-    .datetime({ offset: true })
     .describe('ISO-8601 timestamp when the payout was executed'),
 });
 export type PayoutResult = z.infer<typeof PayoutResultSchema>;

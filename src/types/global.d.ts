@@ -109,6 +109,11 @@ declare module '@solana/web3.js' {
   export const sendAndConfirmTransaction: any;
 }
 
+declare module 'bs58' {
+  const bs58: any;
+  export default bs58;
+}
+
 declare module '@google/genai' {
   export class GoogleGenAI {
     constructor(opts: { apiKey?: string });
@@ -127,7 +132,6 @@ declare module '@langchain/langgraph' {
   export const Annotation: AnnotationType;
 }
 
-declare module 'dotenv/config';
 declare module 'react-hook-form' {
   import type { RefCallback } from 'react';
 
