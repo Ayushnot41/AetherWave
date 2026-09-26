@@ -1,12 +1,54 @@
 /**
- * AetherWeave Service Worker
+ * AetherWave Service Worker
  *
  * Strategy:
  * - Cache-first for app shell (HTML, CSS, JS, fonts, icons)
  * - Network-first for API data (risk data, verification status)
  * - Stale-while-revalidate for images
  * - Offline fallback page for navigation requests
+ *
+ * Push:
+ * - Handles 'push' events for disaster notifications
+ * - On notificationclick, opens /alert-enrollment
  */
+
+// ─── Push Notification Handler ────────────────────────────────────────────────
+
+self.addEventListener('push', (event) => {
+  let data = { title: '🚨 AetherWave — आपदा चेतावनी', body: 'A disaster risk has been detected. Open AetherWave for details. / आपके क्षेत्र में आपदा जोखिम।' };
+  try {
+    if (event.data) {
+      const parsed = event.data.json();
+      data = { ...data, ...parsed };
+    }
+  } catch (_) { /* ignore */ }
+
+  event.waitUntil(
+    self.registration.showNotification(data.title, {
+      body: data.body,
+      icon: '/icons/icon-192x192.png',
+      badge: '/icons/icon-72x72.png',
+      tag: 'aw-disaster-alert',
+      requireInteraction: true,
+      data: { url: '/alert-enrollment' },
+    })
+  );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const url = (event.notification.data && event.notification.data.url) || '/alert-enrollment';
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      for (const client of clientList) {
+        if (client.url.includes(self.location.origin) && 'focus' in client) {
+          return client.focus().then(() => client.navigate(url));
+        }
+      }
+      if (self.clients.openWindow) return self.clients.openWindow(url);
+    })
+  );
+});
 
 const CACHE_NAME = 'aetherweave-v1';
 const STATIC_ASSETS = ['/', '/manifest.json', '/offline'];

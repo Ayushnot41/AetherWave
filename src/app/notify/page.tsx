@@ -7,6 +7,7 @@
  */
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { tokens } from '@/lib/design-tokens';
 import { NotificationPanel, AlertButton } from '@/components/notifications/farmer-notification';
 import type { AlertType, AlertLanguage } from '@/components/notifications/farmer-notification';
@@ -113,6 +114,33 @@ export default function NotifyPage() {
             किसान सूचना प्रणाली — WhatsApp (smartphone) / SMS (keypad phone)
           </p>
         </div>
+
+        {/* Enrollment CTA */}
+        <Link
+          href="/alert-enrollment"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: tokens.spacing.md,
+            padding: tokens.spacing.lg,
+            background: `${tokens.colors.verifiedForest}12`,
+            borderLeft: `3px solid ${tokens.colors.verifiedForest}`,
+            textDecoration: 'none',
+            color: tokens.colors.ink,
+            marginBottom: tokens.spacing.xl,
+          }}
+        >
+          <span style={{ fontSize: '1.8rem', flexShrink: 0 }}>🔔</span>
+          <div>
+            <p style={{ margin: 0, fontWeight: 700, color: tokens.colors.verifiedForest, fontSize: '0.95rem' }}>
+              Register for Automatic Disaster Alerts → किसान सतर्कता नामांकन
+            </p>
+            <p style={{ margin: `2px 0 0`, fontSize: '0.8rem', color: tokens.colors.slate }}>
+              Enroll your phone, enable push notifications, and broadcast to keypad-phone farmers.
+              नामांकन करें · GPS आपदा निगरानी · कीपैड किसानों को SMS भेजें
+            </p>
+          </div>
+        </Link>
 
         {/* How it works */}
         <div

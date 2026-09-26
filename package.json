@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@google/genai": "2.24.0",
+    "@google/genai": "^2.24.0",
     "@types/three": "^0.186.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
