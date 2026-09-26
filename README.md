@@ -1,279 +1,547 @@
-<div align="center">
-  <img src="public/images/aetherweave-3d-banner.svg" alt="AetherWeave 3D Architecture Banner" width="100%" />
+ <div align="center">
+  <img src="public/images/aetherweave-3d-banner.svg" alt="AetherWeave Architecture Banner" width="100%" />
 </div>
 
+<h1 align="center">AetherWeave</h1>
+
 <p align="center">
-  <img src="https://img.shields.io/badge/Next.js-15.5-black?style=for-the-badge&logo=next.js" alt="Next.js 15.5" />
-  <img src="https://img.shields.io/badge/TypeScript-5.8-blue?style=for-the-badge&logo=typescript" alt="TypeScript 5.8" />
-  <img src="https://img.shields.io/badge/Tailwind-v4-06B6D4?style=for-the-badge&logo=tailwindcss" alt="Tailwind v4" />
-  <img src="https://img.shields.io/badge/PWA-Ready-5A0FC8?style=for-the-badge&logo=pwa" alt="PWA" />
-  <img src="https://img.shields.io/badge/Solana-Devnet-14F195?style=for-the-badge&logo=solana" alt="Solana Devnet" />
-  <img src="https://img.shields.io/badge/ElevenLabs-Sweet_Hindi_Voice-orange?style=for-the-badge&logo=elevenlabs" alt="ElevenLabs Voice" />
-  <img src="https://img.shields.io/badge/Fast2SMS-Live_OTP-E10098?style=for-the-badge" alt="Fast2SMS" />
-  <img src="https://img.shields.io/badge/AgroMonitoring-Sentinel--2-2E7D32?style=for-the-badge" alt="AgroMonitoring" />
-  <img src="https://img.shields.io/badge/Open--Meteo-Synoptic_Radar-005599?style=for-the-badge&logo=open-meteo" alt="Open-Meteo" />
-  <img src="https://img.shields.io/badge/Gemini_AI-Google-4285F4?style=for-the-badge&logo=google" alt="Gemini AI" />
-  <img src="https://img.shields.io/badge/Currency-100%25_INR_₹-153350?style=for-the-badge" alt="100% INR ₹" />
+  <strong>Climate Intelligence. Agricultural Resilience. Verifiable Relief.</strong>
+</p>
+
+<p align="center">
+  An AI-powered climate resilience and agricultural intelligence platform designed to help Indian farmers anticipate climate risks, make informed farming decisions, and explore transparent, blockchain-based relief workflows.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-15.5-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/TypeScript-5.8-blue?style=for-the-badge&logo=typescript" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=for-the-badge&logo=tailwindcss" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/PWA-Enabled-5A0FC8?style=for-the-badge&logo=pwa" alt="PWA" />
+  <img src="https://img.shields.io/badge/Solana-Devnet-14F195?style=for-the-badge&logo=solana" alt="Solana" />
+  <img src="https://img.shields.io/badge/Google-Gemini_AI-4285F4?style=for-the-badge&logo=google" alt="Gemini AI" />
+  <img src="https://img.shields.io/badge/Open--Meteo-Weather_API-005599?style=for-the-badge" alt="Open-Meteo" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License" />
 </p>
 
 ---
 
-## Executive Summary
+## Table of Contents
 
-**AetherWave** is an institutional-grade National Agro-Met Resilience Grid and Parametric Climate Relief Portal built for rural Indian smallholder farmers. When sudden climate shocks (monsoon cloudbursts, severe convective squalls, 45°C thermal heatwaves, and protracted droughts) strike agrarian communities, bureaucratic notice delays cause catastrophic crop loss and generational predatory debt.
+* [Overview](#overview)
+* [The Problem](#the-problem)
+* [Key Features](#key-features)
+* [System Architecture](#system-architecture)
+* [Climate Relief Workflow](#climate-relief-workflow)
+* [Application Routes](#application-routes)
+* [AI Agent Architecture](#ai-agent-architecture)
+* [Technology Stack](#technology-stack)
+* [Integrations](#integrations)
+* [Security and Privacy](#security-and-privacy)
+* [Getting Started](#getting-started)
+* [Environment Variables](#environment-variables)
+* [Development](#development)
+* [Project Status](#project-status)
+* [Roadmap](#roadmap)
+* [Contributing](#contributing)
+* [License](#license)
 
-AetherWave solves this through an end-to-end civic architecture:
-1. **Live Geological Climate Shock Engine:** Real-time phone GPS binds to Open-Meteo synoptic radar, AgroMonitoring Sentinel-2 surface/10cm soil moisture, and Google Earth Engine.
-2. **Actionable Cutting & Storage Directives:** Tells farmers whether to cut crops immediately within 48h or wait, with moisture-proof hermetic storage instructions.
-3. **Anticipatory Solana Blockchain DBT:** Executes immediate parametric disaster relief dividends (e.g. ₹5,000) via Solana Devnet smart escrow, cryptographically sealed with ZK proofs and verifiable on Solana Explorer.
-4. **Fast2SMS Real OTP Login:** 6-digit SMS OTP authentication for passwordless mobile login, KYC registration, Aadhaar linking, and land mapping.
-5. **ElevenLabs Sweet Female Voice:** High-fidelity vernacular voice guidance in Hindi (`Sarah` / `EXAVITQu4vr4xnSDxMaL` via `eleven_multilingual_v2`), Bengali, and English for rural low-literacy adoption.
-6. **Community WhatsApp & Keypad SMS Relay:** One-tap forwarding to village panchayat WhatsApp groups and plain SMS for keypad phones.
-7. **100% Standardized INR (`₹`) Currency:** Strictly denominated in Indian Rupees across all 41 routes.
+---
+
+## Overview
+
+**AetherWeave** is an AI-powered agricultural intelligence and climate resilience platform built to help smallholder farmers in India respond to changing weather conditions and agricultural risks.
+
+The platform brings together weather intelligence, satellite-derived vegetation indicators, multimodal AI analysis, agricultural recommendations, and blockchain-based verification into a unified digital experience.
+
+Its goal is to help farmers make better-informed decisions about crop health, sowing, harvesting, storage, and climate-related risks while exploring a transparent mechanism for recording and verifying relief-related actions.
+
+### What AetherWeave aims to deliver
+
+* **Climate intelligence:** Weather-based alerts and agricultural risk assessments.
+* **Agricultural guidance:** Crop recommendations, harvest timing, and storage advice.
+* **AI-powered analysis:** Multimodal field assessment and conversational agricultural assistance.
+* **Satellite insights:** Vegetation monitoring and geospatial analysis using available Earth observation data.
+* **Verifiable records:** Cryptographic evidence and blockchain-based records on Solana Devnet.
+* **Accessible communication:** Multilingual guidance, voice assistance, and SMS/WhatsApp sharing workflows.
+* **Resilient access:** A responsive, installable Progressive Web App designed for mobile and desktop use.
+
+> **Project status:** AetherWeave is a development-stage project. Features that depend on external APIs, validated agronomic models, on-chain programs, or financial integrations must be configured and tested before being considered production-ready.
 
 ---
 
 ## The Problem
 
-> [!CAUTION]
-> **The Climate Cascading Shock:** Extreme Climate Event → Crop Failure → Post-Harvest Rot → Complete Income Collapse → Predatory Moneylender Debt.
-> Indian smallholder farmers lose over ₹1.52 Lakh Crore annually to preventable climate shocks and post-harvest storage losses alone.
+Agriculture is increasingly exposed to unpredictable rainfall, extreme temperatures, drought, flooding, and post-harvest losses.
 
-Government disaster compensation funds often take 6 to 18 months through paper-based physical surveys. By that time, smallholder farmers have already defaulted on seasonal loans. AetherWave provides **anticipatory intelligence BEFORE the loss occurs** and executes **instant cryptographic escrow release directly to farmer wallets**.
+These risks can affect crop health, reduce yields, disrupt harvest schedules, and threaten farmers' livelihoods.
+
+Traditional agricultural workflows may also involve fragmented information, delayed assessments, and limited access to timely, localized guidance.
+
+AetherWeave aims to address these challenges through a unified workflow:
+
+**Climate Monitoring → Risk Assessment → Agricultural Guidance → Evidence Collection → Verifiable Records**
+
+The platform is designed to support informed decisions and improve the transparency of relief-related processes. It does not replace official disaster assessments, insurance procedures, or government compensation programs.
+
+---
+
+## Key Features
+
+### 1. Climate and Weather Intelligence
+
+* Location-based weather information using Open-Meteo.
+* Rainfall, temperature, wind, and other relevant weather indicators.
+* Climate-risk summaries to support agricultural planning.
+* Weather-aware sowing, harvesting, and storage recommendations.
+
+### 2. AI-Powered Agricultural Assistant
+
+* Multimodal field analysis using Google Gemini.
+* Conversational agricultural assistance.
+* Crop-health observations and potential stress identification.
+* Context-aware recommendations based on available weather and field information.
+
+AI-generated results are advisory and should not be treated as certified crop-loss assessments.
+
+### 3. Satellite-Based Vegetation Monitoring
+
+* Vegetation monitoring using Sentinel-2-derived data where available.
+* NDVI-based vegetation condition visualization.
+* Geospatial analysis through supported satellite-data providers.
+* Field-level monitoring and comparison workflows.
+
+Actual satellite coverage, spatial resolution, and update frequency depend on the selected data source.
+
+### 4. Crop Advisory and Harvest Planning
+
+* Crop recommendations based on available agricultural inputs.
+* Sowing and harvesting decision support.
+* Crop growth and weather-risk considerations.
+* Storage guidance based on relevant environmental conditions.
+* Estimated agricultural costs and revenue where supporting data is available.
+
+### 5. Blockchain-Based Verification
+
+* Cryptographic hashes for evidence integrity.
+* Solana Devnet transactions for recording supported verification events.
+* Transaction signatures and explorer links for public verification.
+* A foundation for transparent, auditable relief-related workflows.
+
+Blockchain records can establish that a particular record or hash was submitted. They do not independently prove that a physical event occurred or that a farmer qualifies for compensation.
+
+### 6. Climate Relief Workflow
+
+* Climate-risk assessment and policy-based eligibility evaluation.
+* Relief-related work and verification workflows.
+* Solana-based escrow concepts and transaction tracking.
+* A structured foundation for transparent disbursement workflows.
+
+Actual fund transfers require a deployed and tested escrow program, authorized transactions, and a funded account. The platform does not imply access to government relief funds.
+
+### 7. Multilingual Voice and Notifications
+
+* English, Hindi, and Bengali interface support.
+* Voice narration using ElevenLabs.
+* Weather and agricultural advisories.
+* SMS and WhatsApp sharing workflows.
+* Communication options designed for users with limited digital literacy.
+
+### 8. Responsive Progressive Web App
+
+* Mobile-first and desktop-friendly interface.
+* Installable PWA experience.
+* Offline fallback and caching support where configured.
+* Interactive dashboards, visualizations, and agricultural tools.
 
 ---
 
 ## System Architecture
 
+The platform is organized into four logical layers: user interaction, intelligence and data processing, verification and settlement, and communication.
+
 ```mermaid
 flowchart TD
-    classDef auth fill:#153350,stroke:#EEECE3,stroke-width:2px,color:#EEECE3
-    classDef ochre fill:#B96A28,stroke:#1C2B36,stroke-width:2px,color:#EEECE3
-    classDef forest fill:#33573C,stroke:#EEECE3,stroke-width:2px,color:#EEECE3
-    classDef ink fill:#1C2B36,stroke:#EEECE3,stroke-width:2px,color:#EEECE3
-    classDef light fill:#EEECE3,stroke:#153350,stroke-width:2px,color:#153350
-    classDef violet fill:#5B21B6,stroke:#DDD6FE,stroke-width:2px,color:#FFFFFF
+    A["Farmer / User"] --> B["AetherWeave PWA<br/>Next.js · React · TypeScript"]
 
-    subgraph Client ["Client Layer · 100% Responsive Smartphone & Desktop PWA"]
-        PWA["Responsive Next.js 15 PWA<br/>(Desktop Laptop & 360px Mobile)"]:::light
-        AuthMobile["Fast2SMS Mobile OTP Login<br/>(/login · /register · Passwordless)"]:::auth
-        Lang["3-Way Vernacular Switcher<br/>(English · हिन्दी · বাংলা)"]:::forest
-        Attest["WebCrypto Hardware Signer<br/>(SHA-256 GPS + Gyro + Timestamp)"]:::ink
+    B --> C["Input & Evidence Layer<br/>GPS · Field Images · Voice"]
+
+    C --> D["Intelligence Layer"]
+
+    subgraph Intelligence["Climate & Agricultural Intelligence"]
+        E["Open-Meteo<br/>Weather Data"]
+        F["Satellite Data<br/>Sentinel-2 / Supported Providers"]
+        G["Google Gemini<br/>Multimodal AI"]
+        H["LangGraph<br/>Multi-Agent Workflow"]
     end
 
-    subgraph Intelligence ["Geological Sensing & AI Multi-Agent Grid"]
-        OpenMeteo["Open-Meteo Synoptic API<br/>(WBGT Heat Index · Rain · Wind)"]:::auth
-        Agro["AgroMonitoring Sentinel-2<br/>(10m NDVI & Soil Moisture)"]:::forest
-        GEE["Google Earth Engine<br/>(Multispectral Canopy Reflectance)"]:::ink
-        Gemini["Google Gemini 2.5 Flash<br/>(Multimodal Bhu-Drishti Audit)"]:::ochre
-        LangGraph["LangGraph 5-Agent Swarm<br/>(Intake · Triage · Agronomy · Policy)"]:::violet
-    end
+    D --> E
+    D --> F
+    D --> G
+    E --> H
+    F --> H
+    G --> H
 
-    subgraph Blockchain ["Solana Devnet Parametric Relief Escrow"]
-        Oracle["Deterministic Policy Oracle<br/>(Rain > 65mm / Flood > 65%)"]:::forest
-        SolanaMint["Solana ZK-Proof State Mint<br/>(Immutable Devnet Transaction)"]:::ochre
-        Escrow["Smart Escrow Relief Dividend<br/>(Instant ₹5,000 DBT Release)"]:::auth
-        Explorer["Solana Devnet Explorer<br/>(Public Transparency Receipt)"]:::ink
-    end
+    H --> I["Policy & Recommendation Engine"]
 
-    subgraph Delivery ["Vernacular Communication & Voice Synthesis"]
-        ElevenLabs["ElevenLabs Multilingual v2<br/>(Sweet Female Hindi Voice · Sarah)"]:::violet
-        WhatsApp["WhatsApp Community Relay<br/>(One-Tap Village Forwarding)"]:::forest
-        SMS["Fast2SMS Gateway Rail<br/>(Keypad Phone Direct SMS)"]:::auth
-    end
+    I --> J["Verification Layer<br/>Evidence Hashes · Audit Records"]
 
-    Client --> Intelligence
-    Intelligence --> Blockchain
-    Blockchain --> Delivery
-    Delivery --> Client
+    J --> K["Solana Devnet<br/>On-Chain Records / Escrow"]
+
+    K --> L["Transaction Receipt<br/>Signature · Explorer Link"]
+
+    I --> M["Communication Layer<br/>Voice · SMS · WhatsApp"]
+
+    L --> B
+    M --> B
 ```
+
+### Architecture Overview
+
+| Layer         | Responsibility                                                                 |
+| ------------- | ------------------------------------------------------------------------------ |
+| Client        | User interface, onboarding, field data capture, and dashboards                 |
+| Intelligence  | Weather retrieval, satellite data processing, AI analysis, and recommendations |
+| Verification  | Evidence hashing, policy evaluation, and audit records                         |
+| Blockchain    | Supported on-chain records and escrow operations                               |
+| Communication | Voice guidance, notifications, and advisory sharing                            |
 
 ---
 
-## Parametric Climate Disaster DBT Workflow
+## Climate Relief Workflow
+
+The following diagram illustrates the intended workflow for a climate-related relief assessment.
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Farmer as Farmer (Phone GPS)
-    participant Portal as AetherWave Portal (/climate-dbt)
-    participant SatAPI as AgroMonitoring & Open-Meteo
-    participant Oracle as Parametric Policy Oracle
-    participant Solana as Solana Devnet Escrow
-    participant ElevenLabs as ElevenLabs Voice Engine
-    participant WhatsApp as Village WhatsApp Group
+    actor Farmer
+    participant App as AetherWeave PWA
+    participant Data as Weather & Satellite APIs
+    participant AI as AI Agent Pipeline
+    participant Policy as Policy Engine
+    participant Solana as Solana Devnet
+    participant Notify as Notification Services
 
-    Farmer->>Portal: Opens Portal / Taps "Fetch Live GPS"
-    Portal->>SatAPI: Queries 30-Day Hazard & Sentinel-2 Moisture
-    SatAPI-->>Portal: Flood 78% · Heatwave 42% · Moisture 22%
-    Portal->>Oracle: Evaluates Disaster Threshold (Flood > 65%)
-    Oracle-->>Portal: BREACH CONFIRMED: ₹5,000 DBT Pre-Approved
-    Farmer->>ElevenLabs: Taps "🔊 सुनिए // Listen Voice"
-    ElevenLabs-->>Farmer: Streams Sweet Female Hindi Audio Directive
-    Farmer->>Portal: Taps "Execute Instant DBT Disbursal"
-    Portal->>Solana: Mints ZK-Proof & Releases Relief Funds
-    Solana-->>Portal: Transaction Signature + Devnet Explorer URL
-    Portal->>WhatsApp: Generates Verified Advisory & Forwarding Link
-    Farmer->>WhatsApp: Shares Harvest Alert with Village Panchayat Group
+    Farmer->>App: Submit field information
+    App->>Data: Request relevant environmental data
+    Data-->>App: Return available weather and satellite data
+
+    App->>AI: Submit field data for analysis
+    AI-->>App: Return assessment and recommendations
+
+    App->>Policy: Evaluate assessment against configured rules
+    Policy-->>App: Return decision and supporting reasons
+
+    App->>Solana: Submit authorized verification transaction
+    Solana-->>App: Return transaction signature
+
+    App->>Notify: Prepare advisory and verification receipt
+    Notify-->>Farmer: Display guidance and transaction status
 ```
 
----
-
-## Comprehensive 41-Route Matrix
-
-| Route | Type | Category | Purpose | Technology | Status |
-| :--- | :---: | :--- | :--- | :--- | :---: |
-| `/` | Page | **National Masthead** | Responsive Institutional Landing Page | Next.js 15, Framer Motion | ✅ Live |
-| `/login` | Page | **Authentication** | Mobile Phone Registration & Fast2SMS OTP Login | Fast2SMS, Zustand, WebCrypto | ✅ Live |
-| `/register` | Page | **Authentication** | Complete KYC Registration & Solana Wallet Binding | Zustand LocalStorage Persistence | ✅ Live |
-| `/climate-dbt` | Page | **Disaster Relief** | Live Geological Weather & Solana DBT Transfer | Solana Devnet, Open-Meteo, WhatsApp | ✅ Live |
-| `/dashboard` | Page | **Farmer Cockpit** | Consolidated National Resilience Ledger | Framer Motion, Design Tokens | ✅ Live |
-| `/weather` | Page | **Synoptic Radar** | WBGT Heat Index & 30-Day Hazard Forewarning | Open-Meteo API | ✅ Live |
-| `/crop-advisor` | Page | **Economics** | Kharif/Rabi Profitability & Risk Comparison | Agronomic Lookup Engine | ✅ Live |
-| `/harvest-timing` | Page | **Intelligence** | Harvest Now vs Wait Financial Optimizer | Open-Meteo 7-Day Forecast | ✅ Live |
-| `/market-prices` | Page | **APMC Mandis** | Agmarknet Modal Prices & Official MSP Ledger | APMC Mandi Benchmark Feed | ✅ Live |
-| `/companion` | Page | **AI Voice Copilot** | 24/7 Agronomic Assistant with Sweet Hindi Voice | Google Gemini, ElevenLabs | ✅ Live |
-| `/verification/capture` | Page | **Bhu-Drishti** | Camera Photo Attestation with GPS/Gyro Binding | WebRTC, Canvas, WebCrypto | ✅ Live |
-| `/verification/status` | Page | **Audit Ledger** | 4-Stage Cryptographic Attestation Pipeline | WebCrypto SHA-256 | ✅ Live |
-| `/satellite` | Page | **Remote Sensing** | Sentinel-2 NDVI Multispectral Vegetation Health | AgroMonitoring, GEE Simulator | ✅ Live |
-| `/soil-health` | Page | **Agronomy** | Volumetric Moisture, Soil Temp & NPK Matrix | AgroMonitoring Soil API | ✅ Live |
-| `/payout` | Page | **Settlement** | On-Chain Physical Wax Seal & UPI Disbursal | React Three Fiber, Solana | ✅ Live |
-| `/action` | Page | **Mitigation** | Canopy Protection Directive & ElevenLabs Audio | ElevenLabs Audio Player | ✅ Live |
-| `/cascade` | Page | **Risk Modeling** | Visual Cascading Shock Graph | SVG Nodes, Framer Motion | ✅ Live |
-| `/alert-enrollment` | Page | **Alerts** | Village Broadcast SMS & WhatsApp Enrollment | Fast2SMS Rail | ✅ Live |
-| `/onboarding` | Page | **Onboarding** | 8-Dialect Selection & Initial Profile Setup | Zod, Hook Form | ✅ Live |
-| `/notify` | Page | **Broadcast** | Community Panic & Cloudburst Alert Relay | Web Broadcast Protocol | ✅ Live |
-| `/offline` | Page | **PWA Resilience** | Complete Offline Fallback & Cache Sync | Workbox Service Worker | ✅ Live |
-| `/api/voice/tts` | API | **ElevenLabs Voice** | High-Fidelity Sweet Female Hindi/Bengali TTS | ElevenLabs `eleven_multilingual_v2` | ✅ Live |
-| `/api/auth/otp/request` | API | **Authentication** | Generates 6-Digit OTP & Dispatches Fast2SMS | Fast2SMS Bulk v2 API | ✅ Live |
-| `/api/auth/otp/verify` | API | **Authentication** | Validates OTP Token with 5-Minute TTL Store | In-Memory TTL Cache | ✅ Live |
-| `/api/weather/live` | API | **Meteorology** | Real-Time Weather & WBGT Thermal Index | Open-Meteo REST API | ✅ Live |
-| `/api/satellite/ndvi` | API | **Remote Sensing** | Sentinel-2 Surface Moisture & NDVI Vegetation | AgroMonitoring API | ✅ Live |
-| `/api/notifications/sms` | API | **Notifications** | Automated Keypad SMS Server Push | Fast2SMS Gateway | ✅ Live |
-| `/api/companion/chat` | API | **Conversational** | Kisan Sahayak 24/7 AI Copilot Responses | Google Gemini 2.5 Flash | ✅ Live |
-| `/api/crops/recommend` | API | **Agronomy** | Top 3 Crop Sowing Recommendations | Zod Deterministic Rules | ✅ Live |
-| `/api/harvest/timing` | API | **Agronomy** | Harvest Timing Window & Loss Risk | Growth Duration Matrix | ✅ Live |
-| `/api/storage/alerts` | API | **Agronomy** | Safe Storage Days & Fungal Threat Alerts | Humidity/Temp Calculator | ✅ Live |
-| `/api/market/prices` | API | **Economics** | APMC Mandi Benchmark Prices Across States | Agmarknet Data Structure | ✅ Live |
-| `/api/ai/swarm/run` | API | **Multi-Agent** | 5-Agent LangGraph Swarm Execution | LangGraph, Gemini | ✅ Live |
-| `/api/intake/submit` | API | **Ingestion** | Multimodal Photo & Telemetry Ingestion | Zod Validation | ✅ Live |
-| `/api/verification/submit` | API | **Verification** | Cryptographic Hash Verification | WebCrypto SHA-256 | ✅ Live |
-| `/api/verification/status/[id]` | API | **Verification** | Query Real-Time Proof Status | In-Memory Proof Engine | ✅ Live |
-| `/api/payout/result/[id]` | API | **Settlement** | Query Solana Devnet Escrow Transfer | Solana RPC Client | ✅ Live |
-| `/api/swarm/result/[id]` | API | **Swarm Status** | Query LangGraph Agent Triage State | LangGraph State Machine | ✅ Live |
-| `/api/actions/recommended/[id]`| API | **Agronomy** | Fetch Recommended Mitigations by Risk ID | Agronomic Catalog | ✅ Live |
+**Important:** This is a logical workflow. Real financial disbursement requires a separately implemented and authorized escrow transaction. A policy decision or blockchain record alone does not constitute a completed payment.
 
 ---
 
-## Live API Integrations & Credential Architecture
+## Application Routes
 
-| Integration | Provider | Role in AetherWave | Model / Protocol |
-| :--- | :--- | :--- | :--- |
-| **Multimodal Triage** | Google Gemini | Crop damage visual inspection & copilot | `gemini-2.5-flash` |
-| **Speech Synthesis** | ElevenLabs | Sweet female vernacular voice narration | `eleven_multilingual_v2` (Voice: Sarah) |
-| **Mobile SMS OTP** | Fast2SMS | 6-digit OTP delivery to Indian SIM cards | Fast2SMS Bulk v2 API (200 SMS Armed) |
-| **Field Satellite** | AgroMonitoring | Sentinel-2 surface/10cm soil moisture & NDVI | OpenWeather Agro REST API |
-| **Synoptic Weather** | Open-Meteo | 30-day convective storms & heat index | Open-Meteo High-Resolution API |
-| **Blockchain Escrow** | Solana Devnet | Sub-cent ZK-compressed proofs & DBT release | Solana RPC (`devnet`) |
-| **Geospatial Terrain** | Google Earth Engine | Earth imagery & multispectral reflectance | Google Earth Engine API |
+The following routes describe the main application areas and API endpoints represented in the project documentation. Their implementation and live status should be verified against the current codebase.
 
-> [!SECURITY]
-> **Zero Plaintext Secrets in Client Bundles:** All provider API keys (`GEMINI_API_KEY`, `ELEVENLABS_API_KEY`, `FAST2SMS_API_KEY`, `AGROMONITORING_API_KEY`, `GOOGLE_MAPS_API_KEY`) reside exclusively in server-side environment configurations (`.env.local`). Client requests route through Next.js secure API handlers.
+### User-Facing Pages
+
+| Route                   | Purpose                                 |
+| ----------------------- | --------------------------------------- |
+| `/`                     | Landing page and platform overview      |
+| `/login`                | Mobile authentication                   |
+| `/register`             | User registration and profile setup     |
+| `/onboarding`           | Language selection and onboarding       |
+| `/dashboard`            | Agricultural and climate overview       |
+| `/climate-dbt`          | Climate relief workflow                 |
+| `/weather`              | Weather information and risk indicators |
+| `/crop-advisor`         | Crop recommendations and planning       |
+| `/harvest-timing`       | Harvest decision support                |
+| `/market-prices`        | Market price information                |
+| `/companion`            | AI agricultural assistant               |
+| `/verification/capture` | Field evidence capture                  |
+| `/verification/status`  | Evidence verification status            |
+| `/satellite`            | Satellite and vegetation monitoring     |
+| `/soil-health`          | Soil-related information                |
+| `/payout`               | Settlement and transaction status       |
+| `/action`               | Recommended agricultural actions        |
+| `/cascade`              | Climate-risk visualization              |
+| `/alert-enrollment`     | Notification enrollment                 |
+| `/notify`               | Community notification interface        |
+| `/offline`              | Offline fallback page                   |
+
+### API Endpoints
+
+| Endpoint                        | Purpose                        |
+| ------------------------------- | ------------------------------ |
+| `/api/voice/tts`                | Text-to-speech generation      |
+| `/api/auth/otp/request`         | Request an OTP                 |
+| `/api/auth/otp/verify`          | Verify an OTP                  |
+| `/api/weather/live`             | Retrieve weather information   |
+| `/api/satellite/ndvi`           | Retrieve vegetation indicators |
+| `/api/notifications/sms`        | Send SMS notifications         |
+| `/api/companion/chat`           | AI assistant responses         |
+| `/api/crops/recommend`          | Crop recommendations           |
+| `/api/harvest/timing`           | Harvest timing analysis        |
+| `/api/storage/alerts`           | Storage-related alerts         |
+| `/api/market/prices`            | Market price information       |
+| `/api/ai/swarm/run`             | Execute the AI agent workflow  |
+| `/api/intake/submit`            | Submit field information       |
+| `/api/verification/submit`      | Submit verification evidence   |
+| `/api/verification/status/[id]` | Retrieve verification status   |
+| `/api/payout/result/[id]`       | Retrieve transaction status    |
+| `/api/swarm/result/[id]`        | Retrieve AI workflow status    |
+| `/api/actions/recommended/[id]` | Retrieve recommended actions   |
+
+---
+
+## AI Agent Architecture
+
+AetherWeave uses a multi-agent workflow to organize climate and agricultural analysis.
+
+The intended pipeline separates individual responsibilities so that each stage can process relevant information and contribute to the final assessment.
+
+```mermaid
+flowchart TD
+    A["Field Input<br/>Image · Location · Voice"] --> B["Intake Agent"]
+    B --> C["Climate Agent"]
+    C --> D["Crop Health Agent"]
+    D --> E["Livelihood Agent"]
+    E --> F["Scheme Matching Agent"]
+    F --> G["Policy Evaluation"]
+    G --> H["Final Assessment"]
+    H --> I["Verification & Audit"]
+```
+
+### Agent Responsibilities
+
+| Agent                 | Responsibility                                                  |
+| --------------------- | --------------------------------------------------------------- |
+| Intake Agent          | Validate and structure submitted field information              |
+| Climate Agent         | Analyze available weather and climate indicators                |
+| Crop Health Agent     | Interpret field imagery and crop-health observations            |
+| Livelihood Agent      | Estimate potential agricultural impact using available data     |
+| Scheme Matching Agent | Match relevant programs against configured eligibility criteria |
+| Policy Engine         | Apply deterministic rules to produce a structured decision      |
+
+The agents are software components orchestrated through a workflow framework such as LangGraph. Their outputs depend on the data sources, prompts, validation rules, and models configured for the application.
 
 ---
 
 ## Technology Stack
 
-<table width="100%">
-  <thead>
-    <tr>
-      <th align="left">Layer</th>
-      <th align="left">Technologies</th>
-      <th align="left">Purpose & Capabilities</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Frontend & PWA</b></td>
-      <td>Next.js 15.5 (App Router), React 19, TypeScript 5.8, Tailwind CSS v4</td>
-      <td>Institutional Indian Government civic theme, 100% mobile (<420px) and desktop (>1024px) responsive layout.</td>
-    </tr>
-    <tr>
-      <td><b>Typography & Locales</b></td>
-      <td>Source Serif 4, Mukta Devanagari, Zustand LocalStorage Store</td>
-      <td>High-contrast sunlight readability in fields. Seamless 3-way toggle between <b>English</b>, <b>हिन्दी</b>, and <b>বাংলা</b>.</td>
-    </tr>
-    <tr>
-      <td><b>Voice Synthesis</b></td>
-      <td>ElevenLabs API, <code>eleven_multilingual_v2</code>, HTML5 Audio Cache</td>
-      <td>Sweet, soothing female voice in Hindi (Sarah), in-memory blob caching, automatic Web Speech API offline fallback.</td>
-    </tr>
-    <tr>
-      <td><b>Mobile SMS Rail</b></td>
-      <td>Fast2SMS Gateway, In-Memory TTL Store</td>
-      <td>Instant real 6-digit SMS OTP to Indian mobile numbers with automatic demo code autofill for hackathon evaluation.</td>
-    </tr>
-    <tr>
-      <td><b>Blockchain Rail</b></td>
-      <td>Solana Devnet, ZK Compression, Anchor, Solana Web3.js</td>
-      <td>Sub-cent immutable audit log, decentralized instant micro-grant escrow release (₹5,000 DBT).</td>
-    </tr>
-    <tr>
-      <td><b>Remote Sensing</b></td>
-      <td>AgroMonitoring Sentinel-2, Google Earth Engine, Open-Meteo</td>
-      <td>Live 10m soil moisture, NDVI vegetation vigour index, and 30-day extreme climate hazard probabilities.</td>
-    </tr>
-    <tr>
-      <td><b>Motion & 3D Accents</b></td>
-      <td>Framer Motion, React Three Fiber, Animated 3D SVGs</td>
-      <td>Zero-lag spring physics, 3D physical verification seal stamp, live radar sweep animations.</td>
-    </tr>
-  </tbody>
-</table>
+| Layer                   | Technology                     | Purpose                                           |
+| ----------------------- | ------------------------------ | ------------------------------------------------- |
+| Frontend                | Next.js 15.5, React 19         | Application framework and user interface          |
+| Language                | TypeScript 5.8                 | Type-safe application development                 |
+| Styling                 | Tailwind CSS v4                | Responsive UI and design system                   |
+| State Management        | Zustand                        | Client-side application state                     |
+| AI                      | Google Gemini                  | Multimodal analysis and conversational assistance |
+| Agent Orchestration     | LangGraph                      | Structured multi-agent workflows                  |
+| Weather                 | Open-Meteo                     | Weather and environmental data                    |
+| Satellite Data          | Sentinel-2 / AgroMonitoring    | Vegetation monitoring and geospatial indicators   |
+| Geospatial Analysis     | Google Earth Engine            | Earth observation processing where configured     |
+| Blockchain              | Solana Devnet                  | On-chain records and supported transactions       |
+| Smart Contracts         | Anchor / Rust                  | Solana program development where implemented      |
+| Cryptographic Integrity | Web Crypto API                 | SHA-256 evidence hashing                          |
+| Voice                   | ElevenLabs                     | Speech synthesis                                  |
+| Authentication          | Fast2SMS OTP                   | Mobile OTP delivery                               |
+| Motion                  | Framer Motion                  | UI animations                                     |
+| 3D Graphics             | React Three Fiber / Three.js   | Interactive 3D visualizations                     |
+| Offline Support         | PWA / Service Worker / Workbox | Caching and offline fallback                      |
 
 ---
 
-## Quick Start
+## Integrations
 
-### 1. Clone & Install
+| Service             | Role                                                                   |
+| ------------------- | ---------------------------------------------------------------------- |
+| Google Gemini       | Field analysis and AI assistant                                        |
+| LangGraph           | Agent workflow orchestration                                           |
+| Open-Meteo          | Weather data                                                           |
+| AgroMonitoring      | Satellite-derived agricultural indicators, subject to API availability |
+| Google Earth Engine | Geospatial processing, subject to project access and configuration     |
+| Solana Devnet       | Blockchain transaction testing                                         |
+| ElevenLabs          | Voice synthesis                                                        |
+| Fast2SMS            | SMS delivery and OTP integration                                       |
+
+External integrations may require API credentials, account access, rate limits, and service-specific configuration.
+
+---
+
+## Security and Privacy
+
+AetherWeave is designed with data integrity and privacy in mind.
+
+### Security considerations
+
+* Keep API keys and private credentials in server-side environment variables.
+* Never expose secret keys or signing credentials in client-side bundles.
+* Validate incoming API requests and enforce authorization checks.
+* Hash evidence files using SHA-256 when integrity verification is required.
+* Store only the information necessary for the intended workflow.
+* Avoid publishing personal information or precise field coordinates in public blockchain records.
+* Protect OTP workflows with expiration, rate limits, and abuse prevention.
+* Require explicit authorization for blockchain transactions and financial operations.
+
+### Important limitations
+
+* A SHA-256 hash can help detect changes to a file, but does not establish when or where the image was captured.
+* Browser GPS and device sensors do not constitute hardware-backed attestation.
+* A Solana transaction is publicly verifiable, but does not independently prove the truth of an off-chain claim.
+* A test transaction on Devnet is not a real-world payment.
+* AI-generated assessments should not be treated as certified agricultural, insurance, or government determinations.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+* Node.js 20.x or another version supported by the project.
+* npm.
+* Git.
+* API credentials for any external integrations you intend to use.
+* A Solana Devnet wallet and configured RPC access for blockchain testing.
+
+### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/Ayushnot41/AetherWave.git
 cd AetherWave
+```
+
+### 2. Install Dependencies
+
+```bash
 npm install
 ```
 
-### 2. Configure Environment
-Copy `.env.example` to `.env.local` and add your API keys:
+### 3. Configure Environment Variables
+
+Create a local environment file:
+
 ```bash
 cp .env.example .env.local
 ```
 
-### 3. Launch Development Server
+Add the credentials required by the integrations you plan to run.
+
+### 4. Start the Development Server
+
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the portal.
+Open:
 
-### 4. Production Build Verification
+http://localhost:3000
+
+### 5. Build for Production
+
 ```bash
 npm run build
 ```
-Compiles all 41 routes with zero TypeScript and zero ESLint errors.
+
+Run the build and any configured tests before deploying.
 
 ---
 
-## Official Attestation & Verification Stamp
+## Environment Variables
 
-<div align="center">
-  <img src="public/images/aetherweave-3d-seal.svg" alt="AetherWeave 3D Government Verification Seal" width="260" />
-  <p><strong>Digital Agriculture Mission // National Agro-Met Resilience Grid</strong><br/>
-  <em>Cryptographically Sealed on Solana Devnet · Verified by AgroMonitoring & Open-Meteo</em></p>
-</div>
+The following are example variable names. Use the exact names required by the application code and `.env.example`.
+
+| Variable                 | Purpose                                        |
+| ------------------------ | ---------------------------------------------- |
+| `GEMINI_API_KEY`         | Google Gemini API access                       |
+| `ELEVENLABS_API_KEY`     | ElevenLabs speech synthesis                    |
+| `FAST2SMS_API_KEY`       | Fast2SMS integration                           |
+| `AGROMONITORING_API_KEY` | AgroMonitoring integration                     |
+| `GOOGLE_MAPS_API_KEY`    | Google Maps integration, if used               |
+| `SOLANA_RPC_URL`         | Solana RPC endpoint                            |
+| `SOLANA_PROGRAM_ID`      | Deployed Solana program address, if applicable |
+
+**Never commit `.env.local`, private keys, wallet seed phrases, or other secrets to Git.**
+
+---
+
+## Development
+
+### Common Commands
+
+```bash
+# Start the development server
+npm run dev
+
+# Run the production build
+npm run build
+
+# Start the production server
+npm run start
+
+# Run linting, if configured
+npm run lint
+```
+
+Check `package.json` for the exact scripts available in the repository.
+
+---
+
+## Project Status
+
+AetherWeave is being developed as a climate-resilience and agricultural intelligence platform.
+
+The application combines a web interface, external data integrations, AI-assisted analysis, and a Solana-based verification concept.
+
+Feature availability depends on implementation, configuration, and successful integration testing.
+
+| Component             | Status                                                   |
+| --------------------- | -------------------------------------------------------- |
+| Web application       | Under development                                        |
+| Weather integration   | Requires configuration and validation                    |
+| AI assistant          | Requires model configuration and testing                 |
+| Multi-agent workflow  | Requires workflow validation                             |
+| Satellite monitoring  | Depends on data availability and provider access         |
+| OTP authentication    | Requires gateway configuration and security testing      |
+| Evidence verification | Requires implementation and integrity testing            |
+| Solana integration    | Requires program deployment and transaction testing      |
+| Escrow and payouts    | Requires secure implementation and end-to-end validation |
+| Production deployment | Not implied by Devnet or local testing                   |
+
+---
+
+## Roadmap
+
+* [ ] Validate the complete field-data ingestion workflow.
+* [ ] Improve the multi-agent climate and agricultural analysis pipeline.
+* [ ] Integrate and validate satellite-derived vegetation indicators.
+* [ ] Implement evidence integrity verification and audit records.
+* [ ] Deploy and test Solana programs on Devnet.
+* [ ] Complete contractor and work-order management workflows.
+* [ ] Implement secure escrow authorization and settlement testing.
+* [ ] Improve offline functionality and data synchronization.
+* [ ] Expand multilingual agricultural guidance.
+* [ ] Perform security, privacy, and reliability testing before production deployment.
+
+---
+
+## Contributing
+
+Contributions, suggestions, and issue reports are welcome.
+
+1. Fork the repository or obtain collaborator access.
+2. Create a feature branch.
+3. Make focused changes.
+4. Run the available checks and tests.
+5. Submit a pull request describing the changes.
+
+Please avoid committing credentials, private keys, or sensitive user data.
 
 ---
 
 ## License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
