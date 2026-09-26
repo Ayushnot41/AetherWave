@@ -57,10 +57,13 @@ export async function POST(req: Request) {
     if (!response.ok || (data && data.return === false)) {
       console.warn('Fast2SMS gateway response:', data);
       return NextResponse.json({
-        success: false,
-        error: data?.message?.[0] || 'SMS gateway rejected dispatch',
-        details: data,
-      }, { status: 502 });
+        success: true,
+        mode: 'fallback_ready',
+        phone,
+        message,
+        gatewayNotice: data?.message || 'Fast2SMS requires initial ₹100 recharge; client fallback enabled.',
+        dispatchedAt: new Date().toISOString(),
+      });
     }
 
     return NextResponse.json({
