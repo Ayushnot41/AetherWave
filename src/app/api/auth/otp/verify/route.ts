@@ -6,7 +6,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}));
     const requestId = (body.requestId || body.phone || '').trim();
-    const otp = (body.otp || '').trim();
+    const otp = (body.otp || body.code || '').trim();
 
     if (!otp || otp.length !== 6) {
       return NextResponse.json(
