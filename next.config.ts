@@ -5,23 +5,25 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    // Strict type checking — never ignore build errors
     ignoreBuildErrors: false,
   },
-  // Webpack config to handle Solana/crypto optional dependencies and universal shims
+  // Keep dotenv and @solana/web3.js out of the webpack bundle.
+  // Next.js loads .env files natively — no need to bundle dotenv.
+  // @solana/web3.js is shimmed below for client bundles.
+  serverExternalPackages: ['dotenv', '@solana/web3.js', 'bs58'],
+  // Webpack: shim optional server-only modules on the client side
   webpack: (config: any, { isServer }: { isServer: boolean }) => {
     config.resolve = config.resolve || {};
     config.resolve.alias = config.resolve.alias || {};
-    
-    // Explicitly shim dotenv, dotenv/config, and optional web3 modules to guarantee zero build errors
-    const path = require('path');
-    const emptyShim = path.resolve(__dirname, 'scripts/empty.js');
-    config.resolve.alias['dotenv/config'] = emptyShim;
-    config.resolve.alias['dotenv'] = emptyShim;
-    config.resolve.alias['@solana/web3.js'] = emptyShim;
+
+    // On Vercel/Linux and Windows: use webpack's built-in `false` alias
+    // to produce a zero-byte empty module without any filesystem path lookup.
+    config.resolve.alias['dotenv/config'] = false;
+    config.resolve.alias['dotenv'] = false;
 
     if (!isServer) {
-      // Don't bundle server-only Solana modules on client
+      // Prevent @solana/web3.js from being bundled in the browser
+      config.resolve.alias['@solana/web3.js'] = false;
       config.resolve.fallback = {
         ...(config.resolve.fallback || {}),
         fs: false,
