@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { Button, Card, CardHeader, CardTitle, CardContent, FadeIn } from '@/components/ui';
 import { useLocaleStore } from '@/stores/locale-store';
+import { voicePlayer } from '@/lib/audio-player';
 
 export default function RecommendedActionPage() {
   const router = useRouter();
@@ -57,27 +58,20 @@ export default function RecommendedActionPage() {
     if (audioError) return;
 
     if (!isPlaying) {
-      setIsPlaying(true);
-      // Simulate or play actual speech synthesis / audio playback
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(content.audioTranscript);
-        utterance.lang = dialectCode === 'hi-IN' ? 'hi-IN' : 'en-US';
-        utterance.rate = 0.95;
-        utterance.onend = () => {
+      voicePlayer.playVoice(content.audioTranscript, {
+        dialect: dialectCode,
+        onStart: () => setIsPlaying(true),
+        onEnd: () => {
           setIsPlaying(false);
           setCurrentTime(0);
-        };
-        utterance.onerror = () => {
+        },
+        onError: () => {
           setAudioError(true);
           setIsPlaying(false);
-        };
-        window.speechSynthesis.speak(utterance);
-      }
+        },
+      });
     } else {
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
+      voicePlayer.stop();
       setIsPlaying(false);
     }
   };
@@ -98,10 +92,14 @@ export default function RecommendedActionPage() {
     return () => clearInterval(interval);
   }, [isPlaying, duration]);
 
+  useEffect(() => {
+    return () => {
+      voicePlayer.stop();
+    };
+  }, []);
+
   const handleProceedToVerification = () => {
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-    }
+    voicePlayer.stop();
     router.push('/verification/capture');
   };
 

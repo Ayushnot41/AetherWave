@@ -11,6 +11,7 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'motion/react';
 import { tokens } from '@/lib/design-tokens';
+import { voicePlayer } from '@/lib/audio-player';
 
 interface Message {
   id: string;
@@ -88,30 +89,28 @@ export default function CompanionPage() {
     chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping]);
 
-  // Voice playback using Web Speech API
+  // Voice playback using ElevenLabs sweet female voice (with Web Speech API fallback)
   const handleSpeak = (text: string, msgId: string) => {
-    if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
-      alert('Text-to-speech is not supported on this browser.');
-      return;
-    }
-
     if (isSpeaking === msgId) {
-      window.speechSynthesis.cancel();
+      voicePlayer.stop();
       setIsSpeaking(null);
       return;
     }
 
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = activeLang === 'hi' ? 'hi-IN' : 'en-IN';
-    utterance.rate = 0.95;
-
-    utterance.onend = () => setIsSpeaking(null);
-    utterance.onerror = () => setIsSpeaking(null);
-
     setIsSpeaking(msgId);
-    window.speechSynthesis.speak(utterance);
+    voicePlayer.playVoice(text, {
+      dialect: activeLang === 'hi' ? 'hi-IN' : 'en-IN',
+      onStart: () => setIsSpeaking(msgId),
+      onEnd: () => setIsSpeaking(null),
+      onError: () => setIsSpeaking(null),
+    });
   };
+
+  useEffect(() => {
+    return () => {
+      voicePlayer.stop();
+    };
+  }, []);
 
   const generateAnswer = (query: string): Message => {
     const q = query.toLowerCase();

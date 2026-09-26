@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { tokens } from '@/lib/design-tokens';
+import { useLocaleStore } from '@/stores/locale-store';
 
 interface NavItem {
   id: string;
@@ -24,6 +25,7 @@ interface NavItem {
 export function CivicNavigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { dialectCode, setDialect } = useLocaleStore();
 
   // If on initial splash or pure onboarding dialect select, optionally render minimal bar
   const isMinimal = pathname === '/onboarding' || pathname === '/offline';
@@ -137,6 +139,20 @@ export function CivicNavigation() {
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
           <path d="M13.73 21a2 2 0 0 1-3.46 0" />
           <circle cx="18" cy="8" r="3" fill={color} stroke="none" />
+        </svg>
+      ),
+    },
+    {
+      id: 'climate-dbt',
+      href: '/climate-dbt',
+      labelEn: 'Disaster DBT',
+      labelHi: 'आपदा राहत',
+      badge: 'SOLANA',
+      icon: (color) => (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
+          <line x1="12" x2="12" y1="6" y2="18" />
         </svg>
       ),
     },
@@ -289,8 +305,100 @@ export function CivicNavigation() {
             })}
           </nav>
 
-          {/* Quick System Indicators */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* Quick System Indicators & Language Switcher */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {/* 3-Way Language Switcher (EN | हिन्दी | বাংলা) */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                backgroundColor: '#F1F5F9',
+                border: '1px solid #CBD5E1',
+                borderRadius: '6px',
+                padding: '2px',
+                gap: '2px',
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => setDialect('en-IN')}
+                title="Switch to English"
+                style={{
+                  padding: '3px 7px',
+                  borderRadius: '4px',
+                  fontSize: '0.72rem',
+                  fontWeight: dialectCode === 'en-IN' ? 700 : 500,
+                  backgroundColor: dialectCode === 'en-IN' ? tokens.colors.authority : 'transparent',
+                  color: dialectCode === 'en-IN' ? '#FFFFFF' : tokens.colors.ink,
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setDialect('hi-IN')}
+                title="हिन्दी में बदलें"
+                style={{
+                  padding: '3px 7px',
+                  borderRadius: '4px',
+                  fontSize: '0.72rem',
+                  fontWeight: dialectCode === 'hi-IN' ? 700 : 500,
+                  backgroundColor: dialectCode === 'hi-IN' ? tokens.colors.authority : 'transparent',
+                  color: dialectCode === 'hi-IN' ? '#FFFFFF' : tokens.colors.ink,
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                हिन्दी
+              </button>
+              <button
+                type="button"
+                onClick={() => setDialect('bn-IN')}
+                title="বাংলায় পরিবর্তন করুন"
+                style={{
+                  padding: '3px 7px',
+                  borderRadius: '4px',
+                  fontSize: '0.72rem',
+                  fontWeight: dialectCode === 'bn-IN' ? 700 : 500,
+                  backgroundColor: dialectCode === 'bn-IN' ? tokens.colors.authority : 'transparent',
+                  color: dialectCode === 'bn-IN' ? '#FFFFFF' : tokens.colors.ink,
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                বাংলা
+              </button>
+            </div>
+
+            {/* Login / Kisan Portal Button (Desktop) */}
+            <Link
+              href="/login"
+              className="hidden lg:inline-flex"
+              style={{
+                alignItems: 'center',
+                gap: '5px',
+                padding: '5px 12px',
+                backgroundColor: tokens.colors.authority,
+                color: '#FFFFFF',
+                borderRadius: '6px',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                textDecoration: 'none',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span>लॉगिन // Login</span>
+            </Link>
+
             {/* Live GPS Dot */}
             <div
               style={{
@@ -353,6 +461,81 @@ export function CivicNavigation() {
               }}
               className="md:hidden"
             >
+              {/* Mobile Quick Actions: Login + Language Bar */}
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+                <Link
+                  href="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    padding: '8px',
+                    backgroundColor: tokens.colors.authority,
+                    color: '#FFFFFF',
+                    borderRadius: '6px',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    textDecoration: 'none',
+                  }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  <span>किसान लॉगिन // Login</span>
+                </Link>
+                <div style={{ display: 'flex', border: '1px solid #CBD5E1', borderRadius: '6px', padding: '2px', backgroundColor: '#F1F5F9' }}>
+                  <button
+                    type="button"
+                    onClick={() => setDialect('en-IN')}
+                    style={{
+                      padding: '4px 8px',
+                      borderRadius: '4px',
+                      fontSize: '0.72rem',
+                      fontWeight: dialectCode === 'en-IN' ? 700 : 500,
+                      backgroundColor: dialectCode === 'en-IN' ? tokens.colors.authority : 'transparent',
+                      color: dialectCode === 'en-IN' ? '#FFFFFF' : tokens.colors.ink,
+                      border: 'none',
+                    }}
+                  >
+                    EN
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDialect('hi-IN')}
+                    style={{
+                      padding: '4px 8px',
+                      borderRadius: '4px',
+                      fontSize: '0.72rem',
+                      fontWeight: dialectCode === 'hi-IN' ? 700 : 500,
+                      backgroundColor: dialectCode === 'hi-IN' ? tokens.colors.authority : 'transparent',
+                      color: dialectCode === 'hi-IN' ? '#FFFFFF' : tokens.colors.ink,
+                      border: 'none',
+                    }}
+                  >
+                    हिन्दी
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDialect('bn-IN')}
+                    style={{
+                      padding: '4px 8px',
+                      borderRadius: '4px',
+                      fontSize: '0.72rem',
+                      fontWeight: dialectCode === 'bn-IN' ? 700 : 500,
+                      backgroundColor: dialectCode === 'bn-IN' ? tokens.colors.authority : 'transparent',
+                      color: dialectCode === 'bn-IN' ? '#FFFFFF' : tokens.colors.ink,
+                      border: 'none',
+                    }}
+                  >
+                    বাংলা
+                  </button>
+                </div>
+              </div>
+
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
                 {navItems.map((item) => (
                   <Link
