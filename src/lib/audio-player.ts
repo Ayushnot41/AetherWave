@@ -39,8 +39,14 @@ class VernacularVoicePlayer {
           }),
         });
 
-        if (!res.ok) {
-          throw new Error(`TTS server responded with ${res.status}`);
+        const contentType = res.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+          const data = await res.json().catch(() => ({}));
+          if (data.fallback) {
+            this.isSynthesizing = false;
+            this.fallbackWebSpeech(cleanText, options);
+            return;
+          }
         }
 
         const blob = await res.blob();
