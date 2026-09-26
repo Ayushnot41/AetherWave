@@ -1,4 +1,18 @@
 import type { NextConfig } from "next";
+import path from "path";
+
+if (process.platform === 'win32') {
+  try {
+    const patchPath = path.resolve(process.cwd(), 'scripts/patch-fs.js');
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    require(patchPath);
+    if (!process.env.NODE_OPTIONS?.includes('patch-fs.js')) {
+      process.env.NODE_OPTIONS = `${process.env.NODE_OPTIONS || ''} --require "${patchPath}"`.trim();
+    }
+  } catch {
+    // Non-fatal
+  }
+}
 
 const nextConfig: NextConfig = {
   eslint: {
@@ -13,6 +27,9 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ['dotenv', '@solana/web3.js', 'bs58'],
   // Webpack: shim optional server-only modules on the client side
   webpack: (config: any, { isServer }: { isServer: boolean }) => {
+    // Disable webpack disk cache to avoid EISDIR readlink errors on exFAT drives
+    config.cache = false;
+
     config.resolve = config.resolve || {};
     config.resolve.alias = config.resolve.alias || {};
 
@@ -32,6 +49,7 @@ const nextConfig: NextConfig = {
         crypto: false,
       };
     }
+
     return config;
   },
   // Headers for SSE (disaster alerts)

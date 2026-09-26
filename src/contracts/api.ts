@@ -321,7 +321,7 @@ export const PayoutResultSchema = z.object({
     .number()
     .positive()
     .describe('Disbursed amount in local currency (₹500)'),
-  currency: z.string().default('INR'),
+  currency: z.string().describe('ISO 4217 currency code — always INR for this platform'),
   transactionSignature: z
     .string()
     .min(1)
