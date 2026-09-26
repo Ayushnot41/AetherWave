@@ -33,7 +33,8 @@ function calculateSimpleHeatIndex(temperature: number, humidity: number): number
     return ((heatIndexF - 32) * 5) / 9;
 }
 
-export async function healthAgent(state: any, thresholds: HealthThresholds = DEFAULT_THRESHOLDS) {
+export async function healthAgent(state: any) {
+    const thresholds: HealthThresholds = DEFAULT_THRESHOLDS;
     console.log("\n❤️ HEALTH AGENT STARTED");
 
     if (!state.climate) {

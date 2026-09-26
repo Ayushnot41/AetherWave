@@ -218,7 +218,7 @@ export function FieldParcelVoxel3D({
       }
 
       // Gentle wind sway on crop heads
-      canopyGroup.children.forEach((mesh, idx) => {
+      canopyGroup.children.forEach((mesh: any, idx: number) => {
         if (idx % 2 === 1) {
           mesh.rotation.z = Math.sin(elapsed * 2 + idx) * 0.06;
         }

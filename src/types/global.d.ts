@@ -66,8 +66,48 @@ declare module 'next/server' {
     static redirect(url: string | URL, status?: number): NextResponse;
     static next(init?: ResponseInit): NextResponse;
   }
+  export class NextRequest extends Request {
+    readonly nextUrl: URL;
+    readonly ip?: string;
+    readonly cookies: any;
+  }
 }
 
+declare module 'next/link' {
+  import type { ComponentProps, ForwardRefExoticComponent, RefAttributes } from 'react';
+  type Url = string | { pathname?: string; query?: any; hash?: string };
+  export interface LinkProps extends Omit<ComponentProps<'a'>, 'href'> {
+    href: Url;
+    as?: Url;
+    replace?: boolean;
+    scroll?: boolean;
+    shallow?: boolean;
+    passHref?: boolean;
+    prefetch?: boolean;
+  }
+  const Link: ForwardRefExoticComponent<LinkProps & RefAttributes<HTMLAnchorElement>>;
+  export default Link;
+}
+
+declare module '*.css' {
+  const content: Record<string, string>;
+  export default content;
+}
+
+declare module 'three' {
+  const content: any;
+  export = content;
+}
+
+declare module '@solana/web3.js' {
+  export const Connection: any;
+  export const Keypair: any;
+  export const PublicKey: any;
+  export const SystemProgram: any;
+  export const Transaction: any;
+  export const TransactionInstruction: any;
+  export const sendAndConfirmTransaction: any;
+}
 declare module 'react-hook-form' {
   import type { RefCallback } from 'react';
 

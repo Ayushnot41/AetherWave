@@ -61,7 +61,7 @@ export async function GET(req: Request) {
   let fetchError: string | null = null;
   try {
     const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=Asia/Kolkata&forecast_days=7`;
-    const res = await fetch(weatherUrl, { next: { revalidate: 3600 } });
+    const res = await fetch(weatherUrl, { next: { revalidate: 3600 } } as any);
     if (res.ok) {
       const data = await res.json();
       weatherForecast = (data.daily.time as string[]).map((t: string, i: number) => ({

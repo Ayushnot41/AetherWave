@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { GoogleGenAI } from '@google/genai';
+
 
 const ChatRequestSchema = z.object({
   message: z.string().min(1).max(2000),
@@ -44,27 +44,65 @@ export async function POST(req: Request) {
     const { message, language, context } = parsed.data;
     const apiKey = process.env.GEMINI_API_KEY;
 
-    // If Gemini API key is configured, use Gemini 2.5 Flash for intelligent live response
-    if (apiKey) {
+    // If Gemini API key or Gateway is configured, use Gemini / Gateway for intelligent live response
+    const gatewayUrl = process.env.AI_GATEWAY_URL || 'http://localhost:20128/v1';
+    const gatewayKey = process.env.AI_GATEWAY_API_KEY || apiKey;
+
+    if (gatewayKey) {
       try {
-        const client = new GoogleGenAI({ apiKey });
         const contextStr = context
           ? `\n[Farmer Context: Village: ${context.village || 'Central India'}, Crop: ${context.crop || 'Wheat/Paddy'}, Coords: ${context.lat ?? 22.5}, ${context.lon ?? 77.5}]`
           : '';
 
         const prompt = `${KISAN_SYSTEM_PROMPT}${contextStr}\n\nUser Question (respond in ${language === 'hi' ? 'Hindi' : 'English'}):\n${message}`;
 
-        const response = await client.models.generateContent({
-          model: 'gemini-2.5-flash',
-          contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        });
+        let reply = '';
+        if (apiKey && !process.env.AI_GATEWAY_API_KEY) {
+          // Direct Gemini REST API via fetch (zero heavy SDKs)
+          const res = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{ role: 'user', parts: [{ text: prompt }] }],
+              }),
+            }
+          );
+          if (res.ok) {
+            const data = await res.json();
+            reply = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          }
+        } else {
+          // OpenAI-compatible OmniRoute / FreeLLMAPI Gateway
+          const res = await fetch(`${gatewayUrl}/chat/completions`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${gatewayKey}`,
+            },
+            body: JSON.stringify({
+              model: 'gemini-2.5-flash',
+              messages: [
+                { role: 'system', content: KISAN_SYSTEM_PROMPT + contextStr },
+                { role: 'user', content: `Respond in ${language === 'hi' ? 'Hindi' : 'English'}:\n${message}` },
+              ],
+            }),
+          });
+          if (res.ok) {
+            const data = await res.json();
+            reply = data.choices?.[0]?.message?.content || '';
+          }
+        }
 
-        const reply = response.text || '';
-        return NextResponse.json({
-          reply,
-          source: 'gemini-2.5-flash',
-          language,
-        });
+        if (reply) {
+          return NextResponse.json({
+            reply,
+            source: 'gemini-2.5-flash',
+            language,
+          });
+        }
+>>>>>>> c2a15cb (feat(backend-blockchain): implement resilient dual-mode architecture, clean typecheck, and 100% unit tests)
       } catch (geminiErr) {
         console.warn('Gemini chat error, falling back to heuristic engine:', geminiErr);
         // Fall back to heuristic response below if API quota or network issue occurs

@@ -34,7 +34,7 @@ export function TerrainMesh3D({
     const width = container.clientWidth || 400;
     const height = container.clientHeight || 280;
 
-    let renderer: THREE.WebGLRenderer;
+    let renderer: any;
     try {
       renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
       renderer.setSize(width, height);

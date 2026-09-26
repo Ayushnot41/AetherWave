@@ -34,7 +34,7 @@ export function VerificationSeal3D({
     if (!container) return;
 
     // 1. WebGL Support Test
-    let renderer: THREE.WebGLRenderer;
+    let renderer: any;
     try {
       renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
       renderer.setSize(size, size);

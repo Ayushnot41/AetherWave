@@ -228,7 +228,7 @@ export function DisasterRadarDome3D({
       sweepWedge.rotation.y = elapsed * 1.6;
 
       // Particle slight drift
-      const posAttr = particleGeo.attributes.position as THREE.BufferAttribute;
+      const posAttr = particleGeo.attributes.position as any;
       for (let i = 0; i < particleCount; i++) {
         let y = posAttr.getY(i);
         y += Math.sin(elapsed * 2 + i) * 0.003;

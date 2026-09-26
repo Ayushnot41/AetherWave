@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:guardrail": "node --experimental-strip-types src/__tests__/guardrail.test.ts",
+    "test:idempotency": "node --experimental-strip-types src/__tests__/idempotency.test.ts",
+    "test": "node --experimental-strip-types src/__tests__/guardrail.test.ts && node --experimental-strip-types src/__tests__/idempotency.test.ts"
   },
   "dependencies": {
     "@google/genai": "^2.24.0",
